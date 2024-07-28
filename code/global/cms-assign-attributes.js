@@ -1,4 +1,4 @@
-w; // CMS collection lists
+// CMS collection lists
 // Apply attributes to individual CMS items
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
