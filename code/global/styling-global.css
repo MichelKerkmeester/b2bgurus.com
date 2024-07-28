@@ -1,0 +1,34 @@
+/* Input - Text area */
+/* Resize handling */
+textarea {
+  resize: vertical;
+  /* Allow only vertical resizing */
+  max-width: 100%;
+  /* Prevent horizontal overflow */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+/* Selected text has custom background color */
+::-moz-selection {
+  /* Code for Firefox */
+  color: #13333a;
+  background: #5999a6;
+}
+
+::selection {
+  color: #13333a;
+  background: #5999a6;
+}
+
+/* Hide blue highlight when moving to a section */
+:focus {
+  outline: none;
+}
+
+/* Disable glossy effect safari adds on select elements */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
