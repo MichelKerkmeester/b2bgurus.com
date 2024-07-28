@@ -1,0 +1,31 @@
+/* GSAP Marquee */
+/* CSS Animation for Mobile */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+    /* Start position */
+  }
+
+  100% {
+    transform: translateX(calc(-1 * var(--marquee-width)));
+    /* End position */
+  }
+}
+
+.marquee--track {
+  display: flex;
+  /* Flex container */
+  will-change: transform;
+  /* Optimize for performance */
+}
+
+.marquee-animate {
+  animation: marquee var(--marquee-duration) linear infinite;
+  /* Animation settings */
+  -webkit-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for WebKit */
+  -moz-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for Mozilla */
+  -o-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for Opera */
+}

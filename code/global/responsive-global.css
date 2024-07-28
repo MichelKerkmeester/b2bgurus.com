@@ -1,41 +1,41 @@
-/* Finsweet - Fluid responsive text */
-/* Initial font size */
+/* Finsweetn- Fluid responsive text */
+/* Initial font-size */
 html {
-  font-size: 15.125rem;
+  font-size: 1.125rem;
 }
 
 /* 2560px and below */
 @media screen and (max-width: 2560px) {
   html {
-    font-size: calc(15.8750000000000001rem + 0.15624999999999994vw);
+    font-size: calc(0.8750000000000001rem + 0.15624999999999994vw);
   }
 }
 
 /* 1920px and below */
 @media screen and (max-width: 1920px) {
   html {
-    font-size: calc(15.75rem + 0.20833333333333337vw);
+    font-size: calc(0.75rem + 0.20833333333333337vw);
   }
 }
 
 /* 1440px and below */
 @media screen and (max-width: 1440px) {
   html {
-    font-size: calc(15.3749999999999999rem + 0.6250000000000001vw);
+    font-size: calc(0.3749999999999999rem + 0.6250000000000001vw);
   }
 }
 
 /* 1280px and below */
 @media screen and (max-width: 1280px) {
   html {
-    font-size: calc(15.5356833910034603rem + 0.34602076124567466vw);
+    font-size: calc(0.5356833910034603rem + 0.34602076124567466vw);
   }
 }
 
 /* 991px and below */
 @media screen and (max-width: 991px) {
   html {
-    font-size: 15rem;
+    font-size: 1rem;
   }
 }
 

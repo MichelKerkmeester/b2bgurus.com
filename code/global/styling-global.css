@@ -13,12 +13,12 @@ textarea {
 ::-moz-selection {
   /* Code for Firefox */
   color: #13333a;
-  background: #ff0404;
+  background: #5999a6;
 }
 
 ::selection {
   color: #13333a;
-  background: #f80000;
+  background: #5999a6;
 }
 
 /* Hide blue highlight when moving to a section */
