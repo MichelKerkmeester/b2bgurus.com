@@ -1,0 +1,129 @@
+/* Hero */
+/* B2B Caption - Dashed border */
+.caption--w.cc--dashed-border {
+  position: relative;
+  /* Position relative for pseudo-elements */
+  display: inline-block;
+  /* Fit content */
+  box-sizing: border-box;
+  /* Include padding and border in dimensions */
+  border-radius: 1rem;
+  /* Rounded corners */
+  overflow: hidden;
+  /* Contain the pseudo-element */
+}
+
+.caption--w.cc--dashed-border::before {
+  content: "";
+  /* Empty element for border */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 0.1875rem solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  background:
+      /* Dashed border effect */
+    linear-gradient(90deg, #13333a 1rem, transparent 1rem) repeat-x,
+    linear-gradient(180deg, #13333a 1rem, transparent 1rem) repeat-y,
+    linear-gradient(90deg, transparent 1rem, #13333a 1rem) repeat-x,
+    linear-gradient(180deg, transparent 1rem, #13333a 1rem) repeat-y;
+  background-size:
+    calc(2rem + 0.1875rem) 0.1875rem,
+    /* Size for horizontal dash */ 0.1875rem calc(2rem + 0.1875rem),
+    /* Size for vertical dash */ calc(2rem + 0.1875rem) 0.1875rem,
+    /* Size for bottom-right horizontal dash */ 0.1875rem calc(2rem + 0.1875rem);
+  /* Size for bottom-right vertical dash */
+  background-position:
+    top left,
+    top left,
+    bottom right,
+    bottom right;
+  /* Position dashes */
+}
+
+/* GSAP Marquee */
+/* CSS Animation for Mobile */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+    /* Start position */
+  }
+
+  100% {
+    transform: translateX(calc(-1 * var(--marquee-width)));
+    /* End position */
+  }
+}
+
+.marquee--track {
+  display: flex;
+  /* Flex container */
+  will-change: transform;
+  /* Optimize for performance */
+}
+
+.marquee-animate {
+  animation: marquee var(--marquee-duration) linear infinite;
+  /* Animation settings */
+  -webkit-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for WebKit */
+  -moz-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for Mozilla */
+  -o-animation: marquee var(--marquee-duration) linear infinite;
+  /* Vendor prefix for Opera */
+}
+
+/* Projects */
+/* CMS list - Alternate direction per item */
+@media (min-width: 992px) {
+  /* Even items: reverse the direction */
+  .project--list .w-dyn-item:nth-child(even) .project--card {
+    display: flex;
+    flex-direction: row-reverse;
+    /* Reverse the order */
+  }
+
+  /* Ensure the internal content remains left-to-right */
+  .project--list .w-dyn-item:nth-child(even) .project--image,
+  .project--list .w-dyn-item:nth-child(even) .project--about {
+    direction: ltr;
+    /* Maintain normal text direction */
+  }
+}
+
+/* Process */
+/* Base CSS for all CMS list items */
+.process--list-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem;
+  /* Adjust spacing between items as needed */
+}
+
+/* Overrides for individual CMS list items */
+/* Desktop */
+@media (min-width: 992px) {
+  /* Align items based on their data-item attribute */
+  /* Align left */
+  .process--list-item[cms-item="process-1"],
+  .process--list-item[cms-item="process-4"] {
+    align-items: flex-start;
+  }
+
+  /* Align center */
+  .process--list-item[cms-item="process-3"],
+  .process--list-item[cms-item="process-6"] {
+    align-items: center;
+  }
+
+  /* Align right */
+  .process--list-item[cms-item="process-2"],
+  .process--list-item[cms-item="process-5"] {
+    align-items: flex-end;
+  }
+}

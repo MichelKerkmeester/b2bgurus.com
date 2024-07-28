@@ -1,3 +1,4 @@
+// GSAP Marquee
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
   const marqueeTrack = document.querySelector(".marquee--track"); // Select marquee track
