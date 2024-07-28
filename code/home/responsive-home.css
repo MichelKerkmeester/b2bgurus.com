@@ -1,0 +1,192 @@
+/* Hero */
+/* Illustration size */
+/* Tablet */
+@media only screen and (max-width: 991px) and (min-width: 720px) {
+  .illustration.home--hero-cursor {
+    /* Size */
+    width: 4.25rem;
+    height: 4.25rem;
+
+    /* Position */
+    position: absolute;
+    top: -1.3rem;
+    right: auto;
+    bottom: auto;
+    left: 6rem;
+  }
+
+  .illustration.home--hero-male {
+    /* Size */
+    width: 9rem;
+    height: 9rem;
+
+    /* Position */
+    position: absolute;
+    top: -4.75rem;
+    right: auto;
+    bottom: auto;
+    left: 9.25rem;
+  }
+
+  .illustration.home--hero-female {
+    /* Size */
+    width: 9.5rem;
+    height: 9.5rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: -7.25rem;
+    bottom: 0.25rem;
+    left: auto;
+  }
+}
+
+/* Mobile, Large */
+@media only screen and (max-width: 479px) and (min-width: 410px) {
+  .illustration.home--hero-cursor {
+    /* Size */
+    width: 3.25rem;
+    height: 3.25rem;
+
+    /* Position */
+    position: absolute;
+    top: -0.8rem;
+    right: auto;
+    bottom: auto;
+    left: 6.5rem;
+  }
+
+  .illustration.home--hero-male {
+    /* Size */
+    width: 6.5rem;
+    height: 6.5rem;
+
+    /* Position */
+    position: absolute;
+    top: -4.5rem;
+    right: auto;
+    bottom: auto;
+    left: 8.5rem;
+  }
+
+  .illustration.home--hero-female {
+    /* Size */
+    width: 6.5rem;
+    height: 6.5rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: -5rem;
+    bottom: -1rem;
+    left: auto;
+  }
+}
+
+/* Projects */
+/* Heading size */
+/* Tablet */
+@media (min-width: 660px) {
+  .heading--w.mobile {
+    display: block;
+  }
+
+  .heading--w.mobile--small {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 659px) {
+  .heading--w.mobile {
+    display: none;
+  }
+
+  .heading--w.mobile--small {
+    display: block;
+  }
+}
+
+/* Base CSS for all CMS list items */
+/* Desktop */
+.w-dyn-item[cms-item^="project-"] .project--image {
+  background-size: auto 100%;
+  /* Custom size: Auto width, 100% height */
+  background-position: 50% 50%;
+  /* Center position */
+  background-repeat: no-repeat;
+  /* No tile */
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 991px) {
+  .w-dyn-item[cms-item^="project-"] .project--image {
+    background-size: 100% auto;
+    /* Custom size: Auto width, 100% height */
+    background-position: 50% 50%;
+    /* Center position */
+    background-repeat: no-repeat;
+    /* No tile */
+  }
+}
+
+/* Mobile */
+@media (max-width: 479px) {
+  .w-dyn-item[cms-item^="project-"] .project--image {
+    background-size: auto 100%;
+    /* Custom size: Auto width, 100% height */
+    background-position: 50% 50%;
+    /* Center position */
+    background-repeat: no-repeat;
+    /* No tile */
+  }
+}
+
+/* Overrides for individual CMS list items */
+/* Desktop */
+.w-dyn-item[cms-item="project-1"] .project--image {
+  background-size: auto 150%;
+  background-position: 35% 35%;
+}
+
+.w-dyn-item[cms-item="project-4"] .project--image {
+  background-size: auto 135%;
+  background-position: 50% 55%;
+}
+
+.w-dyn-item[cms-item="project-5"] .project--image {
+  background-size: auto 130%;
+  background-position: 50% 0%;
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 991px) {
+  .w-dyn-item[cms-item="project-1"] .project--image {
+    background-size: 135% auto;
+    background-position: 55% 40%;
+  }
+
+  .w-dyn-item[cms-item="project-4"] .project--image {
+    background-size: auto 135%;
+    background-position: 50% 75%;
+  }
+
+  .w-dyn-item[cms-item="project-7"] .project--image {
+    background-size: auto 110%;
+    background-position: 70% 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 479px) {
+  .w-dyn-item[cms-item="project-1"] .project--image {
+    background-size: auto 130%;
+    background-position: 47.5% 37.5%;
+  }
+
+  .w-dyn-item[cms-item="project-7"] .project--image {
+    background-size: auto 110%;
+    background-position: 70% 100%;
+  }
+}
