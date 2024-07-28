@@ -1,5 +1,5 @@
 // CMS collection lists
-// Apply attributes to individual CMS items
+// Apply attributes to individual CMS item
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
   function applyAttributesToItems(selector, attributeName) {
