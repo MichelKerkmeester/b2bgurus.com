@@ -1,113 +1,71 @@
 /* Hero */
-/* Illustration size */
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
-  .illustration.home--hero-cursor {
+  /* Header size */
+  .hero--header.projects--overview {
     /* Size */
-    width: 4.25rem;
-    height: 4.25rem;
-
-    /* Position */
-    position: absolute;
-    top: -1.3rem;
-    right: auto;
-    bottom: auto;
-    left: 6rem;
+    display: flex; /* Ensure it's a flex container */
+    max-width: 40rem;
   }
 
-  .illustration.home--hero-male {
+  /* Illustration size */
+  .illustration.projects--hero-male {
     /* Size */
     width: 9rem;
     height: 9rem;
 
     /* Position */
     position: absolute;
-    top: -4.75rem;
+    top: 2.5rem;
     right: auto;
     bottom: auto;
-    left: 9.25rem;
+    left: 33rem;
   }
 
-  .illustration.home--hero-female {
+  .illustration.projects--hero-heart {
     /* Size */
-    width: 9.5rem;
-    height: 9.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
 
     /* Position */
     position: absolute;
-    top: auto;
-    right: -7.25rem;
-    bottom: 0.25rem;
-    left: auto;
+    top: 4rem;
+    right: auto;
+    bottom: auto;
+    left: 39rem;
   }
 }
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
-  .illustration.home--hero-cursor {
-    /* Size */
-    width: 3.25rem;
-    height: 3.25rem;
-
-    /* Position */
-    position: absolute;
-    top: -0.8rem;
-    right: auto;
-    bottom: auto;
-    left: 6.5rem;
-  }
-
-  .illustration.home--hero-male {
+  .illustration.projects--hero-male {
     /* Size */
     width: 6.5rem;
     height: 6.5rem;
+
+    /* Position */
+    position: absolute;
+    top: -9.5rem;
+    right: auto;
+    bottom: auto;
+    left: 8.75rem;
+  }
+
+  .illustration.projects--hero-heart {
+    /* Size */
+    width: 5rem;
+    height: 5rem;
 
     /* Position */
     position: absolute;
     top: -4.5rem;
     right: auto;
     bottom: auto;
-    left: 8.5rem;
-  }
-
-  .illustration.home--hero-female {
-    /* Size */
-    width: 6.5rem;
-    height: 6.5rem;
-
-    /* Position */
-    position: absolute;
-    top: auto;
-    right: -5rem;
-    bottom: -1rem;
-    left: auto;
+    left: 14rem;
   }
 }
 
 /* Projects */
-/* Heading size */
-/* Tablet */
-@media (min-width: 660px) {
-  .heading--w.mobile {
-    display: block;
-  }
-
-  .heading--w.mobile--small {
-    display: none;
-  }
-}
-
-/* Mobile */
-@media (max-width: 659px) {
-  .heading--w.mobile {
-    display: none;
-  }
-
-  .heading--w.mobile--small {
-    display: block;
-  }
-}
-
 /* Base CSS for all CMS list items */
 /* Desktop */
 .w-dyn-item[cms-item^="project-"] .project--image {
