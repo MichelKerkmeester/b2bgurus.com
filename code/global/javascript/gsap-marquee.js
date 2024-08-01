@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
   const items = Array.from(marqueeTrack.children); // Get all child items
 
   // Durations for desktop and mobile (in seconds)
-  const desktopDuration = 600,
+  const desktopDuration = 60,
     mobileDuration = 45;
 
   // Device detection, including tablets
