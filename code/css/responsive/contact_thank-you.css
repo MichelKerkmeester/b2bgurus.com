@@ -1,0 +1,66 @@
+/* Hero */
+/* Tablet */
+@media only screen and (max-width: 738px) and (min-width: 720px) {
+  /* Illustration size */
+  .illustration.contact--cursor.thank-you {
+    /* Size */
+    width: 4.25rem;
+    height: 4.25rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: 2rem;
+    bottom: 2em;
+    left: auto;
+  }
+
+  .illustration.contact--male.thank-you {
+    /* Size */
+    width: 9.5rem;
+    height: 9.5rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: -7rem;
+    bottom: 2rem;
+    left: auto;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 739px) {
+  /* Header size */
+  .hero--header.contact--thank-you {
+    /* Size */
+    display: flex; /* Ensure it's a flex container */
+    max-width: none;
+  }
+
+  /* Illustration size */
+  .illustration.contact--cursor.thank-you {
+    /* Size */
+    width: 4.25rem;
+    height: 4.25rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: 2rem;
+    bottom: -5rem;
+    left: auto;
+  }
+
+  .illustration.contact--male.thank-you {
+    /* Size */
+    width: 9.5rem;
+    height: 9.5rem;
+
+    /* Position */
+    position: absolute;
+    top: auto;
+    right: -7rem;
+    bottom: -4.5rem;
+    left: auto;
+  }
+}
