@@ -2,14 +2,14 @@
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
   /* Header size */
-  .hero--header.projects--overview {
+  .hero--header.project--overview {
     /* Size */
     display: flex; /* Ensure it's a flex container */
     max-width: 40rem;
   }
 
   /* Illustration size */
-  .illustration.projects--hero-male {
+  .illustration.project--hero-male {
     /* Size */
     width: 9rem;
     height: 9rem;
@@ -22,7 +22,7 @@
     left: 33rem;
   }
 
-  .illustration.projects--hero-heart {
+  .illustration.project--hero-heart {
     /* Size */
     width: 6.5rem;
     height: 6.5rem;
@@ -38,7 +38,7 @@
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
-  .illustration.projects--hero-male {
+  .illustration.project--hero-male {
     /* Size */
     width: 6.5rem;
     height: 6.5rem;
@@ -51,7 +51,7 @@
     left: 8.75rem;
   }
 
-  .illustration.projects--hero-heart {
+  .illustration.project--hero-heart {
     /* Size */
     width: 5rem;
     height: 5rem;

@@ -88,38 +88,38 @@
 /* Heading size */
 /* Tablet */
 @media (min-width: 393px) {
-  .heading--w.mobile {
+  .heading.mobile {
     display: block;
   }
 
-  .heading--w.mobile--small {
+  .heading.mobile--small {
     display: none;
   }
 
-  .caption--w.mobile {
+  .caption.mobile {
     display: block;
   }
 
-  .caption--w.mobile--small {
+  .caption.mobile--small {
     display: none;
   }
 }
 
 /* Mobile */
 @media (max-width: 392px) {
-  .heading--w.mobile {
+  .heading.mobile {
     display: none;
   }
 
-  .heading--w.mobile--small {
+  .heading.mobile--small {
     display: block;
   }
 
-  .caption--w.mobile {
+  .caption.mobile {
     display: none;
   }
 
-  .caption--w.mobile--small {
+  .caption.mobile--small {
     display: block;
   }
 }
@@ -163,7 +163,7 @@
 /* Desktop */
 .w-dyn-item[cms-item="project-1"] .project--image {
   background-size: auto 150%;
-  background-position: 35% 35%;
+  background-position: 30% 35%;
 }
 
 .w-dyn-item[cms-item="project-4"] .project--image {

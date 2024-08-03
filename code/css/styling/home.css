@@ -1,6 +1,6 @@
 /* Hero */
 /* B2B Caption - Dashed border */
-.caption--w.cc--dashed-border {
+.caption.cc--dashed-border {
   position: relative;
   /* Position relative for pseudo-elements */
   display: inline-block;
@@ -13,7 +13,7 @@
   /* Contain the pseudo-element */
 }
 
-.caption--w.cc--dashed-border::before {
+.caption.cc--dashed-border::before {
   content: "";
   /* Empty element for border */
   position: absolute;
