@@ -1,0 +1,32 @@
+// CMS template
+// Prev / Next page
+window.addEventListener("load", function () {
+  // Wait until all scripts/resources are loaded
+
+  // Select all components with the specified attribute
+  document
+    .querySelectorAll("[cmsnext-element='component']")
+    .forEach((componentEl) => {
+      const cmsListEl = componentEl.querySelector(".w-dyn-items"),
+        cmsItemEl = Array.from(cmsListEl.children);
+
+      let currentItemEl = cmsItemEl.find((item) =>
+        item.querySelector(".w--current")
+      );
+      let nextItemEl = currentItemEl.nextElementSibling,
+        prevItemEl = currentItemEl.previousElementSibling;
+
+      // Loop to the first item if the next item doesn't exist
+      if (componentEl.getAttribute("cmsnext-loop") === "true") {
+        if (!nextItemEl) nextItemEl = cmsItemEl[0];
+        if (!prevItemEl) prevItemEl = cmsItemEl[cmsItemEl.length - 1];
+      }
+
+      let displayEl = nextItemEl;
+
+      // Remove all items except the display element
+      cmsItemEl.forEach((item) => {
+        if (item !== displayEl) item.remove();
+      });
+    });
+});
