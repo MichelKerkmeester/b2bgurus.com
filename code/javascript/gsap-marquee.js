@@ -1,6 +1,7 @@
 // GSAP Marquee
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
+
   const marqueeTrack = document.querySelector(".marquee--track"); // Select marquee track
   const items = Array.from(marqueeTrack.children); // Get all child items
 

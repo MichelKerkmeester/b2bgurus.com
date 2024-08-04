@@ -1,15 +1,14 @@
 // CMS template
 // Prev / Next page
-document.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("load", function () {
+  // Wait until all scripts/resources are loaded
+
   // Select all components with the specified attribute
   document
-    .querySelectorAll("[tr-cmsnext-element='component']")
+    .querySelectorAll("[cmsnext-element='component']")
     .forEach((componentEl) => {
       const cmsListEl = componentEl.querySelector(".w-dyn-items"),
-        cmsItemEl = Array.from(cmsListEl.children),
-        noResultEl = componentEl.querySelector(
-          "[tr-cmsnext-element='no-result']"
-        );
+        cmsItemEl = Array.from(cmsListEl.children);
 
       let currentItemEl = cmsItemEl.find((item) =>
         item.querySelector(".w--current")
@@ -18,32 +17,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
         prevItemEl = currentItemEl.previousElementSibling;
 
       // Loop to the first item if the next item doesn't exist
-      if (componentEl.getAttribute("tr-cmsnext-loop") === "true") {
+      if (componentEl.getAttribute("cmsnext-loop") === "true") {
         if (!nextItemEl) nextItemEl = cmsItemEl[0];
         if (!prevItemEl) prevItemEl = cmsItemEl[cmsItemEl.length - 1];
       }
 
       let displayEl = nextItemEl;
 
-      // Show previous item if the attribute is set
-      if (componentEl.getAttribute("tr-cmsnext-showprev") === "true")
-        displayEl = prevItemEl;
-
-      // Show all items with specific classes if the attribute is set
-      if (componentEl.getAttribute("tr-cmsnext-showall") === "true") {
-        prevItemEl.classList.add("is-prev");
-        currentItemEl.classList.add("is-current");
-        nextItemEl.classList.add("is-next");
-      } else {
-        cmsItemEl.forEach((item) => {
-          if (item !== displayEl) item.remove();
-        });
-        if (!displayEl) noResultEl.style.display = "block";
-        if (
-          !displayEl &&
-          componentEl.getAttribute("tr-cmsnext-hideempty") === "true"
-        )
-          componentEl.style.display = "none";
-      }
+      // Remove all items except the display element
+      cmsItemEl.forEach((item) => {
+        if (item !== displayEl) item.remove();
+      });
     });
 });

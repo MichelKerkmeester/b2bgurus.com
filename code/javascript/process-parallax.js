@@ -1,8 +1,8 @@
 // Process
 // GSAP Parallax
-
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
+
   gsap.registerPlugin(ScrollTrigger);
 
   // Check if the screen width is 992px or above

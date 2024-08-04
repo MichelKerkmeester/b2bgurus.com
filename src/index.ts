@@ -5,23 +5,26 @@ window.Webflow.push(() => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Select all project cards
-  const projectCards = document.querySelectorAll(".project-card");
+  const projectImages = document.querySelectorAll(".project--pgn-image");
 
-  projectCards.forEach((card) => {
-    // Get the overlay element within the current card
-    const overlay = card.querySelector(".project--pgn-overlay");
+  projectImages.forEach((image) => {
+    const footer = image.querySelector(".project--pgn-footer");
 
-    // Set initial overlay opacity to 0
-    gsap.set(overlay, { opacity: 0 });
-
-    // Add hover event listeners to the card
-    card.addEventListener("mouseenter", () => {
-      gsap.to(overlay, { duration: 0.5, opacity: 1 });
+    // Add hover event listeners to the image
+    image.addEventListener("mouseenter", () => {
+      // Animate background color change on hover
+      gsap.to(footer, {
+        duration: 0.3,
+        backgroundColor: "rgba(9, 25, 29, 0.96)",
+      });
     });
 
-    card.addEventListener("mouseleave", () => {
-      gsap.to(overlay, { duration: 0.5, opacity: 0 });
+    image.addEventListener("mouseleave", () => {
+      // Reset background color when hover ends
+      gsap.to(footer, {
+        duration: 0.3,
+        backgroundColor: "rgba(19, 51, 58, 0.95)",
+      });
     });
   });
 });

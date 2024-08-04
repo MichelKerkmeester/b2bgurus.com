@@ -1,8 +1,8 @@
 // Assign FS Load More to list
 // Not needed if it's the only list on the page
-
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
+
   // Array of configurations for each project list
   const projectConfigs = [
     {
