@@ -1,4 +1,4 @@
-// Assign FS Load More to list
+// Assign FS Load More to CMS collection list
 // Not needed if it's the only list on the page
 window.addEventListener("load", function () {
   // Wait until all scripts/resources are loaded
