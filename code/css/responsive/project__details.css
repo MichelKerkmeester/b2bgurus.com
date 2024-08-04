@@ -1,0 +1,10 @@
+/* Project Data */
+/* Grid */
+/* Desktop */
+@media (min-width: 1589px) {
+  .project--data.footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem; /* Adjust gap as needed */
+  }
+}
