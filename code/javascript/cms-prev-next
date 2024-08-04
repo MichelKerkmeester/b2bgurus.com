@@ -1,9 +1,5 @@
 // CMS template
 // Prev / Next page
-window.addEventListener("load", function () {
-  // Wait until all scripts/resources are loaded
-
-  // Select all components with the specified attribute
   document
     .querySelectorAll("[cmsnext-element='component']")
     .forEach((componentEl) => {
