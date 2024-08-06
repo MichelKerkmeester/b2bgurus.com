@@ -126,7 +126,7 @@
 
 /* Base CSS for all CMS list items */
 /* Desktop */
-.w-dyn-item[cms-item^="project-"] .project--image {
+.w-dyn-item[cms-item^="project-"] .project--card-image {
   background-size: auto 100%;
   /* Custom size: Auto width, 100% height */
   background-position: 50% 50%;
@@ -137,7 +137,7 @@
 
 /* Tablet */
 @media (min-width: 480px) and (max-width: 991px) {
-  .w-dyn-item[cms-item^="project-"] .project--image {
+  .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: 100% auto;
     /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
@@ -149,7 +149,7 @@
 
 /* Mobile */
 @media (max-width: 479px) {
-  .w-dyn-item[cms-item^="project-"] .project--image {
+  .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: auto 100%;
     /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
@@ -161,34 +161,34 @@
 
 /* Overrides for individual CMS list items */
 /* Desktop */
-.w-dyn-item[cms-item="project-1"] .project--image {
+.w-dyn-item[cms-item="project-1"] .project--card-image {
   background-size: auto 150%;
   background-position: 30% 35%;
 }
 
-.w-dyn-item[cms-item="project-4"] .project--image {
+.w-dyn-item[cms-item="project-4"] .project--card-image {
   background-size: auto 135%;
   background-position: 50% 55%;
 }
 
-.w-dyn-item[cms-item="project-5"] .project--image {
+.w-dyn-item[cms-item="project-5"] .project--card-image {
   background-size: auto 130%;
   background-position: 50% 0%;
 }
 
 /* Tablet */
 @media (min-width: 480px) and (max-width: 991px) {
-  .w-dyn-item[cms-item="project-1"] .project--image {
+  .w-dyn-item[cms-item="project-1"] .project--card-image {
     background-size: 135% auto;
     background-position: 55% 40%;
   }
 
-  .w-dyn-item[cms-item="project-4"] .project--image {
+  .w-dyn-item[cms-item="project-4"] .project--card-image {
     background-size: auto 135%;
     background-position: 50% 75%;
   }
 
-  .w-dyn-item[cms-item="project-7"] .project--image {
+  .w-dyn-item[cms-item="project-7"] .project--card-image {
     background-size: auto 110%;
     background-position: 70% 100%;
   }
@@ -196,12 +196,12 @@
 
 /* Mobile */
 @media (max-width: 479px) {
-  .w-dyn-item[cms-item="project-1"] .project--image {
+  .w-dyn-item[cms-item="project-1"] .project--card-image {
     background-size: auto 130%;
     background-position: 47.5% 37.5%;
   }
 
-  .w-dyn-item[cms-item="project-7"] .project--image {
+  .w-dyn-item[cms-item="project-7"] .project--card-image {
     background-size: auto 110%;
     background-position: 70% 100%;
   }
