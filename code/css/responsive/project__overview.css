@@ -1,36 +1,32 @@
 /* Hero */
+/* Header */
+
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
-  /* Header size */
   .hero--header.project--overview {
     display: flex;
     max-width: 40rem;
   }
+}
 
-  /* Illustration size */
+/* Hero */
+/* Illustrations */
+
+/* Tablet */
+@media only screen and (max-width: 991px) and (min-width: 720px) {
   .illustration.project--hero-male {
-    /* Size */
     width: 9rem;
     height: 9rem;
-
-    /* Position */
     position: absolute;
     top: 2.5rem;
-    right: auto;
-    bottom: auto;
     left: 33rem;
   }
 
   .illustration.project--hero-heart {
-    /* Size */
     width: 6.5rem;
     height: 6.5rem;
-
-    /* Position */
     position: absolute;
     top: 4rem;
-    right: auto;
-    bottom: auto;
     left: 39rem;
   }
 }
@@ -38,52 +34,38 @@
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
   .illustration.project--hero-male {
-    /* Size */
     width: 6.5rem;
     height: 6.5rem;
-
-    /* Position */
     position: absolute;
     top: -9.5rem;
-    right: auto;
-    bottom: auto;
     left: 8.75rem;
   }
 
   .illustration.project--hero-heart {
-    /* Size */
     width: 5rem;
     height: 5rem;
-
-    /* Position */
     position: absolute;
     top: -4.5rem;
-    right: auto;
-    bottom: auto;
     left: 14rem;
   }
 }
 
+/* Projects */
 /* Base CSS for all CMS list items */
+
 /* Desktop */
 .w-dyn-item[cms-item^="project-"] .project--card-image {
   background-size: auto 100%;
-  /* Custom size: Auto width, 100% height */
   background-position: 50% 50%;
-  /* Center position */
   background-repeat: no-repeat;
-  /* No tile */
 }
 
 /* Tablet */
 @media (min-width: 480px) and (max-width: 991px) {
   .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: 100% auto;
-    /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
-    /* Center position */
     background-repeat: no-repeat;
-    /* No tile */
   }
 }
 
@@ -91,15 +73,12 @@
 @media (max-width: 479px) {
   .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: auto 100%;
-    /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
-    /* Center position */
     background-repeat: no-repeat;
-    /* No tile */
   }
 }
 
-/* Overrides for individual CMS list items */
+/* CMS List Items Overrides */
 /* Desktop */
 .w-dyn-item[cms-item="project-1"] .project--card-image {
   background-size: auto 150%;

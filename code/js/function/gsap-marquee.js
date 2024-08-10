@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
 
   // Durations for desktop and mobile (in seconds)
   const desktopDuration = 60,
-    mobileDuration = 45;
+    mobileDuration = 50;
 
   // Device detection, including tablets
   const isMobile =

@@ -1,149 +1,179 @@
 /* Hero */
-/* Illustration size */
+/* Illustrations */
+
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
   .illustration.home--hero-cursor {
-    /* Size */
     width: 4.25rem;
     height: 4.25rem;
-
-    /* Position */
     position: absolute;
     top: -1.3rem;
-    right: auto;
-    bottom: auto;
     left: 6rem;
   }
 
   .illustration.home--hero-male {
-    /* Size */
     width: 9rem;
     height: 9rem;
-
-    /* Position */
     position: absolute;
     top: -4.75rem;
-    right: auto;
-    bottom: auto;
     left: 9.25rem;
   }
 
   .illustration.home--hero-female {
-    /* Size */
     width: 9.5rem;
     height: 9.5rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: -7.25rem;
     bottom: 0.25rem;
-    left: auto;
   }
 }
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
   .illustration.home--hero-cursor {
-    /* Size */
     width: 3.25rem;
     height: 3.25rem;
-
-    /* Position */
     position: absolute;
     top: -0.8rem;
-    right: auto;
-    bottom: auto;
     left: 6.5rem;
   }
 
   .illustration.home--hero-male {
-    /* Size */
     width: 6.5rem;
     height: 6.5rem;
-
-    /* Position */
     position: absolute;
     top: -4.5rem;
-    right: auto;
-    bottom: auto;
     left: 8.5rem;
   }
 
   .illustration.home--hero-female {
-    /* Size */
     width: 6.5rem;
     height: 6.5rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: -5rem;
     bottom: -1rem;
-    left: auto;
   }
 }
 
 /* Projects */
-/* Heading size */
+/* Headings and Captions */
+
 /* Tablet */
-@media (min-width: 393px) {
-  .heading.mobile {
+@media (min-width: 768px) {
+  .heading.tablet {
     display: block;
   }
 
-  .heading.mobile--small {
+  .heading.mobile,
+  .heading.mobile--small,
+  .caption.mobile--small {
     display: none;
   }
 
   .caption.mobile {
     display: block;
   }
+}
 
-  .caption.mobile--small {
+/* Mobile, Large */
+@media only screen and (max-width: 767px) and (min-width: 393px) {
+  .heading.tablet,
+  .caption.mobile--small,
+  .heading.mobile--small {
     display: none;
+  }
+
+  .heading.mobile,
+  .caption.mobile {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width: 414px) {
+  .project--header {
+    display: flex;
+    max-width: 20rem;
   }
 }
 
 /* Mobile */
 @media (max-width: 392px) {
-  .heading.mobile {
-    display: none;
-  }
-
-  .heading.mobile--small {
-    display: block;
-  }
-
+  .heading.tablet,
+  .heading.mobile,
   .caption.mobile {
     display: none;
   }
 
+  .heading.mobile--small,
   .caption.mobile--small {
     display: block;
   }
 }
 
+/* Projects */
+/* Illustrations */
+
+/* Tablet */
+@media only screen and (max-width: 834px) and (min-width: 768px) {
+  .illustration.project--lightning {
+    position: absolute;
+    right: -3.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 720px) {
+  .illustration.project--heart {
+    width: 9rem;
+    height: 9rem;
+    position: absolute;
+    top: -3.75rem;
+    left: -4.5rem;
+  }
+
+  .illustration.project--lightning {
+    width: 11rem;
+    height: 11rem;
+    position: absolute;
+    top: -12.5rem;
+    right: -2rem;
+  }
+}
+
+/* Mobile, Large */
+@media only screen and (max-width: 719px) and (min-width: 414px) {
+  .illustration.project--heart {
+    width: 7.5rem;
+    height: 7.5rem;
+    position: absolute;
+    top: -3.75rem;
+    left: -4.5rem;
+  }
+
+  .illustration.project--lightning {
+    width: 9.5rem;
+    height: 9.5rem;
+    position: absolute;
+    top: -12.5rem;
+    right: -2rem;
+  }
+}
+
+/* Projects */
 /* Base CSS for all CMS list items */
+
 /* Desktop */
 .w-dyn-item[cms-item^="project-"] .project--card-image {
   background-size: auto 100%;
-  /* Custom size: Auto width, 100% height */
   background-position: 50% 50%;
-  /* Center position */
   background-repeat: no-repeat;
-  /* No tile */
 }
 
 /* Tablet */
 @media (min-width: 480px) and (max-width: 991px) {
   .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: 100% auto;
-    /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
-    /* Center position */
     background-repeat: no-repeat;
-    /* No tile */
   }
 }
 
@@ -151,15 +181,12 @@
 @media (max-width: 479px) {
   .w-dyn-item[cms-item^="project-"] .project--card-image {
     background-size: auto 100%;
-    /* Custom size: Auto width, 100% height */
     background-position: 50% 50%;
-    /* Center position */
     background-repeat: no-repeat;
-    /* No tile */
   }
 }
 
-/* Overrides for individual CMS list items */
+/* CMS List Items Overrides */
 /* Desktop */
 .w-dyn-item[cms-item="project-1"] .project--card-image {
   background-size: auto 150%;

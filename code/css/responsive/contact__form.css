@@ -1,67 +1,51 @@
 /* Hero */
+/* Header */
+
+/* Mobile, Large */
+@media only screen and (max-width: 479px) and (min-width: 410px) {
+  .hero--header.contact--form {
+    display: flex;
+    max-width: 40rem;
+  }
+}
+
+/* Hero */
+/* Illustrations */
+
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
-  /* Illustration size */
   .illustration.contact--cursor {
-    /* Size */
     width: 4.25rem;
     height: 4.25rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: 0rem;
     bottom: -5.5rem;
-    left: auto;
   }
 
   .illustration.contact--male {
-    /* Size */
     width: 9.5rem;
     height: 9.5rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: -9rem;
     bottom: -6.4rem;
-    left: auto;
   }
 }
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
-  /* Header size */
-  .hero--header.contact--form {
-    /* Size */
-    display: flex; /* Ensure it's a flex container */
-    max-width: 40rem;
-  }
-
-  /* Illustration size */
   .illustration.contact--cursor {
-    /* Size */
     width: 3.25rem;
     height: 3.25rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: -1.25rem;
     bottom: -3.5rem;
-    left: auto;
   }
 
   .illustration.contact--male {
-    /* Size */
     width: 6.5rem;
     height: 6.5rem;
-
-    /* Position */
     position: absolute;
-    top: auto;
     right: -6.25rem;
     bottom: -3rem;
-    left: auto;
   }
 }
