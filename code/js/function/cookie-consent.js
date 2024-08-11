@@ -30,7 +30,7 @@ if (hasDeclined()) {
 document
   .getElementById("accept-cookies")
   .addEventListener("click", function () {
-    document.getElementById("cookie-consent-banner").style.display = "none";
+    document.getElementById("cookie-consent").style.display = "none";
   });
 
 // Handle decline button click
@@ -38,8 +38,8 @@ document
   .getElementById("decline-cookies")
   .addEventListener("click", function () {
     disableTracking();
-    document.getElementById("cookie-consent-banner").style.display = "none";
+    document.getElementById("cookie-consent").style.display = "none";
   });
 
 // Show the consent banner by default
-document.getElementById("cookie-consent-banner").style.display = "block";
+document.getElementById("cookie-consent").style.display = "flex";
