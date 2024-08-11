@@ -42,4 +42,4 @@ document
   });
 
 // Show the consent banner by default
-document.getElementById("cookie-consent").style.display = "flex";
+document.getElementById("cookie-consent").style.display = "block";
