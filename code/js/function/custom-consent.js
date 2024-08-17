@@ -69,7 +69,7 @@ window.addEventListener("load", function () {
           ease: "cubic-bezier(0.645, 0.045, 0.355, 1)",
         }
       );
-    }, 1500); // Delay before showing the modal (1.5 seconds)
+    }, 4000); // Delay before showing the modal
   } else {
     // If the user has already consented or declined, keep the modal hidden
     document.getElementById("cookie-consent").style.display = "none";

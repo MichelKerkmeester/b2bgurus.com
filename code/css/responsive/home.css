@@ -233,3 +233,13 @@
     background-position: 70% 100%;
   }
 }
+
+/* Process */
+/* Gap */
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .process--list {
+    gap: clamp(25rem, 50vh, 35rem); /* Adjust the values as needed */
+  }
+}
