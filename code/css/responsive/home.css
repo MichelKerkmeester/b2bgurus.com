@@ -277,12 +277,29 @@
   }
 }
 
+/* Projects */
+/* Gap */
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(6rem, 20vh, 10rem); /* Min, Preferred, Max */
+  }
+}
+
 /* Process */
 /* Gap */
 
 /* Desktop */
 @media only screen and (min-width: 992px) {
   .process--list {
-    gap: clamp(25rem, 50vh, 35rem); /* Adjust the values as needed */
+    gap: clamp(25rem, 50vh, 35rem); /* Min, Preferred, Max */
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(4rem, 10vh, 10rem); /* Min, Preferred, Max */
   }
 }

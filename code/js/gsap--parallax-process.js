@@ -1,28 +1,23 @@
 // Process
 // GSAP Parallax
 document.addEventListener("DOMContentLoaded", function () {
-  // Function to detect if the user is on a desktop device
   function isDesktop() {
-    return window.innerWidth >= 992;
+    return window.innerWidth >= 992; // Check if the device is a desktop
   }
 
   if (isDesktop()) {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Select all process items that need animations
     const processItems = document.querySelectorAll(
       ".process--list .w-dyn-item"
     );
 
-    // Animate each process item
     processItems.forEach((item, index) => {
-      item.style.visibility = "visible"; // Ensure the item is visible
-      animateProcessItem(item, index + 1); // Animate the item based on its index
+      item.style.visibility = "visible"; // Ensure item is visible
+      animateProcessItem(item, index + 1); // Animate each item based on its index
     });
 
-    // Function to animate each process item
     function animateProcessItem(item, index) {
-      // Select the heading, description, and illustrations within the item
       const heading = item.querySelector(".process--heading");
       const description = item.querySelector(".process--description");
       const smallIllustration = item.querySelector(
@@ -32,13 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
         `.illustration.cc--process-${index}--big`
       );
 
-      // Common settings for all animations within this item
       const commonSettings = {
         scrollTrigger: {
           trigger: item, // Element that triggers the animation
-          start: "top 90%", // Start position of the animation based on scroll
-          end: "bottom 20%", // End position of the animation based on scroll
-          scrub: 3, // Smooth scrolling effect during the animation
+          start: "top 90%",
+          end: "bottom 20%",
+          scrub: 1, // Smooth scrolling animation
         },
       };
 
@@ -48,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         y: "6.25rem",
         opacity: 25,
         duration: 1,
-        ease: "power2.out",
+        ease: "power2.out", // Smooth easing effect
       });
 
       // Animate descriptions
@@ -62,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         stagger: 0.1,
       });
 
-      // Animation settings for illustrations based on the item's index
+      // Specific animation settings for illustrations based on item index
       const illustrationSettings = {
         1: {
           small: { x: "6.25rem", y: "-12.5rem", rotation: -30, scale: 0.5 },
@@ -91,10 +85,9 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       // Animate small illustrations
-      const smallSettings = illustrationSettings[index].small;
       gsap.from(smallIllustration, {
         ...commonSettings,
-        ...smallSettings, // Apply specific animation settings based on the item index
+        ...illustrationSettings[index].small, // Apply small illustration settings
         opacity: 0,
         duration: 3,
         ease: "power3.out",
@@ -102,10 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       // Animate big illustrations
-      const bigSettings = illustrationSettings[index].big;
       gsap.from(bigIllustration, {
         ...commonSettings,
-        ...bigSettings, // Apply specific animation settings based on the item index
+        ...illustrationSettings[index].big, // Apply big illustration settings
         opacity: 0,
         duration: 3,
         delay: 0.1,

@@ -141,3 +141,13 @@
     background-position: 70% 100%;
   }
 }
+
+/* Projects */
+/* Gap */
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(6rem, 20vh, 10rem); /* Min, Preferred, Max */
+  }
+}

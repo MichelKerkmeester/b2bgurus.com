@@ -27,14 +27,29 @@ document.addEventListener("DOMContentLoaded", function () {
       overflow: "hidden",
     });
 
-    // Function to handle hover in and out animations for the line only
-    const handleHoverLine = (hoverDivider, isIn) => {
-      gsap.killTweensOf(hoverDivider); // Kill ongoing animations
-      gsap.to(hoverDivider, {
-        width: isIn ? "100%" : "0%",
-        duration: 1.25,
+    // Function to handle color change on hover
+    const handleHoverColorChange = (nrElement, btn1, btn2, isIn) => {
+      gsap.killTweensOf([nrElement, btn1, btn2]); // Kill ongoing animations
+      gsap.to(nrElement, {
+        color: isIn ? "#2f7f90" : "#c4c4c4",
+        duration: 0.5,
         ease: "power1.out",
-      }); // Animate divider line
+      }); // Animate text color change
+      gsap.to([btn1, btn2], {
+        backgroundColor: isIn ? "#2f7f90" : "#13333a",
+        duration: 0.5,
+        ease: "power1.out",
+      }); // Animate background color change
+    };
+
+    // Function to handle line animation on click
+    const handleLineClick = (line, isOpen) => {
+      gsap.killTweensOf(line); // Kill ongoing animations
+      gsap.to(line, {
+        width: isOpen ? "100%" : "0%",
+        duration: 0.5,
+        ease: "power1.out",
+      }); // Animate line width
     };
 
     // Add hover animations if not on mobile/tablet
@@ -42,23 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
       header.addEventListener("mouseenter", () => {
         // Hover on header
         if (header !== openAccordionHeader) {
-          if (lastHoveredHeader && lastHoveredHeader !== header) {
-            const lastHoverDivider = lastHoveredHeader.querySelector(
-              ".accordion--divider"
-            );
-            if (lastHoveredHeader !== openAccordionHeader) {
-              handleHoverLine(lastHoverDivider, false); // Handle last hovered header
-            }
-          }
           lastHoveredHeader = header; // Update last hovered header
-          handleHoverLine(divider, true); // Handle current header
+          handleHoverColorChange(accordionNr, btnLine1, btnLine2, true); // Change text and button colors on hover
         }
       });
 
       header.addEventListener("mouseleave", () => {
         // Hover off header
         if (lastHoveredHeader === header && openAccordionHeader !== header) {
-          handleHoverLine(divider, false); // Handle current header
+          handleHoverColorChange(accordionNr, btnLine1, btnLine2, false); // Reset text and button colors on hover out
           lastHoveredHeader = null; // Reset last hovered header
         }
       });
@@ -92,20 +99,18 @@ document.addEventListener("DOMContentLoaded", function () {
               gsap.set(itemContent, { height: "0px" }); // Ensure height is 0px after closing
             },
           }); // Close other contents
+
           gsap.to(itemDivider, {
             width: "0%",
             duration: 0.5,
             ease: "power1.out",
-          }); // Close other dividers
+          }); // Close divider line
+
           gsap.to(itemNr, {
             color: "#c4c4c4",
             duration: 0.5,
             ease: "power1.inOut",
           }); // Reset number color
-
-          if (isMobileOrTablet()) {
-            handleHoverLine(itemDivider, false); // Apply hover out on close
-          }
 
           // Close button animation
           gsap.to(itemBtnLine1, {
@@ -113,18 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
             duration: 0.75,
             ease: "expo.out",
           }); // Rotate line 1 to 0 degrees
-          gsap.to(itemBtnLine1, {
+          gsap.to([itemBtnLine1, itemBtnLine2], {
             backgroundColor: "#13333a",
             duration: 0.75,
             delay: 0.25,
             ease: "ease.out",
-          }); // Change BG color of line 1
-          gsap.to(itemBtnLine2, {
-            backgroundColor: "#13333a",
-            duration: 0.75,
-            delay: 0.25,
-            ease: "ease.out",
-          }); // Change BG color of line 2
+          }); // Change BG color of button lines
         }
       });
 
@@ -158,37 +157,33 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           },
         });
-        gsap.to(divider, { width: "100%", duration: 0.5, ease: "power1.out" }); // Animate divider
+
+        gsap.to(divider, {
+          width: "100%",
+          duration: 0.5,
+          ease: "power1.out",
+        }); // Animate divider line on open
+
         gsap.to(accordionNr, {
           color: "#2f7f90",
           duration: 0.5,
           ease: "power1.inOut",
         }); // Change number color on open
 
-        if (isMobileOrTablet()) {
-          handleHoverLine(divider, true); // Apply hover on open
-        }
-
         openAccordionHeader = header; // Set the opened accordion header
 
         // Open button animation
         gsap.to(btnLine1, {
           rotation: -90,
-          duration: 0.75,
+          duration: 1,
           ease: "bounce.out",
         }); // Rotate line 1 to -90 degrees
-        gsap.to(btnLine1, {
+        gsap.to([btnLine1, btnLine2], {
           backgroundColor: "#2f7f90",
-          duration: 0.5,
+          duration: 1.5,
           delay: 0.25,
           ease: "bounce.out",
-        }); // Change BG color of line 1
-        gsap.to(btnLine2, {
-          backgroundColor: "#2f7f90",
-          duration: 0.5,
-          delay: 0.25,
-          ease: "bounce.out",
-        }); // Change BG color of line 2
+        }); // Change BG color of button lines
       } else {
         // Close the clicked content if already open
         gsap.to(content, {
@@ -204,16 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
               width: "0%",
               duration: 0.5,
               ease: "power1.out",
-            }); // Close divider
+            }); // Close divider line
             gsap.to(accordionNr, {
               color: "#c4c4c4",
               duration: 0.5,
               ease: "power1.inOut",
             }); // Reset number color on close
-
-            if (isMobileOrTablet()) {
-              handleHoverLine(divider, false); // Apply hover out on close
-            }
             // Enable scroll handling after animation
             setTimeout(window.enableScrollHandling, 1000); // Re-enable scroll handling after 1 second
           },
@@ -223,18 +214,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Close button animation
         gsap.to(btnLine1, { rotation: 0, duration: 0.75, ease: "expo.out" }); // Rotate line 1 to 0 degrees
-        gsap.to(btnLine1, {
+        gsap.to([btnLine1, btnLine2], {
           backgroundColor: "#13333a",
           duration: 0.75,
           delay: 0.25,
           ease: "ease.out",
-        }); // Change BG color of line 1
-        gsap.to(btnLine2, {
-          backgroundColor: "#13333a",
-          duration: 0.75,
-          delay: 0.25,
-          ease: "ease.out",
-        }); // Change BG color of line 2
+        }); // Change BG color of button lines
       }
     });
   });
