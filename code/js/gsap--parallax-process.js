@@ -27,12 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
         `.illustration.cc--process-${index}--big`
       );
 
+      // Speed control: Adjust this value to control overall animation speed
+      // Lower values = slower animation, Higher values = faster animation
+      const speed = 0.75;
+
       const commonSettings = {
         scrollTrigger: {
           trigger: item, // Element that triggers the animation
           start: "top 90%",
           end: "bottom 20%",
-          scrub: 1, // Smooth scrolling animation
+          scrub: speed, // Use the speed variable here
         },
       };
 

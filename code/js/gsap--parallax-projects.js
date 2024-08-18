@@ -2,80 +2,74 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
 
   const projectListItems = document.querySelectorAll(".project--list-item");
-  if (projectListItems.length === 0) return; // Exit if no items found
+  if (projectListItems.length === 0) return;
 
   function isMobile() {
-    return window.innerWidth < 992; // Check if the device is mobile
+    return window.innerWidth < 992;
+  }
+
+  // Lerp function for smooth interpolation
+  function lerp(start, end, t) {
+    return start * (1 - t) + end * t;
   }
 
   projectListItems.forEach((item, index) => {
-    const suffix = isMobile() ? "--mobile" : ""; // Determine suffix based on device type
-
+    const suffix = isMobile() ? "--mobile" : "";
     const card = item.querySelector(`#project-card${suffix}`);
     const imageWrapper = card.querySelector(`#project-image-w${suffix}`);
     const image = imageWrapper.querySelector(`#project-image${suffix}`);
     const illustration = item.querySelector(`#project-bg${suffix}`);
 
-    const direction = index % 2 === 0 ? -100 : 100; // Determine direction based on index
+    const direction = index % 2 === 0 ? -100 : 100;
 
-    // Create and style mask for fade-in effect
-    const mask = document.createElement("div");
-    mask.style.cssText = `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 200%;
-      height: 200%;
-      background-color: transparent;
-      transform: translate(-50%, -50%) scale(0);
-      border-radius: 50%;
-    `;
-    card.style.position = "relative";
-    card.style.overflow = "hidden";
-    card.appendChild(mask);
-
-    // Set initial states for animation
+    // Initial states
     gsap.set(card, { scale: 0.8, yPercent: 50 });
     gsap.set(image, { scale: 1.4 });
     gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
 
-    // Create animation timeline triggered by scroll
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: item,
-        start: "top 90%",
-        end: "bottom 75%",
-        scrub: 1, // Smooth scrolling effect
-        toggleActions: "play none none reverse", // Replay on scroll back
+    let progress = 0;
+    let targetProgress = 0;
+
+    // Speed control: Adjust this value to control overall animation speed
+    // Lower values = slower animation, Higher values = faster animation
+    const speed = 0.1;
+
+    ScrollTrigger.create({
+      trigger: item,
+      start: "top 90%",
+      end: "bottom 75%",
+      onUpdate: (self) => {
+        targetProgress = self.progress;
       },
     });
 
-    // Animate mask to reveal content
-    tl.to(mask, {
-      scale: 5, // Expand mask to reveal
-      duration: 1.5,
-      ease: "power2.out",
-      onComplete: () => (mask.style.display = "none"), // Remove mask after reveal
-    })
-      // Animate card
-      .to(card, { scale: 1, yPercent: 0, duration: 2, ease: "power1.inOut" }, 0)
-      // Animate illustration
-      .to(
-        illustration,
-        {
-          opacity: 1,
-          scale: 1,
-          yPercent: 0,
-          duration: 2,
-          ease: "power1.inOut",
-        },
-        "-=1.25"
-      )
-      // Animate image
-      .to(
-        image,
-        { scale: 1, yPercent: 0, duration: 2, ease: "power1.inOut" },
-        0
-      );
+    function animateItem() {
+      progress = lerp(progress, targetProgress, speed);
+
+      // Card animation
+      gsap.to(card, {
+        scale: 0.8 + 0.2 * progress, // Scales from 0.8 to 1
+        yPercent: 50 - 50 * progress, // Moves up by 50% of its height
+        duration: 0,
+      });
+
+      // Illustration animation
+      gsap.to(illustration, {
+        opacity: progress, // Fades in from 0 to 1
+        scale: 0.7 + 0.3 * progress, // Scales from 0.7 to 1
+        yPercent: 30 - 30 * progress, // Moves up by 30% of its height
+        duration: 0,
+      });
+
+      // Image animation
+      gsap.to(image, {
+        scale: 1.4 - 0.4 * progress, // Scales from 1.4 to 1
+        duration: 0,
+      });
+
+      requestAnimationFrame(animateItem);
+    }
+
+    animateItem();
   });
 });

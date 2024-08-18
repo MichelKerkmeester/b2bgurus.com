@@ -1,28 +1,3 @@
-/* GSAP Marquee */
-/* CSS Animation for Mobile */
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-1 * var(--marquee-width)));
-  }
-}
-
-.marquee--track {
-  display: flex;
-  will-change: transform;
-}
-
-.marquee-animate {
-  animation: marquee var(--marquee-duration) linear infinite;
-  -webkit-animation: marquee var(--marquee-duration) linear infinite;
-  -moz-animation: marquee var(--marquee-duration) linear infinite;
-  -o-animation: marquee var(--marquee-duration) linear infinite;
-}
-
 /* Projects */
 /* CMS List - Alternate Direction per Item */
 
