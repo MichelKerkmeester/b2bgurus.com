@@ -25,22 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
   function runAnimation(isMobile) {
     const suffix = isMobile ? "--mobile" : "";
 
-    // Apply splitText to specific elements
+    // Apply splitText to specific elements (caption removed)
     splitText(`#hero-marketing${suffix}`);
     splitText(`#hero-gurus${suffix}`);
 
     // Set initial styles for elements
     gsap.set(
-      `#hero-caption${suffix} span, #hero-marketing${suffix} span, #hero-gurus${suffix} span, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee`,
+      `#hero-caption${suffix}, #hero-marketing${suffix} span, #hero-gurus${suffix} span, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee`,
       {
         opacity: 0,
         y: isMobile ? "1.5rem" : "3.125rem",
       }
     );
-    gsap.set(`#hero-caption${suffix}`, {
-      opacity: 0,
-      y: isMobile ? "1.5rem" : "3.125rem",
-    });
     gsap.set(
       `#hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`,
       {
@@ -57,11 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Animate in view
     tl.to(`#hero-caption${suffix}`, { opacity: 1, y: 0 })
-      .to(
-        `#hero-caption${suffix} span`,
-        { opacity: 1, y: 0, stagger: isMobile ? 0.02 : 0.03 },
-        "-=0.6"
-      )
       .to(
         `#hero-marketing${suffix} span, #hero-gurus${suffix} span`,
         { opacity: 1, y: 0, stagger: isMobile ? 0.03 : 0.04 },

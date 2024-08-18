@@ -36,26 +36,26 @@ document.addEventListener("DOMContentLoaded", function () {
       const commonSettings = {
         scrollTrigger: {
           trigger: item, // Element that triggers the animation
-          start: "top 99%", // Start position of the animation based on scroll
-          end: "bottom 15%", // End position of the animation based on scroll
-          scrub: 0.5, // Smooth scrolling effect during the animation
+          start: "top 90%", // Start position of the animation based on scroll
+          end: "bottom 20%", // End position of the animation based on scroll
+          scrub: 3, // Smooth scrolling effect during the animation
         },
       };
 
-      // Animate heading
+      // Animate headings
       gsap.from(heading, {
         ...commonSettings,
         y: "6.25rem",
-        opacity: 0,
+        opacity: 25,
         duration: 1,
         ease: "power2.out",
       });
 
-      // Animate the description with a smooth easing and stagger effect
+      // Animate descriptions
       gsap.from(description, {
         ...commonSettings,
         y: "9.375rem",
-        opacity: 0,
+        opacity: 25,
         duration: 1,
         delay: 0.25,
         ease: "power2.out",
