@@ -1,8 +1,6 @@
 // CMS collection lists
 // Apply attributes to individual CMS items
-window.addEventListener("load", function () {
-  // Wait until all scripts/resources are loaded
-
+document.addEventListener("DOMContentLoaded", function () {
   function applyAttributesToItems(selector, attributeName) {
     var items = document.querySelectorAll(selector); // Select all items
     if (items.length === 0) {

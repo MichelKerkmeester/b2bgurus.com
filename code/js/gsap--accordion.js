@@ -1,7 +1,5 @@
 // GSAP Accordion
-window.addEventListener("load", function () {
-  // Wait until all scripts/resources are loaded
-
+document.addEventListener("DOMContentLoaded", function () {
   const accordions = document.querySelectorAll(".accordion--list-item"); // Select all accordion items
   let lastHoveredHeader = null; // Track the last hovered header
   let openAccordionHeader = null; // Track the currently open accordion header

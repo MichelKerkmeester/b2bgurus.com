@@ -1,8 +1,6 @@
 // Navigation
 // Hide/Show on scroll
-window.addEventListener("load", function () {
-  // Wait until all scripts/resources are loaded
-
+document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
 
   // Select the nav bar element

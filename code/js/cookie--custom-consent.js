@@ -1,5 +1,5 @@
-// Wait until all scripts/resources are loaded
-window.addEventListener("load", function () {
+// Cookie Consent
+document.addEventListener("DOMContentLoaded", function () {
   // Names of the cookies to track consent or decline
   var consentCookieName = "cookieConsent";
   var declineCookieName = "cookieDecline";
