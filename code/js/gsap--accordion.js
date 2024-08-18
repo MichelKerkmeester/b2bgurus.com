@@ -28,18 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Function to handle color change on hover
-    const handleHoverColorChange = (nrElement, btn1, btn2, isIn) => {
-      gsap.killTweensOf([nrElement, btn1, btn2]); // Kill ongoing animations
+    const handleHoverColorChange = (nrElement, isIn) => {
+      gsap.killTweensOf(nrElement); // Kill ongoing animations
       gsap.to(nrElement, {
         color: isIn ? "#2f7f90" : "#c4c4c4",
         duration: 0.5,
         ease: "power1.out",
       }); // Animate text color change
-      gsap.to([btn1, btn2], {
-        backgroundColor: isIn ? "#2f7f90" : "#13333a",
-        duration: 0.5,
-        ease: "power1.out",
-      }); // Animate background color change
     };
 
     // Function to handle line animation on click
@@ -58,14 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hover on header
         if (header !== openAccordionHeader) {
           lastHoveredHeader = header; // Update last hovered header
-          handleHoverColorChange(accordionNr, btnLine1, btnLine2, true); // Change text and button colors on hover
+          handleHoverColorChange(accordionNr, true); // Change text color on hover
         }
       });
 
       header.addEventListener("mouseleave", () => {
         // Hover off header
         if (lastHoveredHeader === header && openAccordionHeader !== header) {
-          handleHoverColorChange(accordionNr, btnLine1, btnLine2, false); // Reset text and button colors on hover out
+          handleHoverColorChange(accordionNr, false); // Reset text color on hover out
           lastHoveredHeader = null; // Reset last hovered header
         }
       });
