@@ -34,11 +34,26 @@ window.addEventListener("load", function () {
     });
   }
 
+  // Function to show the consent banner with an animation
+  function showBanner() {
+    var bannerElement = document.getElementById("cookie-consent");
+    bannerElement.style.display = "block";
+    gsap.fromTo(
+      bannerElement,
+      { y: "100vh" },
+      {
+        y: "0vh",
+        duration: 1,
+        ease: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+      }
+    );
+  }
+
   // Handle the acceptance of cookies
   document
     .getElementById("cookie-accept")
     .addEventListener("click", function () {
-      console.log("Cookies accepted"); // Debugging line
+      console.log("Cookies accepted");
       Cookies.set(consentCookieName, "true", { expires: 7 });
       hideBanner();
     });
@@ -47,7 +62,7 @@ window.addEventListener("load", function () {
   document
     .getElementById("cookie-decline")
     .addEventListener("click", function () {
-      console.log("Cookies declined"); // Debugging line
+      console.log("Cookies declined");
       disableTracking();
       hideBanner();
     });
@@ -57,19 +72,8 @@ window.addEventListener("load", function () {
     // Initially set the modal to display: none
     document.getElementById("cookie-consent").style.display = "none";
 
-    // Show modal after a delay, then start the animation
-    setTimeout(function () {
-      document.getElementById("cookie-consent").style.display = "block";
-      gsap.fromTo(
-        "#cookie-consent",
-        { y: "100vh" }, // Start position off-screen
-        {
-          y: "0vh", // End position in view
-          duration: 1, // Duration of the animation
-          ease: "cubic-bezier(0.645, 0.045, 0.355, 1)",
-        }
-      );
-    }, 10000); // Delay before showing the modal
+    // Show modal after a delay
+    setTimeout(showBanner, 10000); // 10 seconds delay
   } else {
     // If the user has already consented or declined, keep the modal hidden
     document.getElementById("cookie-consent").style.display = "none";
