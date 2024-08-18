@@ -1,101 +1,218 @@
+// GSAP Accordion
 document.addEventListener("DOMContentLoaded", function () {
-  gsap.registerPlugin(ScrollTrigger);
+  const accordions = document.querySelectorAll(".accordion--list-item"); // Select all accordion items
+  let lastHoveredHeader = null; // Track the last hovered header
+  let openAccordionHeader = null; // Track the currently open accordion header
 
-  const projectListItems = document.querySelectorAll(".project--list-item");
-  if (projectListItems.length === 0) return;
-
-  function isMobile() {
-    return window.innerWidth < 992;
+  // Function to check if the device is mobile/tablet
+  function isMobileOrTablet() {
+    return window.innerWidth <= 991; // Breakpoint for tablets and below
   }
 
-  // Custom ultra-slow ease function
-  const ultraSlowEase = (progress) => {
-    return Math.pow(progress, 5); // This will create a very slow start
-  };
+  // Loop through each accordion item
+  accordions.forEach((accordion) => {
+    const header = accordion.querySelector(".accordion--header"); // Select the header
+    const content = accordion.querySelector(".accordion--content"); // Select the content
+    const divider = header.querySelector(".accordion--divider"); // Select the divider
+    const accordionNr = header.querySelector(".accordion--nr"); // Select the accordion number
+    const btnLine1 = header.querySelector(".accordion--btn-line-1"); // Select the first line of the button
+    const btnLine2 = header.querySelector(".accordion--btn-line-2"); // Select the second line of the button
 
-  // Smoothing function
-  const smooth = (value, target, factor = 0.05) => {
-    return value + (target - value) * factor;
-  };
+    // Set the initial state for content (collapsed)
+    gsap.set(content, {
+      height: "0px",
+      opacity: 0,
+      scale: 0.95,
+      y: 10,
+      overflow: "hidden",
+    });
 
-  projectListItems.forEach((item, index) => {
-    const suffix = isMobile() ? "--mobile" : "";
+    // Function to handle color change on hover
+    const handleHoverColorChange = (nrElement, btn1, btn2, isIn) => {
+      gsap.killTweensOf([nrElement, btn1, btn2]); // Kill ongoing animations
+      gsap.to(nrElement, {
+        color: isIn ? "#2f7f90" : "#c4c4c4",
+        duration: 0.5,
+        ease: "power1.out",
+      }); // Animate text color change
+      gsap.to([btn1, btn2], {
+        backgroundColor: isIn ? "#2f7f90" : "#13333a",
+        duration: 0.5,
+        ease: "power1.out",
+      }); // Animate background color change
+    };
 
-    const card = item.querySelector(`#project-card${suffix}`);
-    const imageWrapper = card.querySelector(`#project-image-w${suffix}`);
-    const image = imageWrapper.querySelector(`#project-image${suffix}`);
-    const illustration = item.querySelector(`#project-bg${suffix}`);
+    // Function to handle line animation on click
+    const handleLineClick = (line, isOpen) => {
+      gsap.killTweensOf(line); // Kill ongoing animations
+      gsap.to(line, {
+        width: isOpen ? "100%" : "0%",
+        duration: 0.5,
+        ease: "power1.out",
+      }); // Animate line width
+    };
 
-    const direction = index % 2 === 0 ? -100 : 100;
+    // Add hover animations if not on mobile/tablet
+    if (!isMobileOrTablet()) {
+      header.addEventListener("mouseenter", () => {
+        // Hover on header
+        if (header !== openAccordionHeader) {
+          lastHoveredHeader = header; // Update last hovered header
+          handleHoverColorChange(accordionNr, btnLine1, btnLine2, true); // Change text and button colors on hover
+        }
+      });
 
-    // Create and style mask for fade-in effect
-    const mask = document.createElement("div");
-    mask.style.cssText = `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 200%;
-      height: 200%;
-      background-color: transparent;
-      transform: translate(-50%, -50%) scale(0);
-      border-radius: 50%;
-    `;
-    card.style.position = "relative";
-    card.style.overflow = "hidden";
-    card.appendChild(mask);
+      header.addEventListener("mouseleave", () => {
+        // Hover off header
+        if (lastHoveredHeader === header && openAccordionHeader !== header) {
+          handleHoverColorChange(accordionNr, btnLine1, btnLine2, false); // Reset text and button colors on hover out
+          lastHoveredHeader = null; // Reset last hovered header
+        }
+      });
+    }
 
-    // Set initial states for animation
-    gsap.set(card, { scale: 0.8, yPercent: 50 });
-    gsap.set(image, { scale: 1.4 });
-    gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
+    // Click event for the accordion header
+    header.addEventListener("click", () => {
+      const isOpen = parseFloat(gsap.getProperty(content, "height")) > 0; // Check if content is open
 
-    // Create animation timeline
-    const tl = gsap.timeline({ paused: true });
+      // Disable scroll handling
+      window.disableScrollHandling();
 
-    // Animate mask to reveal content
-    tl.to(mask, {
-      scale: 5,
-      duration: 3,
-      ease: "power1.inOut",
-      onComplete: () => (mask.style.display = "none"),
-    })
-      .to(card, { scale: 1, yPercent: 0, duration: 3, ease: "power1.inOut" }, 0)
-      .to(
-        illustration,
-        {
+      // Close all other accordion contents
+      accordions.forEach((item) => {
+        const itemContent = item.querySelector(".accordion--content");
+        const itemHeader = item.querySelector(".accordion--header");
+        const itemDivider = itemHeader.querySelector(".accordion--divider");
+        const itemNr = itemHeader.querySelector(".accordion--nr");
+        const itemBtnLine1 = itemHeader.querySelector(".accordion--btn-line-1");
+        const itemBtnLine2 = itemHeader.querySelector(".accordion--btn-line-2");
+
+        if (itemContent !== content) {
+          gsap.to(itemContent, {
+            height: "0px",
+            opacity: 0,
+            scale: 0.95,
+            y: 10,
+            duration: 0.5,
+            ease: "power1.inOut",
+            onComplete: () => {
+              gsap.set(itemContent, { height: "0px" }); // Ensure height is 0px after closing
+            },
+          }); // Close other contents
+
+          gsap.to(itemDivider, {
+            width: "0%",
+            duration: 0.5,
+            ease: "power1.out",
+          }); // Close divider line
+
+          gsap.to(itemNr, {
+            color: "#c4c4c4",
+            duration: 0.5,
+            ease: "power1.inOut",
+          }); // Reset number color
+
+          // Close button animation
+          gsap.to(itemBtnLine1, {
+            rotation: 0,
+            duration: 0.75,
+            ease: "expo.out",
+          }); // Rotate line 1 to 0 degrees
+          gsap.to([itemBtnLine1, itemBtnLine2], {
+            backgroundColor: "#13333a",
+            duration: 0.75,
+            delay: 0.25,
+            ease: "ease.out",
+          }); // Change BG color of button lines
+        }
+      });
+
+      if (!isOpen) {
+        // Open the clicked content if not already open
+        gsap.to(content, {
+          height: "auto",
           opacity: 1,
           scale: 1,
-          yPercent: 0,
-          duration: 3,
+          y: 0,
+          duration: 0.5,
+          ease: "power1.out",
+          onComplete: () => {
+            gsap.set(content, { height: "auto" }); // Ensure height is auto after opening
+            if (isMobileOrTablet()) {
+              header.scrollIntoView({ behavior: "smooth", block: "start" });
+              setTimeout(() => {
+                window.scrollBy(0, -32); // Add padding (32px)
+              }, 300); // Delay to ensure scrollIntoView completes first
+            }
+            // Enable scroll handling after animation
+            setTimeout(window.enableScrollHandling, 1000); // Re-enable scroll handling after 1 second
+
+            // Hide navigation when accordion is opened
+            if (isMobileOrTablet()) {
+              gsap.to(navHeader, {
+                y: -navHeader.offsetHeight,
+                duration: 0.8,
+                ease: "power2.out",
+              });
+            }
+          },
+        });
+
+        handleLineClick(divider, true); // Animate divider line on open
+
+        gsap.to(accordionNr, {
+          color: "#2f7f90",
+          duration: 0.5,
           ease: "power1.inOut",
-        },
-        "-=2"
-      )
-      .to(
-        image,
-        { scale: 1, yPercent: 0, duration: 3, ease: "power1.inOut" },
-        0
-      );
+        }); // Change number color on open
 
-    let currentProgress = 0;
-    let targetProgress = 0;
+        openAccordionHeader = header; // Set the opened accordion header
 
-    // Create ScrollTrigger
-    ScrollTrigger.create({
-      trigger: item,
-      start: "top 90%",
-      end: "bottom 20%", // Extend the end point to allow for slower animation
-      onUpdate: (self) => {
-        // Calculate target progress with delay and ultra-slow ease
-        targetProgress = ultraSlowEase(Math.max(0, self.progress - 0.1));
+        // Open button animation
+        gsap.to(btnLine1, {
+          rotation: -90,
+          duration: 1,
+          ease: "bounce.out",
+        }); // Rotate line 1 to -90 degrees
+        gsap.to([btnLine1, btnLine2], {
+          backgroundColor: "#2f7f90",
+          duration: 1.5,
+          delay: 0.25,
+          ease: "bounce.out",
+        }); // Change BG color of button lines
+      } else {
+        // Close the clicked content if already open
+        gsap.to(content, {
+          height: "0px",
+          opacity: 0,
+          scale: 0.95,
+          y: 10,
+          duration: 0.5,
+          ease: "power1.inOut",
+          onComplete: () => {
+            gsap.set(content, { height: "0px" }); // Ensure height is 0px after closing
+            handleLineClick(divider, false); // Close divider line
+            gsap.to(accordionNr, {
+              color: "#c4c4c4",
+              duration: 0.5,
+              ease: "power1.inOut",
+            }); // Reset number color on close
+            // Enable scroll handling after animation
+            setTimeout(window.enableScrollHandling, 1000); // Re-enable scroll handling after 1 second
+          },
+        });
 
-        // Smooth the progress
-        currentProgress = smooth(currentProgress, targetProgress, 0.02);
+        openAccordionHeader = null; // Reset the opened accordion header
 
-        // Apply the smoothed progress to the timeline
-        tl.progress(currentProgress);
-      },
-      toggleActions: "play none none reverse",
+        // Close button animation
+        gsap.to(btnLine1, { rotation: 0, duration: 0.75, ease: "expo.out" }); // Rotate line 1 to 0 degrees
+        gsap.to([btnLine1, btnLine2], {
+          backgroundColor: "#13333a",
+          duration: 0.75,
+          delay: 0.25,
+          ease: "ease.out",
+        }); // Change BG color of button lines
+      }
     });
   });
 });
