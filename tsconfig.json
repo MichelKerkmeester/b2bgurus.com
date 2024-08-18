@@ -4,7 +4,7 @@
     "rootDir": ".",
     "baseUrl": "./",
     "paths": {
-      "$utils/*": ["code/js/src/utils/*"]
+      "$utils/*": ["code/JS/src/utils/*"]
     },
     "types": ["@finsweet/ts-utils"]
   }
