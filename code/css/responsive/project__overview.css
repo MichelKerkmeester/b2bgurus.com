@@ -1,11 +1,27 @@
 /* Hero */
-/* Header */
+/* Text */
 
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
-  .hero--header.project--overview {
+  .header.project--overview {
     display: flex;
     max-width: 40rem;
+  }
+  .description.tablet {
+    display: block;
+  }
+  .description.mobile {
+    display: none;
+  }
+}
+
+/* Mobile, Large */
+@media only screen and (max-width: 479px) and (min-width: 410px) {
+  .description.tablet {
+    display: block;
+  }
+  .description.mobile {
+    display: none;
   }
 }
 
@@ -37,7 +53,7 @@
     width: 6.5rem;
     height: 6.5rem;
     position: absolute;
-    top: -9.5rem;
+    top: -9.75rem;
     left: 8.75rem;
   }
 
@@ -45,8 +61,8 @@
     width: 5rem;
     height: 5rem;
     position: absolute;
-    top: -4.5rem;
-    left: 14rem;
+    top: -4rem;
+    left: 13.4rem;
   }
 }
 

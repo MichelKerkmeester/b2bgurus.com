@@ -1,11 +1,28 @@
 /* Hero */
-/* Header */
+/* Text */
+
+/* Tablet */
+@media only screen and (max-width: 991px) and (min-width: 720px) {
+  .description.tablet {
+    display: block;
+  }
+  .description.mobile {
+    display: none;
+  }
+}
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
-  .hero--header.contact--form {
+  .header.contact--form {
     display: flex;
     max-width: 40rem;
+  }
+  .description.tablet {
+    display: block;
+    max-width: 20rem;
+  }
+  .description.mobile {
+    display: none;
   }
 }
 
@@ -18,16 +35,16 @@
     width: 4.25rem;
     height: 4.25rem;
     position: absolute;
-    right: 0rem;
-    bottom: -5.5rem;
+    right: 2rem;
+    bottom: -4.5rem;
   }
 
   .illustration.contact--male {
     width: 9.5rem;
     height: 9.5rem;
     position: absolute;
-    right: -9rem;
-    bottom: -6.4rem;
+    right: -7rem;
+    bottom: -4.5rem;
   }
 }
 
@@ -37,7 +54,7 @@
     width: 3.25rem;
     height: 3.25rem;
     position: absolute;
-    right: -1.25rem;
+    right: -0.3rem;
     bottom: -3.5rem;
   }
 
@@ -45,7 +62,7 @@
     width: 6.5rem;
     height: 6.5rem;
     position: absolute;
-    right: -6.25rem;
+    right: -5rem;
     bottom: -3rem;
   }
 }
