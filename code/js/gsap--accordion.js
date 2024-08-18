@@ -158,11 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         });
 
-        gsap.to(divider, {
-          width: "100%",
-          duration: 0.5,
-          ease: "power1.out",
-        }); // Animate divider line on open
+        handleLineClick(divider, true); // Animate divider line on open
 
         gsap.to(accordionNr, {
           color: "#2f7f90",
@@ -195,11 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ease: "power1.inOut",
           onComplete: () => {
             gsap.set(content, { height: "0px" }); // Ensure height is 0px after closing
-            gsap.to(divider, {
-              width: "0%",
-              duration: 0.5,
-              ease: "power1.out",
-            }); // Close divider line
+            handleLineClick(divider, false); // Close divider line
             gsap.to(accordionNr, {
               color: "#c4c4c4",
               duration: 0.5,
