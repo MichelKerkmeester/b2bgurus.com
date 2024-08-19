@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let animationId;
   let isDesktop = window.innerWidth >= 992;
 
+  // Set different durations for desktop and mobile
+  const desktopDuration = 20000; // 20 seconds for desktop
+  const mobileDuration = 15000; // 15 seconds for mobile
+
   // Calculate the total width of the marquee items
   function calculateTotalWidth() {
     totalWidth = 0;
@@ -26,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Animate the marquee
   function animateMarquee() {
     let startTime;
-    let duration = 20000; // Adjust duration for speed
+    let duration = isDesktop ? desktopDuration : mobileDuration;
 
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
@@ -48,15 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
     animateMarquee();
   }
 
-  // Function to handle resize events (only for desktop)
+  // Function to handle resize events
   function handleResize() {
-    if (isDesktop) {
-      cancelAnimationFrame(animationId);
-      marqueeTrack.style.transform = "translateX(0)";
-      marqueeTrack.innerHTML = "";
-      marqueeTrack.appendChild(marqueeList);
-      initMarquee();
-    }
+    isDesktop = window.innerWidth >= 992;
+    cancelAnimationFrame(animationId);
+    marqueeTrack.style.transform = "translateX(0)";
+    marqueeTrack.innerHTML = "";
+    marqueeTrack.appendChild(marqueeList);
+    initMarquee();
   }
 
   // Debounce function to limit the rate of function calls
@@ -75,11 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use debounced version of handleResize
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Add event listener for window resize only on desktop
-  if (isDesktop) {
-    window.addEventListener("resize", debouncedHandleResize);
-  }
+  // Add event listener for window resize
+  window.addEventListener("resize", debouncedHandleResize);
 
-  // Initialize marquee for both desktop and mobile
+  // Initialize marquee
   initMarquee();
 });

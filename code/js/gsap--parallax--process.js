@@ -1,6 +1,6 @@
 // Process
 // GSAP Parallax
-ddocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
   }
@@ -11,6 +11,10 @@ ddocument.addEventListener("DOMContentLoaded", function () {
     const processItems = document.querySelectorAll(
       ".process--list .w-dyn-item"
     ); // Select all process items
+
+    function lerp(start, end, t) {
+      return start * (1 - t) + end * t;
+    }
 
     processItems.forEach((item, index) => {
       item.style.visibility = "visible"; // Ensure item is visible
@@ -28,40 +32,10 @@ ddocument.addEventListener("DOMContentLoaded", function () {
       );
 
       // Speed control: Adjust this value to control overall animation speed
-      const speed = 0.65; // Lower values = slower animation, Higher values = faster animation
+      const speed = 0.1; // Lower values = slower animation, Higher values = faster animation
 
-      const commonSettings = {
-        scrollTrigger: {
-          trigger: item, // Element that triggers the animation
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: speed, // Use the speed variable here
-        },
-      };
-
-      // Animate headings
-      if (heading) {
-        gsap.from(heading, {
-          ...commonSettings,
-          y: "6.25rem",
-          opacity: 25,
-          duration: 1,
-          ease: "power2.out", // Smooth easing effect
-        });
-      }
-
-      // Animate descriptions
-      if (description) {
-        gsap.from(description, {
-          ...commonSettings,
-          y: "9.375rem",
-          opacity: 25,
-          duration: 1,
-          delay: 0.25,
-          ease: "power2.out",
-          stagger: 0.1, // Stagger effect if multiple elements
-        });
-      }
+      let progress = 0;
+      let targetProgress = 0;
 
       // Specific animation settings for illustrations based on item index
       const illustrationSettings = {
@@ -91,29 +65,80 @@ ddocument.addEventListener("DOMContentLoaded", function () {
         },
       };
 
-      // Animate small illustrations with error handling
-      if (smallIllustration) {
-        gsap.from(smallIllustration, {
-          ...commonSettings,
-          ...illustrationSettings[index].small, // Apply small illustration settings
-          opacity: 0,
-          duration: 3,
-          ease: "power3.out",
-          stagger: 0.2,
+      // Set initial states
+      gsap.set(heading, { y: "6.25rem", opacity: 0 });
+      gsap.set(description, { y: "9.375rem", opacity: 0 });
+      gsap.set(smallIllustration, {
+        ...illustrationSettings[index].small,
+        opacity: 0,
+      });
+      gsap.set(bigIllustration, {
+        ...illustrationSettings[index].big,
+        opacity: 0,
+      });
+
+      ScrollTrigger.create({
+        trigger: item,
+        start: "top 80%",
+        end: "bottom 65%",
+        onUpdate: (self) => {
+          targetProgress = self.progress;
+        },
+      });
+
+      function animateElements() {
+        progress = lerp(progress, targetProgress, speed);
+
+        // Animate heading
+        gsap.to(heading, {
+          y: 6.25 * (1 - progress) + "rem",
+          opacity: progress,
+          duration: 0,
         });
+
+        // Animate description
+        gsap.to(description, {
+          y: 9.375 * (1 - progress) + "rem",
+          opacity: progress,
+          duration: 0,
+        });
+
+        // Animate small illustration
+        gsap.to(smallIllustration, {
+          opacity: progress,
+          x:
+            parseFloat(illustrationSettings[index].small.x) * (1 - progress) +
+            "rem",
+          y:
+            parseFloat(illustrationSettings[index].small.y) * (1 - progress) +
+            "rem",
+          rotation: illustrationSettings[index].small.rotation * (1 - progress),
+          scale:
+            illustrationSettings[index].small.scale +
+            (1 - illustrationSettings[index].small.scale) * progress,
+          duration: 0,
+        });
+
+        // Animate big illustration
+        gsap.to(bigIllustration, {
+          opacity: progress,
+          x:
+            parseFloat(illustrationSettings[index].big.x) * (1 - progress) +
+            "rem",
+          y:
+            parseFloat(illustrationSettings[index].big.y) * (1 - progress) +
+            "rem",
+          rotation: illustrationSettings[index].big.rotation * (1 - progress),
+          scale:
+            illustrationSettings[index].big.scale +
+            (1 - illustrationSettings[index].big.scale) * progress,
+          duration: 0,
+        });
+
+        requestAnimationFrame(animateElements);
       }
 
-      // Animate big illustrations with error handling
-      if (bigIllustration) {
-        gsap.from(bigIllustration, {
-          ...commonSettings,
-          ...illustrationSettings[index].big, // Apply big illustration settings
-          opacity: 0,
-          duration: 3,
-          delay: 0.1,
-          ease: "power3.out",
-        });
-      }
+      animateElements();
     }
   }
 });

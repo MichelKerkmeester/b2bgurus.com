@@ -1,8 +1,13 @@
 // Hero
 // Intro Animation
 document.addEventListener("DOMContentLoaded", function () {
+  // Function to detect if the user is on a desktop or mobile
   function isMobile() {
     return window.innerWidth < 992;
+  }
+
+  function isDesktop() {
+    return window.innerWidth >= 992;
   }
 
   // Function to split text into individual <span> tags
@@ -17,52 +22,54 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // Function to set up and run the animation
-  function runAnimation() {
-    const mobile = isMobile(); // Determine if the device is mobile
+  function runAnimation(isMobile) {
+    const suffix = isMobile ? "--mobile" : "";
 
-    // Apply splitText to specific elements
-    splitText(`[id^="hero-marketing"]`);
-    splitText(`[id^="hero-gurus"]`);
+    // Apply splitText to specific elements (caption removed)
+    splitText(`#hero-marketing${suffix}`);
+    splitText(`#hero-gurus${suffix}`);
 
     // Set initial styles for elements
     gsap.set(
-      `[id^="hero-caption"], [id^="hero-marketing"] span, [id^="hero-gurus"] span, [id^="hero-description"], [id^="hero-button"], #hero-marquee`,
+      `#hero-caption${suffix}, #hero-marketing${suffix} span, #hero-gurus${suffix} span, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee`,
       {
         opacity: 0,
-        y: mobile ? "1.5rem" : "3.125rem", // Different starting positions for mobile and desktop
+        y: isMobile ? "1.5rem" : "3.125rem",
       }
     );
-    gsap.set(`[id^="hero-male"], [id^="hero-female"], [id^="hero-cursor"]`, {
-      opacity: 0,
-      scale: 0.5,
-      y: mobile ? "1rem" : "1.875rem", // Different starting positions for mobile and desktop
-    });
+    gsap.set(
+      `#hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`,
+      {
+        opacity: 0,
+        scale: 0.5,
+        y: isMobile ? "1rem" : "1.875rem",
+      }
+    );
 
     // Create GSAP timeline for animations
     const tl = gsap.timeline({
-      defaults: { ease: "power3.out", duration: mobile ? 0.8 : 1 }, // Faster animation for mobile
+      defaults: { ease: "power3.out", duration: isMobile ? 0.8 : 1 },
     });
 
-    // Animate elements into view
-    tl.to(`[id^="hero-caption"]`, { opacity: 1, y: 0 }) // Animate caption
+    // Animate in view
+    tl.to(`#hero-caption${suffix}`, { opacity: 1, y: 0 })
       .to(
-        `[id^="hero-marketing"] span, [id^="hero-gurus"] span`,
-        { opacity: 1, y: 0, stagger: mobile ? 0.03 : 0.04 }, // Animate marketing and gurus text
+        `#hero-marketing${suffix} span, #hero-gurus${suffix} span`,
+        { opacity: 1, y: 0, stagger: isMobile ? 0.03 : 0.04 },
         "-=0.7"
       )
       .to(
-        `[id^="hero-male"], [id^="hero-cursor"]`,
+        `#hero-male${suffix}, #hero-cursor${suffix}`,
         {
           opacity: 1,
           scale: 1,
           y: 0,
-          stagger: mobile ? 0.15 : 0.2,
-          ease: mobile ? "back.out(1.7)" : "elastic.out(1, 0.7)", // Different easing for mobile and desktop
+          stagger: isMobile ? 0.15 : 0.2,
+          ease: isMobile ? "back.out(1.7)" : "elastic.out(1, 0.7)",
           onComplete: function (targets) {
-            // Add floating animation after initial animation
             gsap.to(targets, {
-              y: mobile ? "-0.3rem" : "-0.625rem",
-              duration: mobile ? 1 : 1.2,
+              y: isMobile ? "-0.3rem" : "-0.625rem",
+              duration: isMobile ? 1 : 1.2,
               repeat: -1,
               yoyo: true,
               ease: "sine.inOut",
@@ -72,47 +79,51 @@ document.addEventListener("DOMContentLoaded", function () {
         "-=0.6"
       )
       .to(
-        `[id^="hero-female"], [id^="hero-description"], [id^="hero-button"], #hero-marquee`,
-        { opacity: 1, scale: 1, y: 0, stagger: mobile ? 0.08 : 0.1 }, // Animate remaining elements
+        `#hero-female${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee`,
+        { opacity: 1, scale: 1, y: 0, stagger: isMobile ? 0.08 : 0.1 },
         "-=0.6"
       )
       .to(
-        `[id^="hero-cursor"]`,
+        `#hero-cursor${suffix}`,
         {
-          x: mobile ? "-0.9375rem" : "-1.875rem",
-          y: mobile ? "-0.9375rem" : "-1.875rem",
+          x: isMobile ? "-0.9375rem" : "-1.875rem",
+          y: isMobile ? "-0.9375rem" : "-1.875rem",
           duration: 0.5,
           ease: "power2.inOut",
-        }, // Move cursor
+        },
         "+=0.3"
       )
       .to(
-        `[id^="hero-cursor"]`,
-        { scale: 0.9, duration: 0.2, ease: "power2.in" }, // Scale down cursor
+        `#hero-cursor${suffix}`,
+        { scale: 0.9, duration: 0.2, ease: "power2.in" },
         "-=0.15"
       )
       .to(
-        `[id^="hero-caption"]`,
-        { scale: 0.95, duration: 0.2, ease: "power2.in" }, // Scale down caption
+        `#hero-caption${suffix}`,
+        { scale: 0.95, duration: 0.2, ease: "power2.in" },
         "<"
       )
-      .to(`[id^="hero-cursor"]`, {
+      .to(`#hero-cursor${suffix}`, {
         scale: 1,
         duration: 0.3,
         ease: "back.out(1.5)",
-      }) // Scale up cursor
+      })
       .to(
-        `[id^="hero-caption"]`,
-        { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.5)" }, // Scale up caption
+        `#hero-caption${suffix}`,
+        { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.5)" },
         "-=0.2"
       )
       .to(
-        `[id^="hero-cursor"]`,
-        { x: 0, y: 0, duration: 0.7, ease: "power2.inOut" }, // Move cursor back to original position
+        `#hero-cursor${suffix}`,
+        { x: 0, y: 0, duration: 0.7, ease: "power2.inOut" },
         "-=0.3"
       );
   }
 
-  // Run the animation
-  runAnimation();
+  // Run the appropriate animation based on device type
+  if (isMobile()) {
+    runAnimation(true);
+  } else if (isDesktop()) {
+    runAnimation(false);
+  }
 });
