@@ -48,29 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
     animateMarquee();
   }
 
-  // Function to handle resize events
+  // Function to handle resize events (only for desktop)
   function handleResize() {
-    const newIsDesktop = window.innerWidth >= 992;
-
-    if (newIsDesktop !== isDesktop) {
-      isDesktop = newIsDesktop;
-
-      if (isDesktop) {
-        // Reinitialize marquee for desktop
-        cancelAnimationFrame(animationId);
-        marqueeTrack.style.transform = "translateX(0)";
-        marqueeTrack.innerHTML = "";
-        marqueeTrack.appendChild(marqueeList);
-        initMarquee();
-      } else {
-        // Stop animation and reset for mobile
-        cancelAnimationFrame(animationId);
-        marqueeTrack.style.transform = "translateX(0)";
-        marqueeTrack.innerHTML = "";
-        marqueeTrack.appendChild(marqueeList);
-      }
-    } else if (isDesktop) {
-      // Only recalculate and reinitialize on desktop
+    if (isDesktop) {
       cancelAnimationFrame(animationId);
       marqueeTrack.style.transform = "translateX(0)";
       marqueeTrack.innerHTML = "";
@@ -95,11 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use debounced version of handleResize
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Add event listener for window resize
-  window.addEventListener("resize", debouncedHandleResize);
-
-  // Initial setup
+  // Add event listener for window resize only on desktop
   if (isDesktop) {
-    initMarquee();
+    window.addEventListener("resize", debouncedHandleResize);
   }
+
+  // Initialize marquee for both desktop and mobile
+  initMarquee();
 });
