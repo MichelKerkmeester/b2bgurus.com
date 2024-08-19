@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ScrollTrigger.create({
         trigger: item,
         start: "top 80%",
-        end: "bottom 65%",
+        end: "bottom 60%",
         onUpdate: (self) => {
           targetProgress = self.progress;
         },
