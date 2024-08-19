@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let progress = 0;
     let targetProgress = 0;
 
-    const speed = 0.1; // Animation speed
+    // Speed control: Adjust this value to control overall animation speed
+    const speed = 0.1; // Lower values = slower animation, Higher values = faster animation
 
     // Create a ScrollTrigger for each project list item
     ScrollTrigger.create({
