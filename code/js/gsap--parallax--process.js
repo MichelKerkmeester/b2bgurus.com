@@ -1,20 +1,20 @@
 // Process
 // GSAP Parallax
-document.addEventListener("DOMContentLoaded", function () {
+ddocument.addEventListener("DOMContentLoaded", function () {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
   }
 
   if (isDesktop()) {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger); // Register the ScrollTrigger plugin for desktop only
 
     const processItems = document.querySelectorAll(
       ".process--list .w-dyn-item"
-    );
+    ); // Select all process items
 
     processItems.forEach((item, index) => {
       item.style.visibility = "visible"; // Ensure item is visible
-      animateProcessItem(item, index + 1); // Animate each item based on its index
+      animateProcessItem(item, index + 1); // Animate each item based on its index (1-based)
     });
 
     function animateProcessItem(item, index) {
@@ -28,37 +28,40 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       // Speed control: Adjust this value to control overall animation speed
-      // Lower values = slower animation, Higher values = faster animation
-      const speed = 0.75;
+      const speed = 0.65; // Lower values = slower animation, Higher values = faster animation
 
       const commonSettings = {
         scrollTrigger: {
           trigger: item, // Element that triggers the animation
-          start: "top 90%",
+          start: "top 80%",
           end: "bottom 20%",
           scrub: speed, // Use the speed variable here
         },
       };
 
       // Animate headings
-      gsap.from(heading, {
-        ...commonSettings,
-        y: "6.25rem",
-        opacity: 25,
-        duration: 1,
-        ease: "power2.out", // Smooth easing effect
-      });
+      if (heading) {
+        gsap.from(heading, {
+          ...commonSettings,
+          y: "6.25rem",
+          opacity: 25,
+          duration: 1,
+          ease: "power2.out", // Smooth easing effect
+        });
+      }
 
       // Animate descriptions
-      gsap.from(description, {
-        ...commonSettings,
-        y: "9.375rem",
-        opacity: 25,
-        duration: 1,
-        delay: 0.25,
-        ease: "power2.out",
-        stagger: 0.1,
-      });
+      if (description) {
+        gsap.from(description, {
+          ...commonSettings,
+          y: "9.375rem",
+          opacity: 25,
+          duration: 1,
+          delay: 0.25,
+          ease: "power2.out",
+          stagger: 0.1, // Stagger effect if multiple elements
+        });
+      }
 
       // Specific animation settings for illustrations based on item index
       const illustrationSettings = {
@@ -88,25 +91,29 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       };
 
-      // Animate small illustrations
-      gsap.from(smallIllustration, {
-        ...commonSettings,
-        ...illustrationSettings[index].small, // Apply small illustration settings
-        opacity: 0,
-        duration: 3,
-        ease: "power3.out",
-        stagger: 0.2,
-      });
+      // Animate small illustrations with error handling
+      if (smallIllustration) {
+        gsap.from(smallIllustration, {
+          ...commonSettings,
+          ...illustrationSettings[index].small, // Apply small illustration settings
+          opacity: 0,
+          duration: 3,
+          ease: "power3.out",
+          stagger: 0.2,
+        });
+      }
 
-      // Animate big illustrations
-      gsap.from(bigIllustration, {
-        ...commonSettings,
-        ...illustrationSettings[index].big, // Apply big illustration settings
-        opacity: 0,
-        duration: 3,
-        delay: 0.1,
-        ease: "power3.out",
-      });
+      // Animate big illustrations with error handling
+      if (bigIllustration) {
+        gsap.from(bigIllustration, {
+          ...commonSettings,
+          ...illustrationSettings[index].big, // Apply big illustration settings
+          opacity: 0,
+          duration: 3,
+          delay: 0.1,
+          ease: "power3.out",
+        });
+      }
     }
   }
 });

@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const marqueeItems = marqueeList.children;
 
   let totalWidth = 0;
+  let animationId;
+  let isDesktop = window.innerWidth >= 992;
 
   // Calculate the total width of the marquee items
   function calculateTotalWidth() {
@@ -33,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const progress = (elapsed % duration) / duration;
       marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
 
-      requestAnimationFrame(step);
+      animationId = requestAnimationFrame(step);
     }
 
-    requestAnimationFrame(step);
+    animationId = requestAnimationFrame(step);
   }
 
   // Initialize marquee
@@ -46,13 +48,58 @@ document.addEventListener("DOMContentLoaded", function () {
     animateMarquee();
   }
 
-  // Recalculate dimensions and restart animation on window resize
-  window.addEventListener("resize", function () {
-    marqueeTrack.style.transform = "translateX(0)"; // Reset position
-    marqueeTrack.innerHTML = ""; // Clear previous clones
-    marqueeTrack.appendChild(marqueeList); // Re-append the original list
-    initMarquee();
-  });
+  // Function to handle resize events
+  function handleResize() {
+    const newIsDesktop = window.innerWidth >= 992;
 
-  initMarquee(); // Start the marquee
+    if (newIsDesktop !== isDesktop) {
+      isDesktop = newIsDesktop;
+
+      if (isDesktop) {
+        // Reinitialize marquee for desktop
+        cancelAnimationFrame(animationId);
+        marqueeTrack.style.transform = "translateX(0)";
+        marqueeTrack.innerHTML = "";
+        marqueeTrack.appendChild(marqueeList);
+        initMarquee();
+      } else {
+        // Stop animation and reset for mobile
+        cancelAnimationFrame(animationId);
+        marqueeTrack.style.transform = "translateX(0)";
+        marqueeTrack.innerHTML = "";
+        marqueeTrack.appendChild(marqueeList);
+      }
+    } else if (isDesktop) {
+      // Only recalculate and reinitialize on desktop
+      cancelAnimationFrame(animationId);
+      marqueeTrack.style.transform = "translateX(0)";
+      marqueeTrack.innerHTML = "";
+      marqueeTrack.appendChild(marqueeList);
+      initMarquee();
+    }
+  }
+
+  // Debounce function to limit the rate of function calls
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Use debounced version of handleResize
+  const debouncedHandleResize = debounce(handleResize, 250);
+
+  // Add event listener for window resize
+  window.addEventListener("resize", debouncedHandleResize);
+
+  // Initial setup
+  if (isDesktop) {
+    initMarquee();
+  }
 });
