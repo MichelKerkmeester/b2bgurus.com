@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set initial states based on device type
     if (isMobile()) {
-      gsap.set(card, { scale: 0.85, yPercent: 37.5 });
-      gsap.set(image, { scale: 1.3 });
+      gsap.set(card, { scale: 0.9, yPercent: 25 });
+      gsap.set(image, { scale: 1.2 });
       if (illustration) {
-        gsap.set(illustration, { scale: 0.775, yPercent: 0, opacity: 0 });
+        gsap.set(illustration, { scale: 0.8, yPercent: 15, opacity: 0 });
       }
     } else {
       gsap.set(card, { scale: 0.8, yPercent: 50 });
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let targetProgress = 0;
 
     // Adjust speed based on device type
-    const speed = isMobile() ? 0.2 : 0.1;
+    const speed = isMobile() ? 0.25 : 0.1;
 
     ScrollTrigger.create({
       trigger: item,
@@ -54,24 +54,26 @@ document.addEventListener("DOMContentLoaded", function () {
       progress = lerp(progress, targetProgress, speed);
 
       if (isMobile()) {
+        // Subtle animation for mobile
         gsap.to(card, {
-          scale: 0.85 + 0.15 * progress,
-          yPercent: 37.5 - 37.5 * progress,
+          scale: 0.9 + 0.1 * progress,
+          yPercent: 25 - 25 * progress,
           duration: 0,
         });
         gsap.to(image, {
-          scale: 1.3 - 0.3 * progress,
+          scale: 1.2 - 0.2 * progress,
           duration: 0,
         });
         if (illustration) {
           gsap.to(illustration, {
             opacity: progress,
-            scale: 0.775 + 0.225 * progress,
-            yPercent: 0 - 22.5 * progress,
+            scale: 0.8 + 0.2 * progress,
+            yPercent: 15 - 15 * progress,
             duration: 0,
           });
         }
       } else {
+        // Regular animation for tablet and desktop
         gsap.to(card, {
           scale: 0.8 + 0.2 * progress,
           yPercent: 50 - 50 * progress,
