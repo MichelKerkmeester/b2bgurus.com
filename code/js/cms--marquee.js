@@ -9,11 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let animationId;
   let isDesktop = window.innerWidth >= 992;
 
-  // Set different durations for desktop and mobile
-  const desktopDuration = 20000; // 20 seconds for desktop
-  const mobileDuration = 15000; // 15 seconds for mobile
+  const desktopDuration = 20000;
+  const mobileDuration = 15000;
 
-  // Calculate the total width of the marquee items
   function calculateTotalWidth() {
     totalWidth = 0;
     Array.from(marqueeItems).forEach((item) => {
@@ -21,13 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Clone the items to create a seamless loop
   function cloneMarqueeItems() {
     const clone = marqueeList.cloneNode(true);
     marqueeTrack.appendChild(clone);
   }
 
-  // Animate the marquee
   function animateMarquee() {
     let startTime;
     let duration = isDesktop ? desktopDuration : mobileDuration;
@@ -45,24 +41,26 @@ document.addEventListener("DOMContentLoaded", function () {
     animationId = requestAnimationFrame(step);
   }
 
-  // Initialize marquee
   function initMarquee() {
     calculateTotalWidth();
     cloneMarqueeItems();
     animateMarquee();
   }
 
-  // Function to handle resize events
   function handleResize() {
+    const wasDesktop = isDesktop;
     isDesktop = window.innerWidth >= 992;
-    cancelAnimationFrame(animationId);
-    marqueeTrack.style.transform = "translateX(0)";
-    marqueeTrack.innerHTML = "";
-    marqueeTrack.appendChild(marqueeList);
-    initMarquee();
+
+    // Only reinitialize if the device type has changed
+    if (wasDesktop !== isDesktop) {
+      cancelAnimationFrame(animationId);
+      marqueeTrack.style.transform = "translateX(0)";
+      marqueeTrack.innerHTML = "";
+      marqueeTrack.appendChild(marqueeList);
+      initMarquee();
+    }
   }
 
-  // Debounce function to limit the rate of function calls
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -75,12 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // Use debounced version of handleResize
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Add event listener for window resize
   window.addEventListener("resize", debouncedHandleResize);
 
-  // Initialize marquee
   initMarquee();
 });

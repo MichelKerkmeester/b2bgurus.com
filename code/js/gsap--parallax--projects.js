@@ -1,35 +1,46 @@
 // Projects
 // GSAP Parallax
 document.addEventListener("DOMContentLoaded", function () {
-  gsap.registerPlugin(ScrollTrigger); // Register the ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
 
-  const projectListItems = document.querySelectorAll(".project--list-item"); // Select all project list items
-  if (projectListItems.length === 0) return; // Exit if no project list items found
+  const projectListItems = document.querySelectorAll(".project--list-item");
+  if (projectListItems.length === 0) return;
 
   function lerp(start, end, t) {
-    return start * (1 - t) + end * t; // Linear interpolation function
+    return start * (1 - t) + end * t;
   }
 
-  projectListItems.forEach((item, index) => {
-    const card = item.querySelector(`[id^="project-card"]`); // Select the project card
-    const imageWrapper = card.querySelector(`[id^="project-image-w"]`); // Select the image wrapper
-    const image = imageWrapper.querySelector(`[id^="project-image"]`); // Select the project image
-    const illustration = item.querySelector(`[id^="project-bg"]`); // Select the project illustration (if exists)
+  function isMobile() {
+    return window.innerWidth <= 767;
+  }
 
-    // Set initial states
-    gsap.set(card, { scale: 0.8, yPercent: 50 });
-    gsap.set(image, { scale: 1.4 });
-    if (illustration) {
-      gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
+  projectListItems.forEach((item) => {
+    const card = item.querySelector(`[id^="project-card"]`);
+    const imageWrapper = card.querySelector(`[id^="project-image-w"]`);
+    const image = imageWrapper.querySelector(`[id^="project-image"]`);
+    const illustration = item.querySelector(`[id^="project-bg"]`);
+
+    // Set initial states based on device type
+    if (isMobile()) {
+      gsap.set(card, { scale: 0.9, yPercent: 25 });
+      gsap.set(image, { scale: 1.2 });
+      if (illustration) {
+        gsap.set(illustration, { scale: 0.8, yPercent: 15, opacity: 0 });
+      }
+    } else {
+      gsap.set(card, { scale: 0.8, yPercent: 50 });
+      gsap.set(image, { scale: 1.4 });
+      if (illustration) {
+        gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
+      }
     }
 
     let progress = 0;
     let targetProgress = 0;
 
-    // Speed control: Adjust this value to control overall animation speed
-    const speed = 0.1; // Lower values = slower animation, Higher values = faster animation
+    // Adjust speed based on device type
+    const speed = isMobile() ? 0.15 : 0.1;
 
-    // Create a ScrollTrigger for each project list item
     ScrollTrigger.create({
       trigger: item,
       start: "top 90%",
@@ -40,34 +51,51 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function animateItem() {
-      progress = lerp(progress, targetProgress, speed); // Update progress using lerp
+      progress = lerp(progress, targetProgress, speed);
 
-      // Animate the project card
-      gsap.to(card, {
-        scale: 0.8 + 0.2 * progress,
-        yPercent: 50 - 50 * progress,
-        duration: 0,
-      });
-
-      // Animate the project image
-      gsap.to(image, {
-        scale: 1.4 - 0.4 * progress,
-        duration: 0,
-      });
-
-      // Animate the project illustration (if exists)
-      if (illustration) {
-        gsap.to(illustration, {
-          opacity: progress,
-          scale: 0.7 + 0.3 * progress,
-          yPercent: 30 - 30 * progress,
+      if (isMobile()) {
+        // Subtle animation for mobile
+        gsap.to(card, {
+          scale: 0.9 + 0.1 * progress,
+          yPercent: 25 - 25 * progress,
           duration: 0,
         });
+        gsap.to(image, {
+          scale: 1.2 - 0.2 * progress,
+          duration: 0,
+        });
+        if (illustration) {
+          gsap.to(illustration, {
+            opacity: progress,
+            scale: 0.8 + 0.2 * progress,
+            yPercent: 15 - 15 * progress,
+            duration: 0,
+          });
+        }
+      } else {
+        // Regular animation for tablet and desktop
+        gsap.to(card, {
+          scale: 0.8 + 0.2 * progress,
+          yPercent: 50 - 50 * progress,
+          duration: 0,
+        });
+        gsap.to(image, {
+          scale: 1.4 - 0.4 * progress,
+          duration: 0,
+        });
+        if (illustration) {
+          gsap.to(illustration, {
+            opacity: progress,
+            scale: 0.7 + 0.3 * progress,
+            yPercent: 30 - 30 * progress,
+            duration: 0,
+          });
+        }
       }
 
-      requestAnimationFrame(animateItem); // Request next animation frame
+      requestAnimationFrame(animateItem);
     }
 
-    animateItem(); // Start the animation loop
+    animateItem();
   });
 });
