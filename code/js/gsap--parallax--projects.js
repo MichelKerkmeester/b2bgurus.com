@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       gsap.set(card, { scale: 0.9, yPercent: 25 });
       gsap.set(image, { scale: 1.2 });
       if (illustration) {
-        gsap.set(illustration, { scale: 0.8, yPercent: 15, opacity: 0 });
+        gsap.set(illustration, { opacity: 0 }); // Hide illustration on mobile
       }
     } else {
       gsap.set(card, { scale: 0.8, yPercent: 50 });
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       progress = lerp(progress, targetProgress, speed);
 
       if (isMobile()) {
-        // Subtle animation for mobile
+        // Subtle animation for mobile, without illustration
         gsap.to(card, {
           scale: 0.9 + 0.1 * progress,
           yPercent: 25 - 25 * progress,
@@ -64,14 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
           scale: 1.2 - 0.2 * progress,
           duration: 0,
         });
-        if (illustration) {
-          gsap.to(illustration, {
-            opacity: progress,
-            scale: 0.8 + 0.2 * progress,
-            yPercent: 15 - 15 * progress,
-            duration: 0,
-          });
-        }
+        // Illustration remains hidden on mobile
       } else {
         // Regular animation for tablet and desktop
         gsap.to(card, {
@@ -95,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       requestAnimationFrame(animateItem);
     }
-
     animateItem();
   });
 });
