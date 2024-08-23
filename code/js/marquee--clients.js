@@ -9,8 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let animationId;
   let isDesktop = window.innerWidth >= 992;
 
-  const desktopDuration = 20000;
-  const mobileDuration = 15000;
+  // Animation durations for desktop and mobile
+  const desktopDuration = 20000; // 20 seconds
+  const mobileDuration = 15000; // 15 seconds
+
+  // Frame rate control variables
+  let lastTimestamp = 0;
+  const targetFPS = 60; // Target 60 frames per second
+  const frameInterval = 1000 / targetFPS; // Milliseconds per frame
 
   function calculateTotalWidth() {
     totalWidth = 0;
@@ -32,8 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
 
-      const progress = (elapsed % duration) / duration;
-      marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
+      // Limit the frame rate for more consistent animation speed
+      if (timestamp - lastTimestamp >= frameInterval) {
+        const progress = (elapsed % duration) / duration;
+        // Move the marquee track based on the calculated progress
+        marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
+        lastTimestamp = timestamp;
+      }
 
       animationId = requestAnimationFrame(step);
     }
@@ -61,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Debounce function to limit the frequency of resize event handling
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -75,7 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const debouncedHandleResize = debounce(handleResize, 250);
 
+  // Listen for window resize events
   window.addEventListener("resize", debouncedHandleResize);
 
+  // Initialize the marquee
   initMarquee();
 });
