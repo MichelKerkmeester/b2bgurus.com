@@ -18,15 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const card = item.querySelector(`[id^="project-card"]`);
     const imageWrapper = card.querySelector(`[id^="project-image-w"]`);
     const image = imageWrapper.querySelector(`[id^="project-image"]`);
-    const illustration = item.querySelector(`[id^="project-bg"]`);
+    const illustration = isMobile()
+      ? null
+      : item.querySelector(`[id^="project-bg"]`);
 
     // Set initial states based on device type
     if (isMobile()) {
-      gsap.set(card, { scale: 0.9, yPercent: 25 });
-      gsap.set(image, { scale: 1.2 });
-      if (illustration) {
-        gsap.set(illustration, { opacity: 0 }); // Hide illustration on mobile
-      }
+      gsap.set(card, { scale: 0.8, yPercent: 35 });
+      gsap.set(image, { scale: 1.4 });
     } else {
       gsap.set(card, { scale: 0.8, yPercent: 50 });
       gsap.set(image, { scale: 1.4 });
@@ -56,15 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isMobile()) {
         // Subtle animation for mobile, without illustration
         gsap.to(card, {
-          scale: 0.9 + 0.1 * progress,
-          yPercent: 25 - 25 * progress,
+          scale: 0.8 + 0.2 * progress,
+          yPercent: 35 - 35 * progress,
           duration: 0,
         });
         gsap.to(image, {
-          scale: 1.2 - 0.2 * progress,
+          scale: 1.4 - 0.4 * progress,
           duration: 0,
         });
-        // Illustration remains hidden on mobile
       } else {
         // Regular animation for tablet and desktop
         gsap.to(card, {
