@@ -32,19 +32,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function animateMarquee() {
     let startTime;
-    let duration = isDesktop ? desktopDuration : mobileDuration;
+    const duration = isDesktop ? desktopDuration : mobileDuration;
 
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
+      const progress = (elapsed % duration) / duration;
 
-      // Limit the frame rate for more consistent animation speed
-      if (timestamp - lastTimestamp >= frameInterval) {
-        const progress = (elapsed % duration) / duration;
-        // Move the marquee track based on the calculated progress
-        marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
-        lastTimestamp = timestamp;
-      }
+      // Move the marquee track based on the calculated progress
+      marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
 
       animationId = requestAnimationFrame(step);
     }
