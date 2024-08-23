@@ -1,4 +1,4 @@
-// Seamless Marquee
+// CMS Marquee
 document.addEventListener("DOMContentLoaded", function () {
   const marqueeWrapper = document.querySelector(".marquee--w");
   const marqueeTrack = marqueeWrapper.querySelector(".marquee--track");
@@ -12,11 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Animation durations for desktop and mobile
   const desktopDuration = 20000; // 20 seconds
   const mobileDuration = 15000; // 15 seconds
-
-  // Frame rate control variables
-  let lastTimestamp = 0;
-  const targetFPS = 60; // Target 60 frames per second
-  const frameInterval = 1000 / targetFPS; // Milliseconds per frame
 
   function calculateTotalWidth() {
     totalWidth = 0;
@@ -39,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const elapsed = timestamp - startTime;
       const progress = (elapsed % duration) / duration;
 
-      // Move the marquee track based on the calculated progress
       marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
 
       animationId = requestAnimationFrame(step);
@@ -58,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const wasDesktop = isDesktop;
     isDesktop = window.innerWidth >= 992;
 
-    // Only reinitialize if the device type has changed
+    // Only reinitialize if switching between desktop and mobile
     if (wasDesktop !== isDesktop) {
       cancelAnimationFrame(animationId);
       marqueeTrack.style.transform = "translateX(0)";
@@ -83,8 +77,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Listen for window resize events
-  window.addEventListener("resize", debouncedHandleResize);
+  // Listen for window resize events only on desktop
+  if (isDesktop) {
+    window.addEventListener("resize", debouncedHandleResize);
+  }
 
   // Initialize the marquee
   initMarquee();
