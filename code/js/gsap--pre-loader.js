@@ -3,26 +3,46 @@
 function animateLogo() {
   const timeline = gsap.timeline();
 
-  // Check if the device is mobile
-  const isMobile = window.innerWidth <= 768;
+  // Check device size
+  const isTablet = window.innerWidth <= 768 && window.innerWidth > 479;
+  const isMobile = window.innerWidth <= 479;
 
-  // Adjust initial setup for mobile
-  if (isMobile) {
-    gsap.set(".b2b", { scale: 1.5, x: 0, opacity: 0 });
-    gsap.set(".gurus", { x: "-2rem", opacity: 0 });
-    gsap.set(".female", { opacity: 0, rotate: 0, scale: 0.8 });
-  } else {
-    gsap.set(".b2b", { scale: 2.5, x: 0, opacity: 0 });
-    gsap.set(".gurus", { x: "-5rem", opacity: 0 });
-    gsap.set(".female", { opacity: 0, rotate: 0 });
-  }
+  // Select the loader content
+  const loaderContent = document.querySelector(".loader--content");
+
+  // Immediately set initial styles to prevent glitch
+  gsap.set(loaderContent, {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    xPercent: -50,
+    yPercent: -50,
+    scale: isTablet ? 1.125 : isMobile ? 0.63 : 1,
+    transformOrigin: "center center",
+    visibility: "hidden", // Hide content initially
+  });
+
+  // Set initial states for animation elements
+  gsap.set(".b2b", {
+    scale: isTablet ? 2.8125 : isMobile ? 1.89 : 2.5,
+    x: 0,
+    opacity: 0,
+  });
+  gsap.set(".gurus", {
+    x: isTablet ? "-3.75rem" : isMobile ? "-2.3625rem" : "-5rem",
+    opacity: 0,
+  });
+  gsap.set(".female", { opacity: 0, rotate: 0 });
+
+  // Reveal content after initial setup
+  timeline.set(loaderContent, { visibility: "visible" }, 0);
 
   // Frame 1: B2B scaled up and fades in
   timeline.to(".b2b", { opacity: 1, duration: 0.4, ease: "power2.in" });
 
   // Frame 2: B2B scales back
   timeline.to(".b2b", {
-    scale: isMobile ? 1 : 1,
+    scale: 1,
     duration: 0.8,
     ease: "elastic.out(1, 0.95)",
   });
@@ -55,7 +75,7 @@ function animateLogo() {
     .to(
       [".b2b", ".gurus", ".female"],
       {
-        x: isMobile ? "+=1rem" : "+=3rem",
+        x: isMobile ? "+=1.575rem" : "+=3rem",
         duration: 0.7,
         ease: "power3.out",
       },
@@ -64,7 +84,7 @@ function animateLogo() {
     .to(
       ".female",
       {
-        rotate: isMobile ? 5 : 10,
+        rotate: isMobile ? 7.875 : 10,
         duration: 0.6,
         ease: "power3.out",
       },
@@ -75,7 +95,7 @@ function animateLogo() {
   timeline.to(
     ".female",
     {
-      rotate: isMobile ? -2 : -5,
+      rotate: isMobile ? -3.15 : -5,
       duration: 0.5,
       ease: "power2.out",
     },
