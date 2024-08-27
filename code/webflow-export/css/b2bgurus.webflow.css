@@ -2766,6 +2766,10 @@ blockquote {
   position: relative;
 }
 
+.project--header.cc--hide--all {
+  display: none;
+}
+
 .caption--base {
   font-family: var(--typography-family--body);
   font-size: var(--typography-size--base);
@@ -2787,8 +2791,6 @@ blockquote {
 }
 
 .project--list {
-  grid-column-gap: 4rem;
-  grid-row-gap: 4rem;
   flex-flow: column;
   display: flex;
 }
@@ -2820,9 +2822,11 @@ blockquote {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .project--card-description {
+  z-index: 2;
   background-color: var(--color-primary--800);
   border-radius: 1rem;
   flex-flow: column;
@@ -2834,6 +2838,7 @@ blockquote {
   transition: background-color .2s;
   display: flex;
   position: relative;
+  overflow: hidden;
 }
 
 .project--card-description:hover {
@@ -2854,10 +2859,6 @@ blockquote {
 
 .description.cc--size--w-100.cc--mt--4rem {
   margin-top: 4rem;
-}
-
-.description.cc--max-w--40rem {
-  max-width: 40rem;
 }
 
 .description.cc--mt--2rem {
@@ -3146,22 +3147,6 @@ blockquote {
   display: block;
 }
 
-.list--pagination {
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 3rem;
-  display: flex;
-}
-
-.list--page-count {
-  width: auto;
-  margin-top: 0;
-}
-
 .project--list-empty {
   background-color: var(--color-neutral--300);
   justify-content: center;
@@ -3170,13 +3155,6 @@ blockquote {
   padding-bottom: 0;
   padding-right: 0;
   display: flex;
-}
-
-.list--pagination-w {
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
 .caption.cc--dashed-border {
@@ -3422,7 +3400,7 @@ blockquote {
   z-index: 1;
   background-color: var(--color-primary--500);
   width: 0%;
-  height: 3px;
+  height: 2px;
   position: relative;
 }
 
@@ -4211,24 +4189,95 @@ blockquote {
   display: none;
 }
 
-.mask {
-  z-index: 2;
-  background-color: #0000;
-  width: 150%;
-  height: 150%;
-  transition-property: all;
-  transition-duration: 1s;
-  transition-timing-function: ease;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)scale(1);
-}
-
 .project--card-image-w {
+  z-index: 3;
+  border-radius: 1rem;
   width: 70%;
   height: 100%;
   position: relative;
+  overflow: hidden;
+}
+
+.page--loader {
+  z-index: 999;
+  background-color: var(--color-neutral--300);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0%;
+  overflow: hidden;
+  transform: none;
+}
+
+.loader--content {
+  grid-column-gap: 4rem;
+  grid-row-gap: 4rem;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.gurus {
+  z-index: 1;
+  object-fit: contain;
+  max-width: none;
+  height: 3rem;
+  position: absolute;
+  right: -13.2rem;
+}
+
+.b2b {
+  z-index: 2;
+  object-fit: contain;
+  max-width: none;
+  height: 4rem;
+  position: relative;
+}
+
+.female {
+  z-index: 3;
+  object-fit: contain;
+  max-width: none;
+  height: 9rem;
+  position: absolute;
+  inset: auto auto auto -7.2rem;
+  transform: rotate(-5deg);
+}
+
+.all {
+  z-index: 10;
+  opacity: .15;
+  height: 8rem;
+  position: absolute;
+}
+
+.loader--logo {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.loader--logo-text {
+  grid-column-gap: .8rem;
+  grid-row-gap: .8rem;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.gurus-copy {
+  z-index: 12;
+  object-fit: contain;
+  max-width: none;
+  height: 3rem;
+  display: none;
+  position: absolute;
+  right: 0;
 }
 
 @media screen and (min-width: 1440px) {
@@ -4961,6 +5010,7 @@ blockquote {
 
   .project--card {
     aspect-ratio: 16 / 9;
+    overflow: hidden;
   }
 
   .project--card-image {
@@ -5044,6 +5094,10 @@ blockquote {
     justify-content: space-between;
     align-items: flex-end;
     display: flex;
+  }
+
+  .heading.mobile--small {
+    display: none;
   }
 
   .marquee--list-item {
@@ -5148,6 +5202,7 @@ blockquote {
   }
 
   .project--card-overlay {
+    z-index: 1;
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
     background-color: #13333af2;
@@ -5159,6 +5214,7 @@ blockquote {
     height: auto;
     padding: 1rem 1.5rem;
     display: flex;
+    position: absolute;
   }
 
   .process--step-1, .process--step-2, .process--step-3, .process--step-4, .process--step-5, .process--step-6 {
@@ -5197,7 +5253,7 @@ blockquote {
   }
 
   .section--project-overview {
-    padding-top: 12.5rem;
+    padding-top: 10rem;
     padding-bottom: 15rem;
   }
 
@@ -5378,6 +5434,12 @@ blockquote {
     width: 100%;
     display: flex;
     overflow: hidden;
+  }
+
+  .loader--content {
+    z-index: 1;
+    grid-column-gap: 3rem;
+    grid-row-gap: 3rem;
   }
 }
 
@@ -5752,6 +5814,7 @@ blockquote {
   .caption.cc--dashed-border {
     padding-left: 1rem;
     padding-right: 1rem;
+    left: .375rem;
   }
 
   .cc--hide--tablet-landscape, .cc--hide--landscape-portrait {
@@ -5825,7 +5888,7 @@ blockquote {
   }
 
   .section--project-overview {
-    padding-top: 10rem;
+    padding-top: 8rem;
     padding-bottom: 9rem;
   }
 
@@ -6512,6 +6575,10 @@ blockquote {
 
   .caption--hero {
     font-size: var(--typography-size--h4);
+  }
+
+  .page--loader {
+    display: none;
   }
 }
 

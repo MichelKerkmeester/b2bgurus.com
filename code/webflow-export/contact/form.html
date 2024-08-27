@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Sun Aug 18 2024 14:31:33 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Tue Aug 27 2024 14:00:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="668589f41e5ffb360819baa0" data-wf-site="665cbae4af106bb742bb980e" lang="en">
 <head>
   <meta charset="utf-8">
@@ -30,10 +30,14 @@
   <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('set', 'developer_id.dZGVlNj', true);gtag('config', 'G-KGZWBC07S1');</script><!--  Cookie Consent  -->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cookie--custom-consent.min.js"></script>
+  <!--  Barba.js - Library  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/2.9.7/barba.umd.js"></script>
   <!--  GSAP - Library  -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <!--  GSAP - Scroll Trigger  -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!--  GSAP - Flip  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/Flip.min.js"></script>
   <!--  VScode - Local Development  -->
   <script defer="" src="http://localhost:3000/index.js"></script>
   <link rel="stylesheet" href="http://localhost:3000/index.css"><!--  Finsweet - Custom form select  -->
@@ -286,30 +290,7 @@ select {
 }
 </style>
     </div>
-    <div class="css--styling w-embed">
-      <style>
-/* GSAP Marquee */
-/* CSS Animation for Mobile */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-1 * var(--marquee-width)));
-  }
-}
-.marquee--track {
-  display: flex;
-  will-change: transform;
-}
-.marquee-animate {
-  animation: marquee var(--marquee-duration) linear infinite;
-  -webkit-animation: marquee var(--marquee-duration) linear infinite;
-  -moz-animation: marquee var(--marquee-duration) linear infinite;
-  -o-animation: marquee var(--marquee-duration) linear infinite;
-}
-</style>
-    </div>
+    <div class="css--styling w-embed"></div>
   </div>
   <div class="page--wrapper">
     <div id="cookie-consent" class="cookie--modal">
@@ -886,8 +867,8 @@ select {
   <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/other--copyright-year.min.js"></script>
   <!--  Lenis.js - Smooth Scrolling  -->
   <script data-id-scroll="" data-autoinit="true" data-duration="1" data-orientation="vertical" data-smoothwheel="true" data-smoothtouch="false" data-touchmultiplier="1.5" data-easing="(t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))" data-useoverscroll="true" data-usecontrols="true" data-useanchor="true" data-useraf="true" data-infinite="false" defer="" src="https://uploads-ssl.webflow.com/645e0e1ff7fdb6dc8c85f3a2/653b82ecf87f552a98ac66b9_lenis-master-offbrand.02.txt"></script><!--  Hero  -->
-  <!--  GSAP Marquee  -->
-  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/gsap--marquee.min.js"></script>
+  <!--  CMS Marquee  -->
+  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cms--marquee.min.js"></script>
   <!--  Form  -->
   <script src="https://cdn.jsdelivr.net/gh/videsigns/webflow-tools@latest/multi-step.min.js"> </script>
   <!--  Spam Protection  -->

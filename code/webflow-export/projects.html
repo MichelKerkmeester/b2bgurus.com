@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Sun Aug 18 2024 14:31:33 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Tue Aug 27 2024 14:00:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="66858a009c11af6af53ecc8d" data-wf-site="665cbae4af106bb742bb980e" lang="en">
 <head>
   <meta charset="utf-8">
@@ -30,10 +30,14 @@
   <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('set', 'developer_id.dZGVlNj', true);gtag('config', 'G-KGZWBC07S1');</script><!--  Cookie Consent  -->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cookie--custom-consent.min.js"></script>
+  <!--  Barba.js - Library  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/2.9.7/barba.umd.js"></script>
   <!--  GSAP - Library  -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <!--  GSAP - Scroll Trigger  -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!--  GSAP - Flip  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/Flip.min.js"></script>
   <!--  VScode - Local Development  -->
   <script defer="" src="http://localhost:3000/index.js"></script>
   <link rel="stylesheet" href="http://localhost:3000/index.css">
@@ -346,30 +350,18 @@ select {
     background-position: 70% 100%;
   }
 }
+/* Projects */
+/* Gap */
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(4rem, 20vh, 8rem); /* Min, Preferred, Max */
+  }
+}
 </style>
     </div>
     <div class="css--styling w-embed">
       <style>
-/* GSAP Marquee */
-/* CSS Animation for Mobile */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-1 * var(--marquee-width)));
-  }
-}
-.marquee--track {
-  display: flex;
-  will-change: transform;
-}
-.marquee-animate {
-  animation: marquee var(--marquee-duration) linear infinite;
-  -webkit-animation: marquee var(--marquee-duration) linear infinite;
-  -moz-animation: marquee var(--marquee-duration) linear infinite;
-  -o-animation: marquee var(--marquee-duration) linear infinite;
-}
 /* Projects */
 /* CMS list - Alternate direction per item */
 @media (min-width: 992px) {
@@ -591,31 +583,44 @@ select {
     <section class="section--project-overview">
       <div class="max-width">
         <div class="desktop">
+          <div class="project--header cc--hide--all">
+            <div class="caption">
+              <div class="caption--base">projects</div>
+            </div>
+            <div class="heading">
+              <h2 class="display--sm"><span class="cc--color--primary">B2B</span> coming to life</h2>
+            </div>
+            <div class="description cc--mt--2rem">
+              <div class="cc--size--xl">Take a peek at some of the client projects we&#x27;re thrilled about.</div>
+            </div>
+          </div>
           <div class="project--content">
-            <div id="project-list-1" class="project--list-w w-dyn-list">
+            <div class="project--list-w w-dyn-list">
               <div role="list" class="project--list w-dyn-items">
                 <div cms-item="" role="listitem" class="project--list-item w-dyn-item">
-                  <div class="project--card">
-                    <div class="project--bg">
-                      <div class="project--card-1"><img src="images/Illustration---Lightning---Dark.webp" loading="lazy" alt="" class="illustration cc--project-1--big"></div>
-                      <div class="project--card-2"><img loading="lazy" src="images/Illustration---Gear---Dark.webp" alt="" class="illustration cc--project-2--big"></div>
-                      <div class="project--card-3"><img loading="lazy" src="images/Illustration---Heart---Dark.webp" alt="" class="illustration cc--project-3--big"></div>
-                      <div class="project--card-4"><img loading="lazy" src="images/Illustration---Social---Dark.webp" alt="" class="illustration cc--project-4--big"></div>
-                      <div class="project--card-5"><img src="images/Illustration---Lightning---Dark.webp" loading="lazy" alt="" class="illustration cc--project-1--big"></div>
-                      <div class="project--card-6"><img loading="lazy" src="images/Illustration---Gear---Dark.webp" alt="" class="illustration cc--project-2--big"></div>
-                      <div class="project--card-7"><img loading="lazy" src="images/Illustration---Heart---Dark.webp" alt="" class="illustration cc--project-3--big"></div>
-                    </div>
-                    <div class="project--card-image">
-                      <div class="project--card-overlay"><img loading="lazy" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" alt="" class="image cc--size--h-60 w-dyn-bind-empty"></div>
+                  <div id="project-bg" class="project--bg">
+                    <div class="project--card-1"><img src="images/Illustration---Lightning---Dark.webp" loading="lazy" alt="" class="illustration cc--project-1--big"></div>
+                    <div class="project--card-2"><img loading="lazy" src="images/Illustration---Gear---Dark.webp" alt="" class="illustration cc--project-2--big"></div>
+                    <div class="project--card-3"><img loading="lazy" src="images/Illustration---Heart---Dark.webp" alt="" class="illustration cc--project-3--big"></div>
+                    <div class="project--card-4"><img loading="lazy" src="images/Illustration---Lightbulb---Dark.webp" alt="" class="illustration cc--project-4--big"></div>
+                    <div class="project--card-5"><img src="images/Illustration---Lightning---Dark.webp" loading="lazy" alt="" class="illustration cc--project-1--big"></div>
+                    <div class="project--card-6"><img loading="lazy" src="images/Illustration---Gear---Dark.webp" alt="" class="illustration cc--project-2--big"></div>
+                    <div class="project--card-7"><img loading="lazy" src="images/Illustration---Heart---Dark.webp" alt="" class="illustration cc--project-3--big"></div>
+                  </div>
+                  <div id="project-card" class="project--card">
+                    <div id="project-image-w" class="project--card-image-w">
+                      <div id="project-image" class="project--card-image">
+                        <div class="project--card-overlay"><img loading="lazy" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" alt="" class="image cc--size--h-60 w-dyn-bind-empty"></div>
+                      </div>
                     </div>
                     <a href="#" class="project--card-description w-inline-block">
                       <div class="container cc--size--w-100"><img loading="lazy" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" alt="" class="project--logo card w-dyn-bind-empty"></div>
                       <div class="container cc--direction--vertical cc--gap--2-5rem">
                         <div class="description cc--direction--vertical cc--gap--1-25rem">
-                          <h3 class="subtitle--xl cc--color--white cc--style--balance w-dyn-bind-empty"></h3>
+                          <h3 class="subtitle--xl cc--color--white w-dyn-bind-empty"></h3>
                           <div class="cc--size--base cc--color--white cc--style--balance w-dyn-bind-empty"></div>
                         </div>
-                        <div class="btn--w">
+                        <div class="btn--w cc--size--w-100">
                           <div class="btn--base ghost static">
                             <div class="btn--content sm cc--align--space-between">
                               <div class="btn--text">View project</div>
@@ -638,16 +643,17 @@ select {
         </div>
         <div class="mobile">
           <div class="project--content">
-            <div id="project-list-2" class="project--list-w w-dyn-list">
+            <div class="project--list-w w-dyn-list">
               <div role="list" class="project--list w-dyn-items">
                 <div cms-item="" role="listitem" class="project--list-item w-dyn-item">
-                  <a href="#" class="project--card w-inline-block">
-                    <div class="project--card-image">
+                  <a id="project-card--mobile" href="#" class="project--card w-inline-block">
+                    <div id="project-image-w--mobile" class="project--card-image-w">
                       <div class="project--card-overlay"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="project--logo card w-dyn-bind-empty">
                         <div class="btn--icon"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewbox="0 0 80 80" fill="none" aria-label="Arrow" class="icon--svg project">
                             <path d="M70.1531 42.6531L47.6531 65.1531C46.9486 65.8575 45.9932 66.2533 44.9969 66.2533C44.0006 66.2533 43.0451 65.8575 42.3406 65.1531C41.6361 64.4486 41.2404 63.4931 41.2404 62.4968C41.2404 61.5005 41.6361 60.545 42.3406 59.8406L58.4375 43.7499H12.5C11.5054 43.7499 10.5516 43.3548 9.84835 42.6516C9.14509 41.9483 8.75 40.9945 8.75 39.9999C8.75 39.0054 9.14509 38.0515 9.84835 37.3483C10.5516 36.645 11.5054 36.2499 12.5 36.2499H58.4375L42.3469 20.1499C41.6424 19.4455 41.2466 18.49 41.2466 17.4937C41.2466 16.4974 41.6424 15.5419 42.3469 14.8374C43.0514 14.133 44.0068 13.7372 45.0031 13.7372C45.9994 13.7372 46.9549 14.133 47.6594 14.8374L70.1594 37.3374C70.509 37.6863 70.7863 38.1008 70.9753 38.5571C71.1644 39.0134 71.2614 39.5026 71.2608 39.9965C71.2602 40.4905 71.162 40.9794 70.972 41.4353C70.7819 41.8912 70.5036 42.305 70.1531 42.6531Z" fill="currentColor" class="icon--path"></path>
                           </svg></div>
                       </div>
+                      <div id="project-image--mobile" class="project--card-image"></div>
                     </div>
                   </a>
                 </div>
@@ -844,9 +850,14 @@ select {
   <!--  Automatically change copyright year  -->
   <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/other--copyright-year.min.js"></script>
   <!--  Lenis.js - Smooth Scrolling  -->
-  <script data-id-scroll="" data-autoinit="true" data-duration="1" data-orientation="vertical" data-smoothwheel="true" data-smoothtouch="false" data-touchmultiplier="1.5" data-easing="(t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))" data-useoverscroll="true" data-usecontrols="true" data-useanchor="true" data-useraf="true" data-infinite="false" defer="" src="https://uploads-ssl.webflow.com/645e0e1ff7fdb6dc8c85f3a2/653b82ecf87f552a98ac66b9_lenis-master-offbrand.02.txt"></script><!--  Hero  -->
-  <!--  GSAP Marquee  -->
-  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/gsap--marquee.min.js"></script>
-  <!--  CMS collection list -->
+  <script data-id-scroll="" data-autoinit="true" data-duration="1" data-orientation="vertical" data-smoothwheel="true" data-smoothtouch="false" data-touchmultiplier="1.5" data-easing="(t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))" data-useoverscroll="true" data-usecontrols="true" data-useanchor="true" data-useraf="true" data-infinite="false" defer="" src="https://uploads-ssl.webflow.com/645e0e1ff7fdb6dc8c85f3a2/653b82ecf87f552a98ac66b9_lenis-master-offbrand.02.txt"></script><!--  CMS collection list -->
   <!--  Apply attributes to individual CMS list items  -->
-  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cms--attributes.min.js"></script</body></html></script></body></html>
+  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cms--attributes.min.js"></script>
+  <!--  Hero  -->
+  <!--  CMS Marquee  -->
+  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/cms--marquee.min.js"></script>
+  <!--  Projects  -->
+  <!--  GSAP Parallax  -->
+  <script src="https://cdn.jsdelivr.net/gh/michelkerkmeester/b2bgurus.com/code/js/gsap--parallax--projects.min.js"></script>
+</body>
+</html>
