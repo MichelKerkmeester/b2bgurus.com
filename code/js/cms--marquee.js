@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let isDesktop = window.innerWidth >= 992;
 
   // Animation durations for desktop and mobile
-  const desktopDuration = 17500; // 20 seconds
-  const mobileDuration = 12500; // 15 seconds
+  const desktopDuration = 20000;
+  const mobileDuration = 17500;
 
   function calculateTotalWidth() {
     totalWidth = 0;
