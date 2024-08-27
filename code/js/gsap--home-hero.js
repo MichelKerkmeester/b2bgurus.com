@@ -19,7 +19,7 @@ function runAnimation(isMobile) {
     `#hero-caption${suffix}, #hero-marketing${suffix}, #hero-gurus${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`,
     {
       opacity: 0,
-      y: isMobile ? "1.5rem" : "3rem",
+      y: isMobile ? "2rem" : "4rem",
     }
   );
 
