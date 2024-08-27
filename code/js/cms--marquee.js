@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Animation durations for desktop and mobile
   const desktopDuration = 20000;
-  const mobileDuration = 17500;
+  const mobileDuration = 12500;
 
   function calculateTotalWidth() {
     totalWidth = 0;
