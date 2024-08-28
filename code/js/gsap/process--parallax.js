@@ -1,6 +1,7 @@
 // Process
 // GSAP Parallax
-document.addEventListener("DOMContentLoaded", function () {
+// Process Parallax
+function initProcessParallax() {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
   }
@@ -11,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const processItems = document.querySelectorAll(
       ".process--list .w-dyn-item"
     ); // Select all process items
+
+    if (processItems.length === 0) return;
 
     function lerp(start, end, t) {
       return start * (1 - t) + end * t;
@@ -141,4 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
       animateElements();
     }
   }
-});
+}
+
+// Initialize on DOMContentLoaded and after preloader/page transitions
+document.addEventListener("DOMContentLoaded", initProcessParallax);
+document.addEventListener("preloaderFinished", initProcessParallax);
+document.addEventListener("barba:transition", initProcessParallax);
