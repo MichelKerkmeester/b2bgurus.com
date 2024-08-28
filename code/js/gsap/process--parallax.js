@@ -1,6 +1,5 @@
 // Process
 // GSAP Parallax
-// Process Parallax
 function initProcessParallax() {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
