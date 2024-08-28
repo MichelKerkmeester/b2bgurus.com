@@ -1,6 +1,8 @@
 // Projects
 // GSAP Parallax
 
+document.addEventListener("DOMContentLoaded", initProjectsParallax);
+
 function initProjectsParallax() {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -90,6 +92,3 @@ function initProjectsParallax() {
     animateItem();
   });
 }
-
-// Initialize immediately
-initProjectsParallax();

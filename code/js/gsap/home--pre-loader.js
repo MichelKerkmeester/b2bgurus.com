@@ -151,26 +151,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 });
-
-// Barba.js initialization for subsequent page transitions
-barba.init({
-  transitions: [
-    {
-      name: "default-transition",
-      enter(data) {
-        // Animate your content entering for subsequent page loads
-        return gsap
-          .from(data.next.container, {
-            opacity: 0,
-            duration: 0.5,
-          })
-          .then(() => {
-            // Dispatch event for Barba.js transition
-            document.dispatchEvent(new Event("barba:transition"));
-            // Trigger in-view animations for the new page
-            triggerInViewAnimations();
-          });
-      },
-    },
-  ],
-});

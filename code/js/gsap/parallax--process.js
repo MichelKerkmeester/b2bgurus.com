@@ -1,6 +1,8 @@
 // Process
 // GSAP Parallax
 
+document.addEventListener("DOMContentLoaded", initProcessParallax);
+
 function initProcessParallax() {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
@@ -143,6 +145,3 @@ function initProcessParallax() {
     }
   }
 }
-
-// Initialize immediately
-initProcessParallax();
