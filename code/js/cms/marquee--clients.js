@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const marqueeList = marqueeWrapper.querySelector(".marquee--list-w");
 
   // Configuration
-  const desktopSpeed = 250; // pixels per second
-  const mobileSpeed = 2000; // pixels per second
+  const desktopSpeed = 300; // pixels per second
+  const mobileSpeed = 200; // pixels per second
   const mobileBreakpoint = 992;
 
   function setupMarquee() {
