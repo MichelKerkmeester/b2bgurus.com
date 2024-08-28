@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const header = accordion.querySelector(".accordion--header"); // Select the header
     const content = accordion.querySelector(".accordion--content"); // Select the content
     const divider = header.querySelector(".accordion--divider"); // Select the divider
-    const accordionNr = header.querySelector(".accordion--nr"); // Select the accordion number
     const btnLine1 = header.querySelector(".accordion--btn-line-1"); // Select the first line of the button
     const btnLine2 = header.querySelector(".accordion--btn-line-2"); // Select the second line of the button
 
@@ -28,10 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Function to handle color change on hover
-    const handleHoverColorChange = (nrElement, headingElement, isIn) => {
-      gsap.killTweensOf([nrElement, headingElement]); // Kill ongoing animations
-      gsap.to([nrElement, headingElement], {
-        color: isIn ? "#2f7f90" : "#c4c4c4",
+    const handleHoverColorChange = (headingElement, isIn) => {
+      gsap.killTweensOf(headingElement); // Kill ongoing animations
+      gsap.to(headingElement, {
+        color: isIn ? "#2f7f90" : "#13333a",
         duration: 0.5,
         ease: "power1.out",
       }); // Animate text color change
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (header !== openAccordionHeader) {
           lastHoveredHeader = header; // Update last hovered header
           const heading = header.querySelector("#accordion--heading");
-          handleHoverColorChange(accordionNr, heading, true); // Change text color on hover
+          handleHoverColorChange(heading, true); // Change heading color on hover
         }
       });
 
@@ -62,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hover off header
         if (lastHoveredHeader === header && openAccordionHeader !== header) {
           const heading = header.querySelector("#accordion--heading");
-          handleHoverColorChange(accordionNr, heading, false); // Reset text color on hover out
+          handleHoverColorChange(heading, false); // Reset heading color on hover out
           lastHoveredHeader = null; // Reset last hovered header
         }
       });
@@ -80,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const itemContent = item.querySelector(".accordion--content");
         const itemHeader = item.querySelector(".accordion--header");
         const itemDivider = itemHeader.querySelector(".accordion--divider");
-        const itemNr = itemHeader.querySelector(".accordion--nr");
         const itemBtnLine1 = itemHeader.querySelector(".accordion--btn-line-1");
         const itemBtnLine2 = itemHeader.querySelector(".accordion--btn-line-2");
 
@@ -102,12 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
             duration: 0.5,
             ease: "power1.out",
           }); // Close divider line
-
-          gsap.to(itemNr, {
-            color: "#c4c4c4",
-            duration: 0.5,
-            ease: "power1.inOut",
-          }); // Reset number color
 
           // Close button animation
           gsap.to(itemBtnLine1, {
@@ -157,14 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         handleLineClick(divider, true); // Animate divider line on open
 
-        gsap.to(accordionNr, {
-          color: "#2f7f90",
-          duration: 0.5,
-          ease: "power1.inOut",
-        }); // Change number color on open
-
-        openAccordionHeader = header; // Set the opened accordion header
-
         // Open button animation
         gsap.to(btnLine1, {
           rotation: -90,
@@ -189,11 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
           onComplete: () => {
             gsap.set(content, { height: "0px" }); // Ensure height is 0px after closing
             handleLineClick(divider, false); // Close divider line
-            gsap.to(accordionNr, {
-              color: "#c4c4c4",
-              duration: 0.5,
-              ease: "power1.inOut",
-            }); // Reset number color on close
             // Enable scroll handling after animation
             setTimeout(window.enableScrollHandling, 1000); // Re-enable scroll handling after 1 second
           },
