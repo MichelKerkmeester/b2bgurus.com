@@ -1,6 +1,7 @@
 // Process
 // GSAP Parallax
-document.addEventListener("DOMContentLoaded", function () {
+
+function initProcessParallax() {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
   }
@@ -44,16 +45,16 @@ document.addEventListener("DOMContentLoaded", function () {
           big: { x: "6.25rem", y: "-3.125rem", rotation: 30, scale: 0.75 },
         },
         2: {
-          small: { x: "-9.375rem", y: "-6.25rem", rotation: 30, scale: 0.5 },
-          big: { x: "-12.5rem", y: "-12.5rem", rotation: -15, scale: 0.75 },
+          small: { x: "-9.375rem", y: "-9.375rem", rotation: 25, scale: 0.5 },
+          big: { x: "-3.125rem", y: "-3.125rem", rotation: -25, scale: 0.75 },
         },
         3: {
           small: { x: "9.375rem", y: "-9.375rem", rotation: -25, scale: 0.5 },
-          big: { x: "6.25rem", y: "-6.25rem", rotation: 25, scale: 0.75 },
+          big: { x: "3.125rem", y: "-3.125rem", rotation: 25, scale: 0.75 },
         },
         4: {
-          small: { x: "12.5rem", y: "-3.125rem", rotation: 45, scale: 0.5 },
-          big: { x: "9.375rem", y: "-15.625rem", rotation: -25, scale: 0.75 },
+          small: { x: "-6.25rem", y: "-9.375rem", rotation: 30, scale: 0.5 },
+          big: { x: "-9.375rem", y: "-3.125rem", rotation: -30, scale: 0.75 },
         },
         5: {
           small: { x: "-9.375rem", y: "-6.25rem", rotation: -25, scale: 0.5 },
@@ -141,4 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
       animateElements();
     }
   }
-});
+}
+
+// Initialize immediately
+initProcessParallax();

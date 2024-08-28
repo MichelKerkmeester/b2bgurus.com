@@ -1,6 +1,7 @@
 // Projects
 // GSAP Parallax
-document.addEventListener("DOMContentLoaded", function () {
+
+function initProjectsParallax() {
   gsap.registerPlugin(ScrollTrigger);
 
   const projectListItems = document.querySelectorAll(".project--list-item");
@@ -88,4 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     animateItem();
   });
-});
+}
+
+// Initialize immediately
+initProjectsParallax();
