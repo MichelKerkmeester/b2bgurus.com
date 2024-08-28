@@ -7,11 +7,14 @@ function animateLogo() {
   const isTablet = window.innerWidth <= 768 && window.innerWidth > 479;
   const isMobile = window.innerWidth <= 479;
 
-  // Select the loader content
-  const loaderContent = document.querySelector(".loader--content");
+  // Select the loader wrapper
+  const loaderWrapper = document.querySelector(".page--loader");
+
+  // Show the loader wrapper
+  loaderWrapper.style.display = "block";
 
   // Immediately set initial styles to prevent glitch
-  gsap.set(loaderContent, {
+  gsap.set(".loader--content", {
     position: "absolute",
     top: "50%",
     left: isMobile ? "52.5%" : "50%", // Move 2.5% to the right on mobile
@@ -19,7 +22,6 @@ function animateLogo() {
     yPercent: -50,
     scale: isTablet ? 1.125 : isMobile ? 0.63 : 1,
     transformOrigin: "center center",
-    visibility: "hidden", // Hide content initially
   });
 
   // Set initial states for animation elements
@@ -33,9 +35,6 @@ function animateLogo() {
     opacity: 0,
   });
   gsap.set(".female", { opacity: 0, rotate: 0 });
-
-  // Reveal content after initial setup
-  timeline.set(loaderContent, { visibility: "visible" }, 0);
 
   // Frame 1: B2B scaled up and fades in
   timeline.to(".b2b", { opacity: 1, duration: 0.4, ease: "power2.in" });

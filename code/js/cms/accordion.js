@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Function to handle color change on hover
-    const handleHoverColorChange = (nrElement, isIn) => {
-      gsap.killTweensOf(nrElement); // Kill ongoing animations
-      gsap.to(nrElement, {
+    const handleHoverColorChange = (nrElement, headingElement, isIn) => {
+      gsap.killTweensOf([nrElement, headingElement]); // Kill ongoing animations
+      gsap.to([nrElement, headingElement], {
         color: isIn ? "#2f7f90" : "#c4c4c4",
         duration: 0.5,
         ease: "power1.out",
@@ -53,14 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hover on header
         if (header !== openAccordionHeader) {
           lastHoveredHeader = header; // Update last hovered header
-          handleHoverColorChange(accordionNr, true); // Change text color on hover
+          const heading = header.querySelector("#accordion--heading");
+          handleHoverColorChange(accordionNr, heading, true); // Change text color on hover
         }
       });
 
       header.addEventListener("mouseleave", () => {
         // Hover off header
         if (lastHoveredHeader === header && openAccordionHeader !== header) {
-          handleHoverColorChange(accordionNr, false); // Reset text color on hover out
+          const heading = header.querySelector("#accordion--heading");
+          handleHoverColorChange(accordionNr, heading, false); // Reset text color on hover out
           lastHoveredHeader = null; // Reset last hovered header
         }
       });
