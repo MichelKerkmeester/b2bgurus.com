@@ -1,7 +1,6 @@
 // Home
 // Pre-Loader Animation
 
-// Immediately hide page--wrapper and ensure loader--content is displayed
 gsap.set(".page--wrapper", { display: "none" });
 gsap.set(".loader--content", { display: "flex" });
 
@@ -114,8 +113,6 @@ function revealContent() {
       document.dispatchEvent(new Event("preloaderFinished"));
       // Trigger in-view animations
       triggerInViewAnimations();
-      // Reinitialize parallax effects
-      initializeParallaxEffects();
     },
   });
 }
@@ -133,18 +130,6 @@ function triggerInViewAnimations() {
       ease: "power2.out",
     });
   });
-}
-
-function initializeParallaxEffects() {
-  // Reinitialize process parallax
-  if (typeof initProcessParallax === "function") {
-    initProcessParallax();
-  }
-
-  // Reinitialize projects parallax
-  if (typeof initProjectsParallax === "function") {
-    initProjectsParallax();
-  }
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -178,8 +163,6 @@ barba.init({
             document.dispatchEvent(new Event("barba:transition"));
             // Trigger in-view animations for the new page
             triggerInViewAnimations();
-            // Reinitialize parallax effects
-            initializeParallaxEffects();
           });
       },
     },

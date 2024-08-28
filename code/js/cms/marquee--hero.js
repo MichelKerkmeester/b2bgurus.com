@@ -48,7 +48,9 @@ function initializeMarquee() {
   }
 
   function handleResize() {
-    setupMarquee();
+    if (window.innerWidth >= mobileBreakpoint) {
+      setupMarquee();
+    }
   }
 
   // Debounce function
@@ -66,8 +68,10 @@ function initializeMarquee() {
 
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Listen for window resize events
-  window.addEventListener("resize", debouncedHandleResize);
+  // Listen for window resize events only on desktop
+  if (window.innerWidth >= mobileBreakpoint) {
+    window.addEventListener("resize", debouncedHandleResize);
+  }
 
   // Initialize the marquee
   setupMarquee();
