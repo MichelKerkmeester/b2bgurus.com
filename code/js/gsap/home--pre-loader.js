@@ -1,5 +1,10 @@
 // Home
 // Pre-Loader Animation
+
+// Immediately hide page--wrapper and ensure loader--content is displayed
+gsap.set(".page--wrapper", { display: "none" });
+gsap.set(".loader--content", { display: "flex" });
+
 function animateLogo() {
   const timeline = gsap.timeline();
 
@@ -7,17 +12,11 @@ function animateLogo() {
   const isTablet = window.innerWidth <= 768 && window.innerWidth > 479;
   const isMobile = window.innerWidth <= 479;
 
-  // Select the loader wrapper
-  const loaderWrapper = document.querySelector(".page--loader");
-
-  // Show the loader wrapper
-  loaderWrapper.style.display = "block";
-
-  // Immediately set initial styles to prevent glitch
+  // Set initial styles for loader--content
   gsap.set(".loader--content", {
     position: "absolute",
     top: "50%",
-    left: isMobile ? "52.5%" : "50%", // Move 2.5% to the right on mobile
+    left: isMobile ? "52.5%" : "50%",
     xPercent: -50,
     yPercent: -50,
     scale: isTablet ? 1.125 : isMobile ? 0.63 : 1,
@@ -25,22 +24,22 @@ function animateLogo() {
   });
 
   // Set initial states for animation elements
-  gsap.set(".b2b", {
+  gsap.set(".loader--b2b", {
     scale: isTablet ? 2.8125 : isMobile ? 1.89 : 2.5,
     x: 0,
     opacity: 0,
   });
-  gsap.set(".gurus", {
+  gsap.set(".loader--gurus", {
     x: isTablet ? "-3.75rem" : isMobile ? "-2.3625rem" : "-5rem",
     opacity: 0,
   });
-  gsap.set(".female", { opacity: 0, rotate: 0 });
+  gsap.set(".loader--female", { opacity: 0, rotate: 0 });
 
   // Frame 1: B2B scaled up and fades in
-  timeline.to(".b2b", { opacity: 1, duration: 0.4, ease: "power2.in" });
+  timeline.to(".loader--b2b", { opacity: 1, duration: 0.4, ease: "power2.in" });
 
   // Frame 2: B2B scales back
-  timeline.to(".b2b", {
+  timeline.to(".loader--b2b", {
     scale: 1,
     duration: 0.8,
     ease: "elastic.out(1, 0.95)",
@@ -48,7 +47,7 @@ function animateLogo() {
 
   // Frame 3: Gurus becomes visible and moves to original position
   timeline.to(
-    ".gurus",
+    ".loader--gurus",
     {
       opacity: 1,
       x: 0,
@@ -60,7 +59,7 @@ function animateLogo() {
 
   // Frame 4: Female icon appears
   timeline.to(
-    ".female",
+    ".loader--female",
     {
       opacity: 1,
       duration: 0.4,
@@ -72,7 +71,7 @@ function animateLogo() {
   // Frame 5: B2B, Gurus, and female move right, female rotates
   timeline
     .to(
-      [".b2b", ".gurus", ".female"],
+      [".loader--b2b", ".loader--gurus", ".loader--female"],
       {
         x: isMobile ? "+=1.575rem" : "+=3rem",
         duration: 0.7,
@@ -81,7 +80,7 @@ function animateLogo() {
       "move"
     )
     .to(
-      ".female",
+      ".loader--female",
       {
         rotate: isMobile ? 7.875 : 10,
         duration: 0.6,
@@ -92,7 +91,7 @@ function animateLogo() {
 
   // Frame 6: Female rotates back
   timeline.to(
-    ".female",
+    ".loader--female",
     {
       rotate: isMobile ? -3.15 : -5,
       duration: 0.5,
@@ -110,38 +109,23 @@ function revealContent() {
     duration: 0.8,
     ease: "power3.inOut",
     onComplete: () => {
-      document.querySelector(".page--loader").style.display = "none";
+      gsap.set(".page--loader", { display: "none" });
+      // Dispatch preloaderFinished event
+      document.dispatchEvent(new Event("preloaderFinished"));
     },
   });
 }
 
-// Modified event listener
 document.addEventListener("DOMContentLoaded", (event) => {
-  // Hide the page content initially
-  gsap.set(".page-wrapper", { opacity: 0 });
+  requestAnimationFrame(() => {
+    const logoAnimation = animateLogo();
+    const totalDuration = logoAnimation.duration();
 
-  // Run the logo animation
-  const logoAnimation = animateLogo();
-  const totalDuration = logoAnimation.duration();
+    logoAnimation.then(() => {
+      // Make page--wrapper visible before moving the loader
+      gsap.set(".page--wrapper", { display: "block" });
 
-  // Dispatch the "preloaderFinished" event
-  // Adjust this timing as needed
-  setTimeout(
-    () => {
-      document.dispatchEvent(new Event("preloaderFinished"));
-    },
-    (totalDuration - 0) * 1000
-  );
-
-  logoAnimation.then(() => {
-    // Move the page--loader upwards
-    revealContent().then(() => {
-      // Fade in the page content after the page--loader has moved up
-      gsap.to(".page-wrapper", {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
+      revealContent();
     });
   });
 });
@@ -153,10 +137,15 @@ barba.init({
       name: "default-transition",
       enter(data) {
         // Animate your content entering for subsequent page loads
-        return gsap.from(data.next.container, {
-          opacity: 0,
-          duration: 0.5,
-        });
+        return gsap
+          .from(data.next.container, {
+            opacity: 0,
+            duration: 0.5,
+          })
+          .then(() => {
+            // Dispatch event for Barba.js transition
+            document.dispatchEvent(new Event("barba:transition"));
+          });
       },
     },
   ],

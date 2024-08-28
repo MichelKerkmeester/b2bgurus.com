@@ -1,5 +1,5 @@
 // CMS Marquee
-document.addEventListener("DOMContentLoaded", function () {
+function initializeMarquee() {
   const marqueeWrapper = document.querySelector(".marquee--w");
   const marqueeList = marqueeWrapper.querySelector(".marquee--list-w");
 
@@ -85,4 +85,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   `;
   document.head.appendChild(style);
+}
+
+// Initialize marquee when DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  initializeMarquee();
+});
+
+// Listen for preloader finished event (for home page)
+document.addEventListener("preloaderFinished", function () {
+  initializeMarquee();
+});
+
+// Listen for Barba.js page transitions
+document.addEventListener("barba:transition", function () {
+  initializeMarquee();
 });
