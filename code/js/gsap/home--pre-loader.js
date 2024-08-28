@@ -112,7 +112,24 @@ function revealContent() {
       gsap.set(".page--loader", { display: "none" });
       // Dispatch preloaderFinished event
       document.dispatchEvent(new Event("preloaderFinished"));
+      // Trigger in-view animations
+      triggerInViewAnimations();
     },
+  });
+}
+
+function triggerInViewAnimations() {
+  // Select all elements with the 'home--in-view' class
+  const inViewElements = document.querySelectorAll(".home--in-view");
+
+  // Trigger the animation for each element
+  inViewElements.forEach((element) => {
+    gsap.to(element, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
   });
 }
 
@@ -145,6 +162,8 @@ barba.init({
           .then(() => {
             // Dispatch event for Barba.js transition
             document.dispatchEvent(new Event("barba:transition"));
+            // Trigger in-view animations for the new page
+            triggerInViewAnimations();
           });
       },
     },
