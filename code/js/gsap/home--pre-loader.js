@@ -105,12 +105,14 @@ function animateLogo() {
 function revealContent() {
   return gsap.to(".page--loader", {
     yPercent: -100,
-    duration: 0.8,
+    duration: isMobile() ? 0.6 : 0.8, // Faster on mobile
     ease: "power3.inOut",
+    onStart: () => {
+      // Dispatch preloaderFinished event at the start of the reveal animation
+      document.dispatchEvent(new Event("preloaderFinished"));
+    },
     onComplete: () => {
       gsap.set(".page--loader", { display: "none" });
-      // Dispatch preloaderFinished event
-      document.dispatchEvent(new Event("preloaderFinished"));
       // Trigger in-view animations
       triggerInViewAnimations();
     },
@@ -130,6 +132,10 @@ function triggerInViewAnimations() {
       ease: "power2.out",
     });
   });
+}
+
+function isMobile() {
+  return window.innerWidth < 992;
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
