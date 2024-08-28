@@ -14,7 +14,7 @@ function animateLogo() {
   gsap.set(loaderContent, {
     position: "absolute",
     top: "50%",
-    left: "50%",
+    left: isMobile ? "52.5%" : "50%", // Move 2.5% to the right on mobile
     xPercent: -50,
     yPercent: -50,
     scale: isTablet ? 1.125 : isMobile ? 0.63 : 1,

@@ -1,68 +1,57 @@
 // CMS Marquee
 document.addEventListener("DOMContentLoaded", function () {
   const marqueeWrapper = document.querySelector(".marquee--w");
-  const marqueeTrack = marqueeWrapper.querySelector(".marquee--track");
-  const marqueeList = marqueeTrack.querySelector(".marquee--list-w");
-  const marqueeItems = marqueeList.children;
+  const marqueeList = marqueeWrapper.querySelector(".marquee--list-w");
 
-  let totalWidth = 0;
-  let animationId;
-  let isDesktop = window.innerWidth >= 992;
+  // Configuration
+  const desktopSpeed = 250; // pixels per second
+  const mobileSpeed = 2000; // pixels per second
+  const mobileBreakpoint = 992;
 
-  // Animation durations for desktop and mobile
-  const desktopDuration = 20000;
-  const mobileDuration = 12500;
+  function setupMarquee() {
+    const isDesktop = window.innerWidth >= mobileBreakpoint;
+    const speed = isDesktop ? desktopSpeed : mobileSpeed;
 
-  function calculateTotalWidth() {
-    totalWidth = 0;
-    Array.from(marqueeItems).forEach((item) => {
-      totalWidth += item.offsetWidth;
-    });
-  }
+    // Clear existing content and animation
+    marqueeList.innerHTML = "";
+    marqueeList.style.animation = "none";
 
-  function cloneMarqueeItems() {
-    const clone = marqueeList.cloneNode(true);
-    marqueeTrack.appendChild(clone);
-  }
+    // Clone the original items
+    const originalItems = Array.from(
+      marqueeWrapper.querySelectorAll(".marquee--list-w > *")
+    );
+    originalItems.forEach((item) =>
+      marqueeList.appendChild(item.cloneNode(true))
+    );
+    originalItems.forEach((item) =>
+      marqueeList.appendChild(item.cloneNode(true))
+    );
 
-  function animateMarquee() {
-    let startTime;
-    const duration = isDesktop ? desktopDuration : mobileDuration;
+    // Calculate the total width
+    const totalWidth = Array.from(marqueeList.children).reduce(
+      (sum, item) => sum + item.offsetWidth,
+      0
+    );
 
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = (elapsed % duration) / duration;
+    // Set up the CSS animation
+    marqueeList.style.setProperty(
+      "--marquee-duration",
+      `${totalWidth / speed}s`
+    );
+    marqueeList.style.animation =
+      "marquee var(--marquee-duration) linear infinite";
 
-      marqueeTrack.style.transform = `translateX(${-progress * totalWidth}px)`;
-
-      animationId = requestAnimationFrame(step);
-    }
-
-    animationId = requestAnimationFrame(step);
-  }
-
-  function initMarquee() {
-    calculateTotalWidth();
-    cloneMarqueeItems();
-    animateMarquee();
+    // Add necessary styles
+    marqueeWrapper.style.overflow = "hidden";
+    marqueeList.style.display = "flex";
+    marqueeList.style.width = "max-content";
   }
 
   function handleResize() {
-    const wasDesktop = isDesktop;
-    isDesktop = window.innerWidth >= 992;
-
-    // Only reinitialize if switching between desktop and mobile
-    if (wasDesktop !== isDesktop) {
-      cancelAnimationFrame(animationId);
-      marqueeTrack.style.transform = "translateX(0)";
-      marqueeTrack.innerHTML = "";
-      marqueeTrack.appendChild(marqueeList);
-      initMarquee();
-    }
+    setupMarquee();
   }
 
-  // Debounce function to limit the frequency of resize event handling
+  // Debounce function
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -77,11 +66,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Listen for window resize events only on desktop
-  if (isDesktop) {
-    window.addEventListener("resize", debouncedHandleResize);
-  }
+  // Listen for window resize events
+  window.addEventListener("resize", debouncedHandleResize);
 
   // Initialize the marquee
-  initMarquee();
+  setupMarquee();
+
+  // Add the CSS animation
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  `;
+  document.head.appendChild(style);
 });
