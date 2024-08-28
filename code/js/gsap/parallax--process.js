@@ -1,9 +1,7 @@
 // Process
 // GSAP Parallax
 
-document.addEventListener("DOMContentLoaded", initProcessParallax);
-
-function initProcessParallax() {
+window.initProcessParallax = function () {
   function isDesktop() {
     return window.innerWidth >= 992; // Check if the device is a desktop
   }
@@ -83,7 +81,7 @@ function initProcessParallax() {
       ScrollTrigger.create({
         trigger: item,
         start: "top 80%",
-        end: "bottom 50%",
+        end: "bottom 60%",
         onUpdate: (self) => {
           targetProgress = self.progress;
         },
@@ -144,4 +142,4 @@ function initProcessParallax() {
       animateElements();
     }
   }
-}
+};

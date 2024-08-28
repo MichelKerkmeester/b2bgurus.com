@@ -1,9 +1,7 @@
 // Projects
 // GSAP Parallax
 
-document.addEventListener("DOMContentLoaded", initProjectsParallax);
-
-function initProjectsParallax() {
+window.initProjectsParallax = function () {
   gsap.registerPlugin(ScrollTrigger);
 
   const projectListItems = document.querySelectorAll(".project--list-item");
@@ -17,16 +15,21 @@ function initProjectsParallax() {
     return window.innerWidth <= 767;
   }
 
+  function isTablet() {
+    return window.innerWidth > 767 && window.innerWidth <= 1024;
+  }
+
   projectListItems.forEach((item) => {
     const card = item.querySelector(`[id^="project-card"]`);
     const imageWrapper = card.querySelector(`[id^="project-image-w"]`);
     const image = imageWrapper.querySelector(`[id^="project-image"]`);
-    const illustration = isMobile()
-      ? null
-      : item.querySelector(`[id^="project-bg"]`);
+    const illustration =
+      isMobile() || isTablet()
+        ? null
+        : item.querySelector(`[id^="project-bg"]`);
 
     // Set initial states based on device type
-    if (isMobile()) {
+    if (isMobile() || isTablet()) {
       gsap.set(card, { scale: 0.8, yPercent: 35 });
       gsap.set(image, { scale: 1.4 });
     } else {
@@ -55,8 +58,8 @@ function initProjectsParallax() {
     function animateItem() {
       progress = lerp(progress, targetProgress, speed);
 
-      if (isMobile()) {
-        // Subtle animation for mobile, without illustration
+      if (isMobile() || isTablet()) {
+        // Subtle animation for mobile and tablet, without illustration
         gsap.to(card, {
           scale: 0.8 + 0.2 * progress,
           yPercent: 35 - 35 * progress,
@@ -67,7 +70,7 @@ function initProjectsParallax() {
           duration: 0,
         });
       } else {
-        // Regular animation for tablet and desktop
+        // Regular animation for desktop
         gsap.to(card, {
           scale: 0.8 + 0.2 * progress,
           yPercent: 50 - 50 * progress,
@@ -91,4 +94,20 @@ function initProjectsParallax() {
     }
     animateItem();
   });
+};
+
+// Function to initialize parallax
+function initializeParallax() {
+  if (window.initProjectsParallax) {
+    window.initProjectsParallax();
+  }
+}
+
+// Check if the page has a preloader
+if (document.querySelector(".page--loader")) {
+  // If there's a preloader, wait for the preloaderFinished event
+  document.addEventListener("preloaderFinished", initializeParallax);
+} else {
+  // If there's no preloader, initialize parallax on DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", initializeParallax);
 }

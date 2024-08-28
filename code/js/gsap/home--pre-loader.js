@@ -15,7 +15,7 @@ function animateLogo() {
   gsap.set(".loader--content", {
     position: "absolute",
     top: "50%",
-    left: isMobile ? "52.5%" : "50%",
+    left: isMobile ? "55%" : "50%",
     xPercent: -50,
     yPercent: -50,
     scale: isTablet ? 1.125 : isMobile ? 0.63 : 1,
@@ -115,6 +115,14 @@ function revealContent() {
       gsap.set(".page--loader", { display: "none" });
       // Trigger in-view animations
       triggerInViewAnimations();
+
+      // Initialize parallax effects after pre-loader is complete
+      if (window.initProjectsParallax) {
+        window.initProjectsParallax();
+      }
+      if (window.initProcessParallax) {
+        window.initProcessParallax();
+      }
     },
   });
 }
