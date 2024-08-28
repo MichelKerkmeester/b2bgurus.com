@@ -27,18 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Function to handle color change on hover
-    const handleHoverColorChange = (headingElement, numberElement, isIn) => {
-      gsap.killTweensOf([headingElement, numberElement]); // Kill ongoing animations
+    const handleHoverColorChange = (headingElement, isIn) => {
+      gsap.killTweensOf(headingElement); // Kill ongoing animations
       gsap.to(headingElement, {
         color: isIn ? "#2f7f90" : "#13333a",
         duration: 0.5,
         ease: "power1.out",
-      }); // Animate heading text color change
-      gsap.to(numberElement, {
-        color: isIn ? "#13333a" : "#c4c4c4",
-        duration: 0.5,
-        ease: "power1.out",
-      }); // Animate number text color change
+      }); // Animate text color change
     };
 
     // Function to handle line animation on click
@@ -58,8 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (header !== openAccordionHeader) {
           lastHoveredHeader = header; // Update last hovered header
           const heading = header.querySelector("#accordion--heading");
-          const number = header.querySelector(".accordion--nr");
-          handleHoverColorChange(heading, number, true); // Change colors on hover
+          handleHoverColorChange(heading, true); // Change heading color on hover
         }
       });
 
@@ -67,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hover off header
         if (lastHoveredHeader === header && openAccordionHeader !== header) {
           const heading = header.querySelector("#accordion--heading");
-          const number = header.querySelector(".accordion--nr");
-          handleHoverColorChange(heading, number, false); // Reset colors on hover out
+          handleHoverColorChange(heading, false); // Reset heading color on hover out
           lastHoveredHeader = null; // Reset last hovered header
         }
       });
