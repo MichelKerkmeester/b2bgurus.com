@@ -1,5 +1,5 @@
 // Home
-// Pre-Loader Animation
+// Pre-Loader + Transition Out
 
 gsap.set(".page--wrapper", { display: "none" });
 gsap.set(".loader--content", { display: "flex" });
@@ -11,8 +11,8 @@ function animateLogo() {
   const isTablet = window.innerWidth <= 768 && window.innerWidth > 479;
   const isMobile = window.innerWidth <= 479;
 
-  // Set initial styles for loader--content
-  gsap.set(".loader--content", {
+  // Set initial styles for loader--content and transition--content
+  gsap.set([".loader--content", {
     position: "absolute",
     top: "50%",
     left: isMobile ? "55%" : "50%",
@@ -145,6 +145,33 @@ function triggerInViewAnimations() {
 function isMobile() {
   return window.innerWidth < 992;
 }
+
+// New function for transition out, using transition--content
+function homeTransitionOut() {
+  const tl = gsap.timeline();
+
+  tl.set(".transition--content", { display: "flex" })
+    .set(".loader--content", { display: "none" })
+    .to(".page--loader", {
+      yPercent: 0,
+      duration: 0.6,
+      ease: "power3.inOut",
+      display: "block",
+    });
+
+  return tl;
+}
+
+// Modify the click event listener for internal links
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+  if (link && link.href && link.href.startsWith(window.location.origin)) {
+    e.preventDefault();
+    homeTransitionOut().then(() => {
+      window.location.href = link.href;
+    });
+  }
+});
 
 document.addEventListener("DOMContentLoaded", (event) => {
   requestAnimationFrame(() => {
