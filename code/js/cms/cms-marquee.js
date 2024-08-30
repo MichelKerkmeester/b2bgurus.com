@@ -4,13 +4,13 @@ function initializeMarquee() {
   const marqueeList = marqueeWrapper.querySelector(".marquee--list-w");
 
   // Configuration
-  const desktopSpeed = 300; // pixels per second
-  const mobileSpeed = 200; // pixels per second
+  const desktopDuration = 20; // seconds
+  const mobileDuration = 30; // seconds
   const mobileBreakpoint = 992;
 
   function setupMarquee() {
     const isDesktop = window.innerWidth >= mobileBreakpoint;
-    const speed = isDesktop ? desktopSpeed : mobileSpeed;
+    const duration = isDesktop ? desktopDuration : mobileDuration;
 
     // Clear existing content and animation
     marqueeList.innerHTML = "";
@@ -27,17 +27,8 @@ function initializeMarquee() {
       marqueeList.appendChild(item.cloneNode(true))
     );
 
-    // Calculate the total width
-    const totalWidth = Array.from(marqueeList.children).reduce(
-      (sum, item) => sum + item.offsetWidth,
-      0
-    );
-
     // Set up the CSS animation
-    marqueeList.style.setProperty(
-      "--marquee-duration",
-      `${totalWidth / speed}s`
-    );
+    marqueeList.style.setProperty("--marquee-duration", `${duration}s`);
     marqueeList.style.animation =
       "marquee var(--marquee-duration) linear infinite";
 
@@ -48,9 +39,7 @@ function initializeMarquee() {
   }
 
   function handleResize() {
-    if (window.innerWidth >= mobileBreakpoint) {
-      setupMarquee();
-    }
+    setupMarquee();
   }
 
   // Debounce function
@@ -68,10 +57,8 @@ function initializeMarquee() {
 
   const debouncedHandleResize = debounce(handleResize, 250);
 
-  // Listen for window resize events only on desktop
-  if (window.innerWidth >= mobileBreakpoint) {
-    window.addEventListener("resize", debouncedHandleResize);
-  }
+  // Listen for window resize events
+  window.addEventListener("resize", debouncedHandleResize);
 
   // Initialize the marquee
   setupMarquee();
