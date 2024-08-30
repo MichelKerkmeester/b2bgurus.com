@@ -1,4 +1,4 @@
-// Pre-loader + Page Transitions
+// Pre-loader + Animate in view
 
 // Hero
 // Animate in view
@@ -6,11 +6,17 @@ function animateHeroIntro() {
   const isMobileOrTablet = window.innerWidth < 992; // This includes both mobile and tablet
   const suffix = isMobileOrTablet ? "--mobile" : "";
   const elements = `#hero-caption${suffix}, #hero-heading-1${suffix}, #hero-heading-2${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`;
+  const heroImage = `#hero-image${suffix}`;
 
   // Set initial styles for hero elements
   gsap.set(elements, {
     opacity: 0,
-    y: isMobileOrTablet ? "2rem" : "4rem",
+    y: isMobileOrTablet ? "10vh" : "8vh",
+  });
+
+  // Set initial styles for hero image
+  gsap.set(heroImage, {
+    y: isMobileOrTablet ? "12vh" : "14vh",
   });
 
   const tl = gsap.timeline({
@@ -24,27 +30,26 @@ function animateHeroIntro() {
     stagger: isMobileOrTablet ? 0.08 : 0.1,
   });
 
+  // Animate hero image
+  tl.to(
+    heroImage,
+    {
+      y: 0,
+      duration: isMobileOrTablet ? 0.8 : 0.9,
+      ease: "power3.out",
+    },
+    "<"
+  ); // Sync with the start of the elements animation
+
   return tl;
 }
 
-// Flag to prevent double transitions
-let isTransitioning = false;
-
-// Check device size
-function isMobile() {
-  return window.innerWidth <= 479;
-}
-
-function isTablet() {
-  return window.innerWidth <= 768 && window.innerWidth > 479;
-}
-
 // Home
-// Pre-loader + Transition out
+// Pre-loader
 function animateLogo() {
   const timeline = gsap.timeline();
-  const isTabletDevice = isTablet();
-  const isMobileDevice = isMobile();
+  const isTabletDevice = window.innerWidth <= 768 && window.innerWidth > 479;
+  const isMobileDevice = window.innerWidth <= 479;
 
   // Initial setup for loader content
   gsap.set(".loader--content", {
@@ -156,7 +161,7 @@ function animateLogo() {
 function revealContent() {
   return gsap.to(".page--loader", {
     yPercent: -100, // Move the loader up and out of view
-    duration: isMobile() ? 0.6 : 0.8, // Faster animation for mobile
+    duration: window.innerWidth <= 479 ? 0.6 : 0.8, // Faster animation for mobile
     ease: "power3.inOut", // Smooth easing for natural movement
     onStart: () => {
       // Dispatch event to signal preloader has finished
@@ -184,147 +189,6 @@ function triggerInViewAnimations() {
   });
 }
 
-// Animation for transitioning out of the current page
-function homeTransitionOut() {
-  const tl = gsap.timeline();
-  tl.set(".loader--content", { display: "flex" }).to(".page--loader", {
-    yPercent: 0,
-    duration: 0.6,
-    ease: "power3.inOut",
-    display: "block",
-  });
-  return tl;
-}
-
-// Global Page Transitions
-function setLogoFinalState() {
-  const isMobileDevice = isMobile();
-  const isTabletDevice = isTablet();
-
-  gsap.set(".loader--content", {
-    position: "absolute",
-    top: "50%",
-    left: isMobileDevice ? "55%" : "50%",
-    xPercent: -50,
-    yPercent: -50,
-    scale: isTabletDevice ? 1.125 : isMobileDevice ? 0.63 : 1,
-    transformOrigin: "center center",
-    display: "flex",
-    opacity: 1,
-  });
-
-  gsap.set(".loader--b2b", {
-    scale: 1,
-    x: isMobileDevice ? "1.575rem" : "3rem",
-    opacity: 1,
-    display: "block",
-  });
-
-  gsap.set(".loader--gurus", {
-    x: isMobileDevice ? "1.575rem" : "3rem",
-    opacity: 1,
-    display: "block",
-  });
-
-  gsap.set(".loader--female", {
-    x: isMobileDevice ? "1.575rem" : "3rem",
-    rotate: isMobileDevice ? -3.15 : -5,
-    opacity: 1,
-    display: "block",
-  });
-}
-
-function pageTransitionIn() {
-  const tl = gsap.timeline();
-
-  tl.set(".page--loader", { display: "block", yPercent: 0 })
-    .to(".page--loader", {
-      yPercent: -100,
-      duration: 0.8,
-      ease: "power3.inOut",
-      onComplete: () => {
-        // Dispatch event to signal preloader has finished
-        document.dispatchEvent(new Event("preloaderFinished"));
-      },
-    })
-    .set(".page--loader", { display: "none" });
-
-  return tl;
-}
-
-function pageTransitionOut() {
-  const tl = gsap.timeline();
-
-  tl.set(".page--loader", { display: "block", yPercent: -100 }).to(
-    ".page--loader",
-    {
-      yPercent: 0,
-      duration: 0.8,
-      ease: "power3.inOut",
-    }
-  );
-
-  return tl;
-}
-
-// Function to handle page show (including back/forward navigation)
-let isBackNavigation = false;
-
-function handlePageShow(event) {
-  if (
-    event.persisted ||
-    (window.performance && window.performance.navigation.type === 2)
-  ) {
-    isBackNavigation = true;
-    if (isMobile()) {
-      // For mobile devices, hide loader and show content immediately
-      gsap.set(".page--loader", { display: "none" });
-      gsap.set(".page--wrapper", { display: "block", opacity: 1 });
-      animateHeroIntro().then(() => {
-        isTransitioning = false;
-      });
-    } else {
-      location.reload();
-    }
-  } else {
-    isBackNavigation = false;
-  }
-}
-
-// Listen for pageshow event
-window.addEventListener("pageshow", handlePageShow);
-
-// Modify the click event listener for internal links
-document.addEventListener("click", (e) => {
-  const link = e.target.closest("a");
-  if (link && link.href && link.href.startsWith(window.location.origin)) {
-    e.preventDefault();
-    if (isTransitioning) return; // Prevent double transitions
-    isTransitioning = true; // Set flag to true to indicate transition is in progress
-
-    if (isBackNavigation && isMobile()) {
-      // If it's a back navigation on mobile, reset the flag and perform normal transition
-      isBackNavigation = false;
-      handlePageTransition(link.href);
-    } else if (
-      window.location.pathname.includes("index.html") ||
-      window.location.pathname === "/"
-    ) {
-      homeTransitionOut().then(() => {
-        window.location.href = link.href; // Navigate to the new page after transition
-      });
-    } else {
-      handlePageTransition(link.href);
-    }
-  }
-});
-
-// Modify the handlePageTransition function
-const handlePageTransition = async (url) => {
-  await pageTransitionOut();
-  window.location.href = url;
-};
-
 // Initial page load
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize parallax effects immediately on page load
@@ -338,9 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
       animateLogo(); // Start the main animation sequence for home
     });
   } else {
-    setLogoFinalState();
-    const tl = pageTransitionIn();
-    tl.add(animateHeroIntro(), "-=0.4"); // Start hero animation before the loader is completely out of view
+    animateHeroIntro(); // Start hero animation for other pages
   }
 });
 
