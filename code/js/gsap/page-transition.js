@@ -236,12 +236,17 @@ function setLogoFinalState() {
 
 function pageTransitionIn() {
   const tl = gsap.timeline();
+  const duration = isMobile() ? 0.6 : 0.8;
 
   tl.set(".page--loader", { display: "block", yPercent: 0 })
     .to(".page--loader", {
       yPercent: -100,
-      duration: 0.8,
+      duration: duration,
       ease: "power3.inOut",
+      onComplete: () => {
+        // Dispatch event to signal preloader has finished
+        document.dispatchEvent(new Event("preloaderFinished"));
+      },
     })
     .set(".page--loader", { display: "none" });
 
@@ -302,11 +307,11 @@ window.addEventListener("popstate", () => {
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize parallax effects immediately on page load
   if (window.initProjectsParallax) window.initProjectsParallax();
-
   if (
     window.location.pathname.includes("index.html") ||
     window.location.pathname === "/"
   ) {
+    if (window.initProcessParallax) window.initProcessParallax();
     requestAnimationFrame(() => {
       animateLogo(); // Start the main animation sequence for home
     });
@@ -320,4 +325,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // Prevent flash of unstyled content
 document.addEventListener("DOMContentLoaded", () => {
   gsap.to("body", { opacity: 1, duration: 0 });
+});
+
+// Dispatch event to signal preloader has finished
+document.addEventListener("preloaderFinished", () => {
+  if (window.initProcessParallax) window.initProcessParallax();
 });

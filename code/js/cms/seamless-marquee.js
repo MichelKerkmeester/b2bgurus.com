@@ -100,8 +100,3 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("preloaderFinished", function () {
   initializeMarquee();
 });
-
-// Listen for Barba.js page transitions
-document.addEventListener("barba:transition", function () {
-  initializeMarquee();
-});
