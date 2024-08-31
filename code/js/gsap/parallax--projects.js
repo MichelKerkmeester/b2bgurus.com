@@ -21,10 +21,10 @@ window.initProjectsParallax = function () {
     const illustration = item.querySelector(`[id^="project-bg"]`);
 
     // Set initial states for animation
-    gsap.set(card, { scale: 0.9, yPercent: 25 });
-    gsap.set(image, { scale: 1.4 });
+    gsap.set(card, { scale: 0.9, yPercent: 15 });
+    gsap.set(image, { scale: 1.2 });
     if (illustration) {
-      gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
+      gsap.set(illustration, { scale: 0.75, yPercent: 30, opacity: 0 });
     }
 
     // Animation progress variables
@@ -36,7 +36,7 @@ window.initProjectsParallax = function () {
     ScrollTrigger.create({
       trigger: item,
       start: "top 95%",
-      end: "bottom 85%", // End when the bottom of the item reaches 85% from the top of the viewport
+      end: "bottom 87.5%",
       onUpdate: (self) => {
         targetProgress = self.progress; // Update target progress based on scroll position
       },
@@ -50,13 +50,13 @@ window.initProjectsParallax = function () {
       // Animate the card
       gsap.to(card, {
         scale: 0.9 + 0.1 * progress, // Scale up slightly as it comes into view
-        yPercent: 25 - 25 * progress, // Move up as it comes into view
+        yPercent: 15 - 15 * progress, // Move up as it comes into view
         duration: 0, // Set to 0 for immediate update each frame
       });
 
       // Animate the image
       gsap.to(image, {
-        scale: 1.4 - 0.4 * progress, // Scale down as it comes into view
+        scale: 1.2 - 0.2 * progress, // Scale down as it comes into view
         duration: 0,
       });
 
@@ -64,7 +64,7 @@ window.initProjectsParallax = function () {
       if (illustration) {
         gsap.to(illustration, {
           opacity: progress, // Fade in as it comes into view
-          scale: 0.7 + 0.3 * progress, // Scale up as it comes into view
+          scale: 0.75 + 0.25 * progress, // Scale up as it comes into view
           yPercent: 30 - 30 * progress, // Move up as it comes into view
           duration: 0,
         });
