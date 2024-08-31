@@ -2,15 +2,20 @@
 // GSAP Parallax
 
 window.initProjectsParallax = function () {
+  // Register the ScrollTrigger plugin for GSAP
   gsap.registerPlugin(ScrollTrigger);
 
-  // Select all project list items
   const projectListItems = document.querySelectorAll(".project--list-item");
   if (projectListItems.length === 0) return; // Exit if no items found
 
   // Linear interpolation function for smooth animations
   function lerp(start, end, t) {
     return start * (1 - t) + end * t;
+  }
+
+  // Function to check if the device is mobile
+  function isMobile() {
+    return window.matchMedia("(max-width: 767px)").matches;
   }
 
   projectListItems.forEach((item) => {
@@ -20,23 +25,54 @@ window.initProjectsParallax = function () {
     const image = imageWrapper.querySelector(`[id^="project-image"]`);
     const illustration = item.querySelector(`[id^="project-bg"]`);
 
-    // Set initial states for animation
-    gsap.set(card, { scale: 0.9, yPercent: 15 });
-    gsap.set(image, { scale: 1.2 });
-    if (illustration) {
-      gsap.set(illustration, { scale: 0.75, yPercent: 30, opacity: 0 });
-    }
+    // Initial states
+    const initialStates = {
+      card: { scale: 0.9, yPercent: 35 },
+      image: {
+        scale: isMobile() ? 1.2 : 1.4, // Different scale for mobile and desktop
+      },
+      illustration: { scale: 0.7, yPercent: 30, opacity: 0 },
+    };
+
+    // Set initial states using GSAP
+    gsap.set(card, initialStates.card);
+    gsap.set(image, initialStates.image);
+    if (illustration) gsap.set(illustration, initialStates.illustration);
 
     // Animation progress variables
     let progress = 0;
     let targetProgress = 0;
     const speed = 0.1; // Determines how quickly the animation responds to scroll
 
+    // Animation properties
+    const animations = {
+      card: {
+        scale: () => initialStates.card.scale + 0.1 * progress,
+        yPercent: () => initialStates.card.yPercent - 35 * progress,
+      },
+      image: {
+        scale: () =>
+          initialStates.image.scale - (isMobile() ? 0.2 : 0.4) * progress,
+      },
+      illustration: illustration
+        ? {
+            opacity: () => progress,
+            scale: () => initialStates.illustration.scale + 0.3 * progress,
+            yPercent: () => initialStates.illustration.yPercent - 30 * progress,
+          }
+        : null,
+    };
+
+    // Different start and end points for mobile and desktop
+    const triggerSettings = isMobile()
+      ? { start: "top 100%", end: "bottom 95%" } // Mobile settings
+      : { start: "top 95%", end: "bottom 90%" }; // Desktop settings
+
     // Create a ScrollTrigger for each project item
     ScrollTrigger.create({
       trigger: item,
-      start: "top 95%",
-      end: "bottom 87.5%",
+      start: triggerSettings.start,
+      end: triggerSettings.end,
       onUpdate: (self) => {
         targetProgress = self.progress; // Update target progress based on scroll position
       },
@@ -48,26 +84,14 @@ window.initProjectsParallax = function () {
       progress = lerp(progress, targetProgress, speed);
 
       // Animate the card
-      gsap.to(card, {
-        scale: 0.9 + 0.1 * progress, // Scale up slightly as it comes into view
-        yPercent: 15 - 15 * progress, // Move up as it comes into view
-        duration: 0, // Set to 0 for immediate update each frame
-      });
+      gsap.to(card, { ...animations.card, duration: 0 });
 
       // Animate the image
-      gsap.to(image, {
-        scale: 1.2 - 0.2 * progress, // Scale down as it comes into view
-        duration: 0,
-      });
+      gsap.to(image, { ...animations.image, duration: 0 });
 
       // Animate the illustration if it exists
-      if (illustration) {
-        gsap.to(illustration, {
-          opacity: progress, // Fade in as it comes into view
-          scale: 0.75 + 0.25 * progress, // Scale up as it comes into view
-          yPercent: 30 - 30 * progress, // Move up as it comes into view
-          duration: 0,
-        });
+      if (illustration && animations.illustration) {
+        gsap.to(illustration, { ...animations.illustration, duration: 0 });
       }
 
       // Continue the animation loop
