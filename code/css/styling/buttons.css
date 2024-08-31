@@ -1,0 +1,156 @@
+/* Buttons */
+
+/*----------------------
+    Primary 
+----------------------*/
+
+/* Enabled */
+[data-button="Primary"] {
+  background-color: #2f7f90;
+  color: #fefdfd;
+  border: 1px solid #2f7f90;
+}
+
+/* Hover  */
+[data-button="Primary"]:hover {
+  background-color: #155e68;
+  color: #fefdfd;
+  border: 1px solid #155e68;
+}
+
+/* Pressed  */
+[data-button="Primary"]:active {
+  background-color: #1c4c56;
+  color: #fefdfd;
+  border: 1px solid #1c4c56;
+}
+
+/*----------------------
+    Secondary 
+----------------------*/
+
+/* Enabled */
+[data-button="Secondary"] {
+  background-color: #fefdfd;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/* Hover  */
+[data-button="Secondary"]:hover {
+  background-color: #c4c4c4;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/* Pressed  */
+[data-button="Secondary"]:active {
+  background-color: #919191;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/*----------------------
+    Dark 
+----------------------*/
+
+/* Enabled */
+[data-button="Dark"] {
+  background-color: #13333a;
+  color: #fefdfd;
+  border: 1px solid #13333a;
+}
+
+/* Hover  */
+[data-button="Dark"]:hover {
+  background-color: #09191d;
+  color: #fefdfd;
+  border: 1px solid #09191d;
+}
+
+/* Pressed  */
+[data-button="Dark"]:active {
+  background-color: #1c4c56;
+  color: #fefdfd;
+  border: 1px solid #1c4c56;
+}
+
+/*----------------------
+    Ghost 
+----------------------*/
+
+/* Enabled */
+[data-button="Ghost"] {
+  background-color: transparent;
+  color: #fefdfd;
+  border: 1px solid #fefdfd;
+}
+
+/* Hover  */
+[data-button="Ghost"]:hover {
+  background-color: #13333a;
+  color: #fefdfd;
+  border: 1px solid #13333a;
+}
+
+/* Pressed  */
+[data-button="Ghost"]:active {
+  background-color: #09191d;
+  color: #fefdfd;
+  border: 1px solid #09191d;
+}
+
+/*----------------------
+    No BG 
+----------------------*/
+
+/* Enabled */
+[data-button="Transparent"] {
+  background-color: transparent;
+  color: #13333a;
+  border: 1px solid transparent;
+}
+
+/* Hover  */
+[data-button="Transparent"]:hover {
+  background-color: #c4c4c4;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/* Pressed  */
+[data-button="Transparent"]:active {
+  background-color: #919191;
+  color: #13333a;
+  border: 1px solid #919191;
+}
+
+/*----------------------
+    Contact
+----------------------*/
+
+/* Enabled */
+[data-button="Contact"] {
+  background-color: #ffc022;
+  color: #453309;
+  border: 1px solid #ffc022;
+}
+
+/* Hover  */
+[data-button="Contact"]:hover {
+  background-color: #cc9a1b;
+  color: #453309;
+  border: 1px solid #cc9a1b;
+}
+
+/* Pressed  */
+[data-button="Contact"]:active {
+  background-color: #997314;
+  color: #453309;
+  border: 1px solid #997314;
+}
+
+/* Focused (Keyboard) */
+[data-button="Contact"]:focus-visible {
+  outline: 4px solid #c4c4c4;
+}
