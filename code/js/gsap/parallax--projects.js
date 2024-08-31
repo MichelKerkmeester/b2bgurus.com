@@ -4,94 +4,77 @@
 window.initProjectsParallax = function () {
   gsap.registerPlugin(ScrollTrigger);
 
+  // Select all project list items
   const projectListItems = document.querySelectorAll(".project--list-item");
-  if (projectListItems.length === 0) return;
+  if (projectListItems.length === 0) return; // Exit if no items found
 
+  // Linear interpolation function for smooth animations
   function lerp(start, end, t) {
     return start * (1 - t) + end * t;
   }
 
-  function isMobile() {
-    return window.innerWidth <= 767;
-  }
-
-  function isTablet() {
-    return window.innerWidth > 767 && window.innerWidth <= 1024;
-  }
-
   projectListItems.forEach((item) => {
+    // Select elements within each project item
     const card = item.querySelector(`[id^="project-card"]`);
     const imageWrapper = card.querySelector(`[id^="project-image-w"]`);
     const image = imageWrapper.querySelector(`[id^="project-image"]`);
-    const illustration =
-      isMobile() || isTablet()
-        ? null
-        : item.querySelector(`[id^="project-bg"]`);
+    const illustration = item.querySelector(`[id^="project-bg"]`);
 
-    // Set initial states based on device type
-    if (isMobile() || isTablet()) {
-      gsap.set(card, { scale: 0.9, yPercent: 35 });
-      gsap.set(image, { scale: 1.4 });
-    } else {
-      gsap.set(card, { scale: 0.9, yPercent: 50 });
-      gsap.set(image, { scale: 1.4 });
-      if (illustration) {
-        gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
-      }
+    // Set initial states for animation
+    gsap.set(card, { scale: 0.9, yPercent: 25 });
+    gsap.set(image, { scale: 1.4 });
+    if (illustration) {
+      gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
     }
 
+    // Animation progress variables
     let progress = 0;
     let targetProgress = 0;
+    const speed = 0.1; // Determines how quickly the animation responds to scroll
 
-    // Adjust speed based on device type
-    const speed = isMobile() ? 0.25 : 0.1;
-
+    // Create a ScrollTrigger for each project item
     ScrollTrigger.create({
       trigger: item,
       start: "top 95%",
-      end: "bottom 85%",
+      end: "bottom 85%", // End when the bottom of the item reaches 85% from the top of the viewport
       onUpdate: (self) => {
-        targetProgress = self.progress;
+        targetProgress = self.progress; // Update target progress based on scroll position
       },
     });
 
+    // Animation function that runs every frame
     function animateItem() {
+      // Smoothly interpolate between current and target progress
       progress = lerp(progress, targetProgress, speed);
 
-      if (isMobile() || isTablet()) {
-        // Subtle animation for mobile and tablet, without illustration
-        gsap.to(card, {
-          scale: 0.9 + 0.1 * progress,
-          yPercent: 35 - 35 * progress,
+      // Animate the card
+      gsap.to(card, {
+        scale: 0.9 + 0.1 * progress, // Scale up slightly as it comes into view
+        yPercent: 25 - 25 * progress, // Move up as it comes into view
+        duration: 0, // Set to 0 for immediate update each frame
+      });
+
+      // Animate the image
+      gsap.to(image, {
+        scale: 1.4 - 0.4 * progress, // Scale down as it comes into view
+        duration: 0,
+      });
+
+      // Animate the illustration if it exists
+      if (illustration) {
+        gsap.to(illustration, {
+          opacity: progress, // Fade in as it comes into view
+          scale: 0.7 + 0.3 * progress, // Scale up as it comes into view
+          yPercent: 30 - 30 * progress, // Move up as it comes into view
           duration: 0,
         });
-        gsap.to(image, {
-          scale: 1.4 - 0.4 * progress,
-          duration: 0,
-        });
-      } else {
-        // Regular animation for desktop
-        gsap.to(card, {
-          scale: 0.9 + 0.1 * progress,
-          yPercent: 50 - 50 * progress,
-          duration: 0,
-        });
-        gsap.to(image, {
-          scale: 1.4 - 0.4 * progress,
-          duration: 0,
-        });
-        if (illustration) {
-          gsap.to(illustration, {
-            opacity: progress,
-            scale: 0.7 + 0.3 * progress,
-            yPercent: 30 - 30 * progress,
-            duration: 0,
-          });
-        }
       }
 
+      // Continue the animation loop
       requestAnimationFrame(animateItem);
     }
+
+    // Start the animation loop
     animateItem();
   });
 };
