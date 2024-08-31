@@ -30,10 +30,10 @@ window.initProjectsParallax = function () {
 
     // Set initial states based on device type
     if (isMobile() || isTablet()) {
-      gsap.set(card, { scale: 0.8, yPercent: 35 });
+      gsap.set(card, { scale: 0.9, yPercent: 35 });
       gsap.set(image, { scale: 1.4 });
     } else {
-      gsap.set(card, { scale: 0.8, yPercent: 50 });
+      gsap.set(card, { scale: 0.9, yPercent: 50 });
       gsap.set(image, { scale: 1.4 });
       if (illustration) {
         gsap.set(illustration, { scale: 0.7, yPercent: 30, opacity: 0 });
@@ -61,7 +61,7 @@ window.initProjectsParallax = function () {
       if (isMobile() || isTablet()) {
         // Subtle animation for mobile and tablet, without illustration
         gsap.to(card, {
-          scale: 0.8 + 0.2 * progress,
+          scale: 0.9 + 0.1 * progress,
           yPercent: 35 - 35 * progress,
           duration: 0,
         });
@@ -72,7 +72,7 @@ window.initProjectsParallax = function () {
       } else {
         // Regular animation for desktop
         gsap.to(card, {
-          scale: 0.8 + 0.2 * progress,
+          scale: 0.9 + 0.1 * progress,
           yPercent: 50 - 50 * progress,
           duration: 0,
         });
