@@ -1,0 +1,40 @@
+:root {
+  --marquee-gap: 10rem;
+  --marquee-duration: 30s;
+}
+
+.marquee--track {
+  display: flex;
+  gap: var(--marquee-gap);
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+.marquee--list {
+  display: flex;
+  gap: var(--marquee-gap);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--marquee-gap) / 2));
+  }
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  :root {
+    --marquee-gap: 8rem;
+    --marquee-duration: 30s;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  :root {
+    --marquee-gap: 4rem;
+    --marquee-duration: 30s;
+  }
+}

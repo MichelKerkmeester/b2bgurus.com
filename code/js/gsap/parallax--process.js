@@ -26,10 +26,10 @@ window.initProcessParallax = function () {
       const heading = item.querySelector(".process--heading");
       const description = item.querySelector(".process--description");
       const smallIllustration = item.querySelector(
-        `.illustration.cc--process-${index}--small`
+        `.illustration.process--${index}-small`
       );
       const bigIllustration = item.querySelector(
-        `.illustration.cc--process-${index}--big`
+        `.illustration.process--${index}-big`
       );
 
       // Speed control: Adjust this value to control overall animation speed
