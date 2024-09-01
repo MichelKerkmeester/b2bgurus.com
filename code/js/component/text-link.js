@@ -8,18 +8,18 @@ $(document).ready(function () {
       function () {
         // Mouse enter animation
         gsap.to($(this).find(".btn--link-highlight"), {
-          duration: 0.3, // Animation duration in seconds
-          width: "100%", // Expand the line to full width
-          visibility: "visible", // Make the line visible
-          ease: "power1.out", // Easing function for smooth animation
+          duration: 0.3,
+          width: "100%",
+          visibility: "visible",
+          ease: "power1.out",
         });
       },
       function () {
         // Mouse leave animation
         gsap.to($(this).find(".btn--link-highlight"), {
-          duration: 0.3, // Animation duration in seconds
-          width: "0%", // Collapse the line to zero width
-          ease: "power1.out", // Easing function for smooth animation
+          duration: 0.3,
+          width: "0%",
+          ease: "power1.out",
         });
       }
     );

@@ -1,3 +1,5 @@
+// Input field
+// Custom placeholder & Focus states
 document.addEventListener("DOMContentLoaded", function () {
   const inputs = document.querySelectorAll("input, textarea, select");
   let usingMouse = false;

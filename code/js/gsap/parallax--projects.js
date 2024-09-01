@@ -84,26 +84,14 @@ window.initProjectsParallax = function () {
       progress = lerp(progress, targetProgress, speed);
 
       // Animate the card
-      gsap.to(card, {
-        scale: animations.card.scale(),
-        yPercent: animations.card.yPercent(),
-        duration: 0,
-      });
+      gsap.to(card, { ...animations.card, duration: 0 });
 
       // Animate the image
-      gsap.to(image, {
-        scale: animations.image.scale(),
-        duration: 0,
-      });
+      gsap.to(image, { ...animations.image, duration: 0 });
 
       // Animate the illustration if it exists
       if (illustration && animations.illustration) {
-        gsap.to(illustration, {
-          opacity: animations.illustration.opacity(),
-          scale: animations.illustration.scale(),
-          yPercent: animations.illustration.yPercent(),
-          duration: 0,
-        });
+        gsap.to(illustration, { ...animations.illustration, duration: 0 });
       }
 
       // Continue the animation loop
