@@ -27,7 +27,7 @@ window.initProjectsParallax = function () {
 
     // Initial states
     const initialStates = {
-      card: { scale: 0.9, yPercent: 35 },
+      card: { scale: 0.925, yPercent: 25 },
       image: {
         scale: isMobile() ? 1.2 : 1.4, // Different scale for mobile and desktop
       },
@@ -47,8 +47,8 @@ window.initProjectsParallax = function () {
     // Animation properties
     const animations = {
       card: {
-        scale: () => initialStates.card.scale + 0.1 * progress,
-        yPercent: () => initialStates.card.yPercent - 35 * progress,
+        scale: () => initialStates.card.scale + 0.075 * progress,
+        yPercent: () => initialStates.card.yPercent - 25 * progress,
       },
       image: {
         scale: () =>
