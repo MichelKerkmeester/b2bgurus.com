@@ -42,9 +42,7 @@ select.w--focus-visible {
 /* Resize handling */
 textarea {
   resize: vertical;
-  /* Allow only vertical resizing */
   max-width: 100%;
-  /* Prevent horizontal overflow */
   box-sizing: border-box;
-  /* Include padding and border in the element's total width and height */
+  overflow-y: auto;
 }

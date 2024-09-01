@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Prevent default focus ring on mouse click
+    // Prevent default focus ring on mouse click, but allow textarea resizing
     document.addEventListener("mousedown", function (e) {
       if (
         e.target instanceof HTMLElement &&
-        ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)
+        (e.target.tagName === "INPUT" || e.target.tagName === "SELECT")
       ) {
         e.preventDefault();
         e.target.focus();
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Initialize both functionalities
+  // Initialize all functionalities
   handlePlaceholders();
   handleFocusStates();
 });
