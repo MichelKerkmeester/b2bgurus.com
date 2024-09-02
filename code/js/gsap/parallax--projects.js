@@ -65,7 +65,7 @@ window.initProjectsParallax = function () {
 
     // Different start and end points for mobile and desktop
     const triggerSettings = isMobile()
-      ? { start: "top 99%", end: "bottom 96%" } // Mobile settings
+      ? { start: "top 98.5%", end: "bottom 96%" } // Mobile settings
       : { start: "top 95%", end: "bottom 90%" }; // Desktop settings
 
     // Create a ScrollTrigger for each project item
