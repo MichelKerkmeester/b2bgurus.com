@@ -52,7 +52,7 @@ window.initProjectsParallax = function () {
       },
       image: {
         scale: () =>
-          initialStates.image.scale - (isMobile() ? 0.3 : 0.4) * progress,
+          initialStates.image.scale - (isMobile() ? 0.2 : 0.4) * progress,
       },
       illustration: illustration
         ? {
@@ -65,7 +65,7 @@ window.initProjectsParallax = function () {
 
     // Different start and end points for mobile and desktop
     const triggerSettings = isMobile()
-      ? { start: "top 98.5%", end: "bottom 96%" } // Mobile settings
+      ? { start: "top 100%", end: "bottom 95%" } // Mobile settings
       : { start: "top 95%", end: "bottom 90%" }; // Desktop settings
 
     // Create a ScrollTrigger for each project item
