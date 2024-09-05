@@ -67,8 +67,8 @@ window.initProcessParallax = function () {
       };
 
       // Set initial states
-      gsap.set(heading, { y: "6.25rem" });
-      gsap.set(description, { y: "9.375rem" });
+      gsap.set(heading, { y: "7.5rem", opacity: 0.4 });
+      gsap.set(description, { y: "10rem", opacity: 0.4 });
       gsap.set(smallIllustration, {
         ...illustrationSettings[index].small,
         opacity: 0,
@@ -92,13 +92,15 @@ window.initProcessParallax = function () {
 
         // Animate heading
         gsap.to(heading, {
-          y: 6.25 * (1 - progress) + "rem",
+          y: 7.5 * (1 - progress) + "rem",
+          opacity: 0.4 + 0.6 * progress,
           duration: 0,
         });
 
         // Animate description
         gsap.to(description, {
-          y: 9.375 * (1 - progress) + "rem",
+          y: 10 * (1 - progress) + "rem",
+          opacity: 0.4 + 0.6 * progress,
           duration: 0,
         });
 
