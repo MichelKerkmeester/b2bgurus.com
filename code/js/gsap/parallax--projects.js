@@ -27,7 +27,7 @@ window.initProjectsParallax = function () {
 
     // Initial states
     const initialStates = {
-      card: { scale: 0.925, yPercent: 25 },
+      card: { scale: 0.9, yPercent: 25 },
       image: {
         scale: isMobile() ? 1.2 : 1.4, // Different scale for mobile and desktop
       },
