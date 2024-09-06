@@ -31,11 +31,7 @@ window.initProjectsParallax = function () {
       image: {
         scale: isMobile() ? 1.2 : 1.4, // Different scale for mobile and desktop
       },
-      illustration: {
-        scale: 0.7,
-        yPercent: 30,
-        opacity: isMobile() ? 1 : 0, // Full opacity on mobile, 0 on desktop
-      },
+      illustration: { scale: 0.7, yPercent: 30, opacity: 0 },
     };
 
     // Set initial states using GSAP
@@ -58,15 +54,13 @@ window.initProjectsParallax = function () {
         scale: () =>
           initialStates.image.scale - (isMobile() ? 0.2 : 0.4) * progress,
       },
-      illustration:
-        !isMobile() && illustration
-          ? {
-              opacity: () => progress,
-              scale: () => initialStates.illustration.scale + 0.3 * progress,
-              yPercent: () =>
-                initialStates.illustration.yPercent - 30 * progress,
-            }
-          : null,
+      illustration: illustration
+        ? {
+            opacity: () => progress,
+            scale: () => initialStates.illustration.scale + 0.3 * progress,
+            yPercent: () => initialStates.illustration.yPercent - 30 * progress,
+          }
+        : null,
     };
 
     // Different start and end points for mobile and desktop
@@ -95,8 +89,8 @@ window.initProjectsParallax = function () {
       // Animate the image
       gsap.to(image, { ...animations.image, duration: 0 });
 
-      // Animate the illustration if it exists and not on mobile
-      if (!isMobile() && illustration && animations.illustration) {
+      // Animate the illustration if it exists
+      if (illustration && animations.illustration) {
         gsap.to(illustration, { ...animations.illustration, duration: 0 });
       }
 
