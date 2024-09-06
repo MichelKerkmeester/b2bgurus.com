@@ -31,7 +31,11 @@ window.initProjectsParallax = function () {
       image: {
         scale: isMobile() ? 1.2 : 1.4, // Different scale for mobile and desktop
       },
-      illustration: { scale: 0.7, yPercent: 30, opacity: 0 },
+      illustration: {
+        scale: 0.7,
+        yPercent: 30,
+        opacity: isMobile() ? 1 : 0, // Full opacity on mobile, 0 on desktop
+      },
     };
 
     // Set initial states using GSAP
