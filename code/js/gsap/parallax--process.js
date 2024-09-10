@@ -80,8 +80,8 @@ window.initProcessParallax = function () {
 
       ScrollTrigger.create({
         trigger: item,
-        start: "top 80%",
-        end: "bottom 60%",
+        start: "top 90%",
+        end: "bottom 65%",
         onUpdate: (self) => {
           targetProgress = self.progress;
         },

@@ -1,5 +1,5 @@
-/* Finsweet - Fluid responsive text */
-/* Initial font-size */
+/* Fluid responsive text */
+/* Stop scaling at max breakpoint */
 html {
   font-size: 1.125rem;
 }
