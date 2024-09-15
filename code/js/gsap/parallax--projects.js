@@ -1,6 +1,5 @@
 // Projects
 // GSAP Parallax
-
 window.initProjectsParallax = function () {
   // Register the ScrollTrigger plugin for GSAP
   gsap.registerPlugin(ScrollTrigger);
