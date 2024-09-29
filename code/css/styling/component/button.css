@@ -154,3 +154,53 @@
 [data-button="Contact"]:focus-visible {
   outline: 4px solid #c4c4c4;
 }
+
+/*----------------------
+    Footer: Light
+----------------------*/
+
+/* Enabled */
+[data-button="Footer-Light"] {
+  background-color: #e7e7e7;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/* Hover  */
+[data-button="Footer-Light"]:hover {
+  background-color: #c4c4c4;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/* Pressed  */
+[data-button="Footer-Light"]:active {
+  background-color: #919191;
+  color: #13333a;
+  border: 1px solid #c4c4c4;
+}
+
+/*----------------------
+    Footer: Dark
+----------------------*/
+
+/* Enabled */
+[data-button="Footer-Dark"] {
+  background-color: #2f7f90;
+  color: #fefdfd;
+  border: 1px solid #5999a6;
+}
+
+/* Hover  */
+[data-button="Footer-Dark"]:hover {
+  background-color: #13333a;
+  color: #fefdfd;
+  border: 1px solid #13333a;
+}
+
+/* Pressed  */
+[data-button="Footer-Dark"]:active {
+  background-color: #09191d;
+  color: #fefdfd;
+  border: 1px solid #09191d;
+}
