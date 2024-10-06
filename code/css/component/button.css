@@ -1,3 +1,22 @@
+/* Button */
+
+/* INTERACTION */
+/*----------------------
+    T.Ricks Accessibility Method
+----------------------*/
+.btn--interaction a[href="#"] {
+  display: none;
+}
+
+.btn--interaction a[href="#"] ~ button {
+  display: block;
+}
+
+.wf-design-mode .btn--interaction {
+  pointer-events: none;
+}
+
+
 /* Button - Main */
 
 /* SIZE */
@@ -108,7 +127,8 @@
 /*----------------------
     Icon 
 ----------------------*/
-[data-btn-variant="Icon"] .btn--text {
+[data-btn-variant="Icon"] .btn--text,
+[data-btn-variant="Icon"] .btn--text-aria {
   display: none;
 }
 
@@ -133,7 +153,6 @@
 /*----------------------
     Primary 
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Primary"] {
   background-color: var(--color-primary--500);
@@ -158,7 +177,6 @@
 /*----------------------
     Secondary 
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Secondary"] {
   background-color: var(--color-neutral--100);
@@ -183,7 +201,6 @@
 /*----------------------
     Dark 
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Dark"] {
   background-color: var(--color-primary--800);
@@ -208,7 +225,6 @@
 /*----------------------
     Ghost 
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Ghost"] {
   background-color: transparent;
@@ -233,7 +249,6 @@
 /*----------------------
     No BG 
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Transparent"] {
   background-color: transparent;
@@ -258,7 +273,6 @@
 /*----------------------
     Contact
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Contact"] {
   background-color: var(--color-secondary--500);
@@ -292,7 +306,6 @@
 /*----------------------
     Footer: Light
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Footer-Light"] {
   background-color: var(--color-neutral--300);
@@ -317,7 +330,6 @@
 /*----------------------
     Footer: Dark
 ----------------------*/
-
 /* Enabled */
 [data-btn-type="Footer-Dark"] {
   background-color: var(--color-primary--500);
@@ -329,12 +341,12 @@
 [data-btn-type="Footer-Dark"]:hover {
   background-color: var(--color-primary--800);
   color: var(--color-neutral--100);
-  border: 1px solid var(--color-primary--400);
+  border: 1px solid var(--color-primary--800);
 }
 
 /* Pressed  */
 [data-btn-type="Footer-Dark"]:active {
   background-color: var(--color-primary--900);
   color: var(--color-neutral--100);
-  border: 1px solid var(--color-primary--400);
+  border: 1px solid var(--color-primary--900);
 }
