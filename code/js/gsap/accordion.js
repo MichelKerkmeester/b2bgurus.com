@@ -1,4 +1,48 @@
-// GSAP Accordion
+// Accordion
+// Animate in view
+function animateAccordionItems() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    console.error("GSAP or ScrollTrigger is not loaded");
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const accordionItems = document.querySelectorAll(
+    ".accordion--list-item[services--attribute]"
+  );
+
+  if (accordionItems.length === 0) {
+    console.warn("No accordion items found with services--attribute");
+    return;
+  }
+
+  const accordionList = document.querySelector(".accordion--list-w");
+  if (!accordionList) {
+    console.warn("Accordion list wrapper (.accordion--list-w) not found");
+    return;
+  }
+
+  accordionItems.forEach((item, index) => {
+    gsap.from(item, {
+      opacity: 0,
+      y: "8vh",
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: item,
+        start: "top 80%",
+        end: "bottom 40%",
+        toggleActions: "play none none none",
+      },
+    });
+  });
+}
+
+// Initialize animation on page load
+document.addEventListener("DOMContentLoaded", animateAccordionItems);
+
+// Logic
 document.addEventListener("DOMContentLoaded", function () {
   const accordions = document.querySelectorAll(".accordion--list-item"); // Select all accordion items
   let lastHoveredHeader = null; // Track the last hovered header
