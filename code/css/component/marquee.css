@@ -7,11 +7,13 @@
   display: flex;
   gap: var(--marquee-gap);
   animation: marquee var(--marquee-duration) linear infinite;
+  will-change: transform; /* Optimize for animations */
 }
 
 .marquee--list {
   display: flex;
   gap: var(--marquee-gap);
+  flex-shrink: 0; /* Prevent shrinking of items */
 }
 
 @keyframes marquee {
@@ -19,7 +21,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(calc(-50% - var(--marquee-gap) / 2));
+    transform: translateX(calc(-50% - var(--marquee-gap)));
   }
 }
 
@@ -27,7 +29,7 @@
 @media (max-width: 991px) {
   :root {
     --marquee-gap: 8rem;
-    --marquee-duration: 30s;
+    --marquee-duration: 25s; /* Slightly faster on tablet */
   }
 }
 
@@ -35,6 +37,6 @@
 @media (max-width: 767px) {
   :root {
     --marquee-gap: 4rem;
-    --marquee-duration: 30s;
+    --marquee-duration: 20s; /* Even faster on mobile */
   }
 }

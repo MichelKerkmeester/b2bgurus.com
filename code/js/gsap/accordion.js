@@ -1,49 +1,54 @@
 // Accordion
 // Animate in view
 function animateAccordionItems() {
-  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
-    console.error("GSAP or ScrollTrigger is not loaded");
-    return;
-  }
-
   gsap.registerPlugin(ScrollTrigger);
 
+  const isMobileOrTablet = window.innerWidth < 992;
+
+  // Select all accordion items with the specified attribute
   const accordionItems = document.querySelectorAll(
     ".accordion--list-item[services--attribute]"
   );
 
-  if (accordionItems.length === 0) {
-    console.warn("No accordion items found with services--attribute");
-    return;
-  }
+  // Create a timeline for all accordion items
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: accordionItems[0], // Use the first item as the trigger
+      start: "bottom 100%",
+      end: "bottom 40%",
+      toggleActions: "play none none none",
+    },
+  });
 
-  const accordionList = document.querySelector(".accordion--list-w");
-  if (!accordionList) {
-    console.warn("Accordion list wrapper (.accordion--list-w) not found");
-    return;
-  }
-
+  // Set initial state: hidden and slightly below its final position
   accordionItems.forEach((item, index) => {
-    gsap.from(item, {
+    gsap.set(item, {
       opacity: 0,
-      y: "8vh",
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: item,
-        start: "top 80%",
-        end: "bottom 40%",
-        toggleActions: "play none none none",
-      },
+      y: isMobileOrTablet ? "8vh" : "8vh",
     });
+
+    // Animate each item to its final state
+    tl.to(
+      item,
+      {
+        opacity: 1,
+        y: 0,
+        duration: isMobileOrTablet ? 0.8 : 1,
+        ease: "power3.out",
+      },
+      index * 0.2 // Stagger each item's animation by 0.2 seconds
+    );
   });
 }
 
 // Initialize animation on page load
-document.addEventListener("DOMContentLoaded", animateAccordionItems);
+document.addEventListener("DOMContentLoaded", () => {
+  animateAccordionItems();
+  initializeAccordion();
+});
 
-// Logic
-document.addEventListener("DOMContentLoaded", function () {
+// Accordion logic
+function initializeAccordion() {
   const accordions = document.querySelectorAll(".accordion--list-item"); // Select all accordion items
   let lastHoveredHeader = null; // Track the last hovered header
   let openAccordionHeader = null; // Track the currently open accordion header
@@ -235,4 +240,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-});
+}

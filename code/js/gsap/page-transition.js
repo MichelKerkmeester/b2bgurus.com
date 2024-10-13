@@ -5,7 +5,7 @@
 function animateHeroIntro() {
   const isMobileOrTablet = window.innerWidth < 992; // This includes both mobile and tablet
   const suffix = isMobileOrTablet ? "--mobile" : "";
-  const elements = `#hero-caption${suffix}, #hero-heading-1${suffix}, #hero-heading-2${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`;
+  const elements = `#hero-caption${suffix}, #hero-heading-1${suffix}, #hero-heading-2${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}, #hero-other${suffix}`;
   const heroImage = `#hero-image${suffix}`;
 
   // Set initial styles for hero elements
