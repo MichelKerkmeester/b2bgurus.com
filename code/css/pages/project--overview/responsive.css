@@ -1,9 +1,19 @@
 /* Hero */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--hero.is--projects {
+    padding-top: 15vh;
+  }
+}
+
+/* Hero */
 /* Text */
 
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
-  .header.project--overview {
+  .header.is--projects {
     display: flex;
     max-width: 40rem;
   }

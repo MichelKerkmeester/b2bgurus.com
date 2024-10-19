@@ -1,4 +1,14 @@
 /* Hero */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--hero {
+    padding-top: 15vh;
+  }
+}
+
+/* Hero */
 /* Text */
 
 /* Tablet */

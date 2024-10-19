@@ -15,7 +15,6 @@
   pointer-events: none;
 }
 
-
 /* Button: Main */
 /*----------------------
   SIZE
@@ -114,7 +113,7 @@
 ----------------------*/
 /* Main */
 [data-btn-variant="Main"] {
-  width: auto; 
+  width: auto;
 }
 
 /* Icon */
@@ -286,7 +285,6 @@
   outline: 4px solid var(--color-neutral--500);
 }
 
-
 /* Button: Text link */
 /*----------------------
   SIZE
@@ -360,7 +358,6 @@
 [data-text-link-weight="Bold"] {
   font-weight: 700; /* Bold */
 }
-
 
 /* Button: Footer */
 /*----------------------

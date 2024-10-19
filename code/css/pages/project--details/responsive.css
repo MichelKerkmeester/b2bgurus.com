@@ -1,4 +1,14 @@
 /* Hero */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--hero.is--projects {
+    padding-top: 15vh;
+  }
+}
+
+/* Hero */
 /* Headings */
 
 /* Tablet */
@@ -31,6 +41,20 @@
   .project--data {
     display: grid;
     grid-template-columns: 1fr; /* 1 column layout */
+  }
+}
+
+/* Project */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--project {
+    padding-bottom: 15vh;
+  }
+
+  .project--pagination {
+    margin-top: 10vh;
   }
 }
 

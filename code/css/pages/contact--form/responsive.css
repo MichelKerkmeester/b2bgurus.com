@@ -1,11 +1,26 @@
 /* Hero */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--hero.is--contact {
+    padding-top: 15vh;
+  }
+}
+
+/* Hero */
 /* Text */
 
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 720px) {
+  .display--small {
+    font-size: 8rem;
+  }
+
   .description.tablet {
     display: block;
   }
+
   .description.mobile {
     display: none;
   }
@@ -13,7 +28,7 @@
 
 /* Mobile, Large */
 @media only screen and (max-width: 479px) and (min-width: 410px) {
-  .header.contact--form {
+  .header.is--contact-form {
     display: flex;
     max-width: 40rem;
   }

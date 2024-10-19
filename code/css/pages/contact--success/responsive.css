@@ -1,9 +1,19 @@
 /* Hero */
+/* Section */
+
+/* Desktop - Vertical Monitor */
+@media (min-height: 1800px) {
+  .section--hero.is--contact-success {
+    padding-top: 15vh;
+  }
+}
+
+/* Hero */
 /* Text */
 
 /* Tablet */
 @media only screen and (max-width: 991px) and (min-width: 739px) {
-  .header.contact--thank-you {
+  .header.is--contact-success {
     display: flex;
     max-width: none;
   }
