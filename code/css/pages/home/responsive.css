@@ -1,10 +1,34 @@
-/* Hero */
-/* Section */
+/* Global */
+/* Section spacing */
 
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
+/* Desktop */
+@media (min-width: 992px) {
   .section--hero {
-    padding-top: 15vh;
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .marquee {
+    margin-top: clamp(7.5rem, 15vh, 15rem);
+  }
+
+  .section--project-overview.is--home {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--services {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--process {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .process--header {
+    margin-bottom: clamp(10rem, 20vh, 20rem);
   }
 }
 
@@ -212,6 +236,16 @@
 }
 
 /* Projects */
+/* Gap */
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(3.5rem, 20vh, 7rem);
+  }
+}
+
+/* Projects */
 /* Base CSS for all CMS list items */
 
 /* Desktop */
@@ -287,29 +321,11 @@
   }
 }
 
-/* Projects */
-/* Gap */
-
-/* Desktop */
-@media only screen and (min-width: 992px) {
-  .project--list {
-    gap: clamp(4rem, 20vh, 8rem); /* Min, Preferred, Max */
-  }
-}
-
 /* Process */
 /* Gap */
 
 /* Desktop */
 @media only screen and (min-width: 992px) {
   .process--list {
-    gap: clamp(25rem, 50vh, 35rem); /* Min, Preferred, Max */
-  }
-}
-
-/* Desktop */
-@media only screen and (min-width: 992px) {
-  .project--list {
-    gap: clamp(4rem, 10vh, 10rem); /* Min, Preferred, Max */
-  }
+    gap: clamp(25rem, 50vh, 35rem);
 }

@@ -1,10 +1,19 @@
-/* Hero */
-/* Section */
+/* Global */
+/* Section spacing */
 
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
+/* Desktop */
+@media (min-width: 992px) {
   .section--hero.is--projects {
-    padding-top: 15vh;
+    padding-top: clamp(12.5rem, 25vh, 25rem);
+  }
+
+  .section--projects {
+    padding-top: clamp(3.75rem, 7.5vh, 7.5rem);
+    padding-bottom: clamp(12.5rem, 25vh, 25rem);
+  }
+
+  .project--pagination {
+    margin-top: clamp(7.5rem, 15vh, 15rem);
   }
 }
 
@@ -41,20 +50,6 @@
   .project--data {
     display: grid;
     grid-template-columns: 1fr; /* 1 column layout */
-  }
-}
-
-/* Project */
-/* Section */
-
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
-  .section--project {
-    padding-bottom: 15vh;
-  }
-
-  .project--pagination {
-    margin-top: 10vh;
   }
 }
 

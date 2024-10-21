@@ -1,10 +1,19 @@
-/* Hero */
-/* Section */
+/* Global */
+/* Section spacing */
 
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
+/* Desktop */
+@media (min-width: 992px) {
   .section--hero.is--projects {
-    padding-top: 15vh;
+    padding-top: clamp(12.5rem, 25vh, 25rem);
+  }
+
+  .marquee.is--secondary {
+    margin-top: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--project-overview {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(15rem, 30vh, 30rem);
   }
 }
 
@@ -73,6 +82,16 @@
     position: absolute;
     top: -4.35rem;
     left: 13.2rem;
+  }
+}
+
+/* Projects */
+/* Gap */
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .project--list {
+    gap: clamp(3.5rem, 20vh, 7rem);
   }
 }
 
@@ -149,15 +168,5 @@
   .w-dyn-item[cms-item="project-7"] .project--card-image {
     background-size: auto 110%;
     background-position: 70% 100%;
-  }
-}
-
-/* Projects */
-/* Gap */
-
-/* Desktop */
-@media only screen and (min-width: 992px) {
-  .project--list {
-    gap: clamp(6rem, 20vh, 10rem); /* Min, Preferred, Max */
   }
 }

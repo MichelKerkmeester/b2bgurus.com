@@ -1,10 +1,24 @@
-/* Hero */
-/* Section */
+/* Global */
+/* Section spacing */
 
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
+/* Desktop */
+@media (min-width: 992px) {
   .section--hero.is--services {
-    padding-top: 15vh;
+    padding-top: clamp(12.5rem, 25vh, 25rem);
+  }
+
+  .marquee.is--secondary {
+    margin-top: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--services {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--diagram {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(15rem, 30vh, 30rem);
   }
 }
 

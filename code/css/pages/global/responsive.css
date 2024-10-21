@@ -125,12 +125,3 @@ html {
     font-size: 1.64rem;
   }
 }
-
-/* Footer - Image size */
-/* Desktop with large viewport width */
-@media (min-width: 2500px) {
-  .footer--illustration {
-    background-size: 115%;
-    /* Background size for viewports 2560px and above */
-  }
-}

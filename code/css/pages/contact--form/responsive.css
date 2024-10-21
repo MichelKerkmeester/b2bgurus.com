@@ -1,10 +1,19 @@
-/* Hero */
-/* Section */
+/* Global */
+/* Section spacing */
 
-/* Desktop - Vertical Monitor */
-@media (min-height: 1800px) {
+/* Desktop */
+@media (min-width: 992px) {
   .section--hero.is--contact {
-    padding-top: 15vh;
+    padding-top: clamp(12.5rem, 25vh, 25rem);
+    padding-bottom: clamp(10rem, 20vh, 20rem);
+  }
+
+  .marquee.is--secondary {
+    margin-top: clamp(10rem, 20vh, 20rem);
+  }
+
+  .section--form {
+    padding-bottom: clamp(10rem, 20vh, 20rem);
   }
 }
 
