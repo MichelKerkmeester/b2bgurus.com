@@ -349,14 +349,19 @@
 /*----------------------
   WEIGHT
 ----------------------*/
+/* Light */
+[data-text-link-weight="Light"] {
+  font-weight: 300;
+}
+
 /* Regular */
 [data-text-link-weight="Regular"] {
-  font-weight: 400; /* Normal */
+  font-weight: 400;
 }
 
 /* Bold */
 [data-text-link-weight="Bold"] {
-  font-weight: 700; /* Bold */
+  font-weight: 700;
 }
 
 /* Button: Footer */

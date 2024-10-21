@@ -1,18 +1,15 @@
 :root {
-  --marquee-gap: 10rem;
-  --marquee-duration: 30s;
+  --marquee-duration: 10s;
 }
 
 .marquee--track {
   display: flex;
-  gap: var(--marquee-gap);
   animation: marquee var(--marquee-duration) linear infinite;
   will-change: transform; /* Optimize for animations */
 }
 
 .marquee--list {
   display: flex;
-  gap: var(--marquee-gap);
   flex-shrink: 0; /* Prevent shrinking of items */
 }
 
@@ -21,22 +18,20 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(calc(-50% - var(--marquee-gap)));
+    transform: translateX(-50%);
   }
 }
 
 /* Tablet */
 @media (max-width: 991px) {
   :root {
-    --marquee-gap: 8rem;
-    --marquee-duration: 25s; /* Slightly faster on tablet */
+    --marquee-duration: 25s;
   }
 }
 
 /* Mobile */
 @media (max-width: 767px) {
   :root {
-    --marquee-gap: 4rem;
-    --marquee-duration: 20s; /* Even faster on mobile */
+    --marquee-duration: 25s;
   }
 }

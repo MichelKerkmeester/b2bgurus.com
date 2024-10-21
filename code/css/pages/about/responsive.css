@@ -12,6 +12,11 @@
     padding-top: clamp(7.5rem, 15vh, 15rem);
     padding-bottom: clamp(10rem, 10vh, 20rem);
   }
+
+  .section--team {
+    padding-top: clamp(10rem, 20vh, 20rem);
+    padding-bottom: clamp(20rem, 30vh, 30rem);
+  }
 }
 
 /* Hero */
