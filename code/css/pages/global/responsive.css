@@ -1,7 +1,7 @@
 /* Fluid responsive text */
 /* Stop scaling at max breakpoint */
 html {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
 }
 
 /* 2560px and below */

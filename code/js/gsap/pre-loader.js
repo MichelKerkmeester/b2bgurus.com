@@ -5,41 +5,28 @@
 function animateHeroIntro() {
   const isMobileOrTablet = window.innerWidth < 992; // This includes both mobile and tablet
   const suffix = isMobileOrTablet ? "--mobile" : "";
-  const elements = `#hero-caption${suffix}, #hero-heading-1${suffix}, #hero-heading-2${suffix}, #hero-description${suffix}, #hero-button${suffix}, #hero-marquee, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}, #hero-other${suffix}`;
-  const heroImage = `#hero-image${suffix}`;
+  const elements = `#hero-caption${suffix}, #hero-heading-1${suffix}, #hero-heading-2${suffix}, #hero-description${suffix}, #hero-marquee, #hero-button${suffix}, #hero-male${suffix}, #hero-female${suffix}, #hero-cursor${suffix}`;
 
-  // Set initial styles for hero elements
-  gsap.set(elements, {
-    opacity: 0,
-    y: isMobileOrTablet ? "10vh" : "8vh",
-  });
-
-  // Set initial styles for hero image
-  gsap.set(heroImage, {
-    y: isMobileOrTablet ? "12vh" : "14vh",
-  });
+  // First, force the initial state with immediateRender
+  gsap.set(
+    elements.split(",").map((s) => s.trim()),
+    {
+      opacity: 0,
+      y: isMobileOrTablet ? "4rem" : "8rem",
+      immediateRender: true,
+    }
+  );
 
   const tl = gsap.timeline({
-    defaults: { ease: "power3.out", duration: isMobileOrTablet ? 0.8 : 0.9 },
+    defaults: { ease: "power3.out", duration: isMobileOrTablet ? 1.4 : 1.2 },
   });
 
   // Animate hero elements
   tl.to(elements, {
     opacity: 1,
     y: 0,
-    stagger: isMobileOrTablet ? 0.08 : 0.1,
+    stagger: isMobileOrTablet ? 0.09 : 0.1,
   });
-
-  // Animate hero image
-  tl.to(
-    heroImage,
-    {
-      y: 0,
-      duration: isMobileOrTablet ? 0.8 : 0.9,
-      ease: "power3.out",
-    },
-    "<"
-  ); // Sync with the start of the elements animation
 
   return tl;
 }
@@ -161,8 +148,8 @@ function animateLogo() {
 function revealContent() {
   return gsap.to(".page--loader", {
     yPercent: -100, // Move the loader up and out of view
-    duration: window.innerWidth <= 479 ? 0.6 : 0.8, // Faster animation for mobile
-    ease: "power3.inOut", // Smooth easing for natural movement
+    duration: window.innerWidth <= 479 ? 1.4 : 1.2,
+    ease: "power3.inOut",
     onStart: () => {
       // Dispatch event to signal preloader has finished
       document.dispatchEvent(new Event("preloaderFinished"));
@@ -173,19 +160,6 @@ function revealContent() {
       // Trigger animations for elements coming into view
       triggerInViewAnimations();
     },
-  });
-}
-
-// Trigger animations for elements as they come into view
-function triggerInViewAnimations() {
-  const inViewElements = document.querySelectorAll(".home--in-view");
-  inViewElements.forEach((element) => {
-    gsap.to(element, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    });
   });
 }
 
