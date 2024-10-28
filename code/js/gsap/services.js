@@ -15,7 +15,7 @@ function animateHeroIntro() {
     elements.split(",").map((s) => s.trim()),
     {
       opacity: 0,
-      y: isMobileOrTablet ? "2.5rem" : "6rem",
+      y: isMobileOrTablet ? "4rem" : "6rem",
       immediateRender: true,
     }
   );
@@ -62,7 +62,7 @@ function animateVennDiagram() {
     // Set initial state for each element
     gsap.set(element, {
       opacity: 0,
-      y: isMobileOrTablet ? "2.5rem" : "4rem",
+      y: isMobileOrTablet ? "4rem" : "6rem",
     });
 
     // Create animation for each element

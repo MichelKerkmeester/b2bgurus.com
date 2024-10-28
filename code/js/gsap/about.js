@@ -19,7 +19,7 @@ function animateHeroIntro() {
     elements.split(",").map((s) => s.trim()),
     {
       opacity: 0,
-      y: isMobileOrTablet ? "2.5rem" : "6rem",
+      y: isMobileOrTablet ? "4rem" : "6rem",
       immediateRender: true,
     }
   );
