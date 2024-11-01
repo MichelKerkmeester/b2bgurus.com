@@ -4,7 +4,7 @@
 /* Desktop */
 @media (min-width: 992px) {
   .section--hero.is--projects {
-    padding-top: clamp(12.5rem, 25vh, 25rem);
+    padding-top: clamp(10rem, 20vh, 20rem);
   }
 
   .section--projects {
