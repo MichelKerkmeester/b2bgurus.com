@@ -1,74 +1,35 @@
-// Input field
-// Custom placeholder & Focus states
-document.addEventListener("DOMContentLoaded", function () {
-  const inputs = document.querySelectorAll("input, textarea, select");
-  let usingMouse = false;
+// Input field - Focus handling
+Webflow.push(() => {
+  const formElements = document.querySelectorAll("input, textarea, select");
+  let usingKeyboard = false;
 
-  // Placeholder functionality
-  function handlePlaceholders() {
-    inputs.forEach((input) => {
-      const placeholders = input.getAttribute("data-placeholder")?.split("|");
-      if (placeholders) {
-        const defaultPlaceholder = placeholders[0].trim();
-        const hoverPlaceholder = placeholders[1]?.trim() || defaultPlaceholder;
+  // Track input method (keyboard vs mouse)
+  document.addEventListener("mousedown", () => {
+    usingKeyboard = false;
+  });
 
-        // Set initial placeholder
-        input.placeholder = defaultPlaceholder;
-        input.dataset.currentPlaceholder = defaultPlaceholder;
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") {
+      usingKeyboard = true;
+    }
+  });
 
-        // Change placeholder on mouseover
-        input.addEventListener("mouseover", () => {
-          input.dataset.currentPlaceholder = hoverPlaceholder;
-          input.classList.add("hovered");
-        });
-
-        // Revert placeholder on mouseout
-        input.addEventListener("mouseout", () => {
-          input.dataset.currentPlaceholder = defaultPlaceholder;
-          input.classList.remove("hovered");
-        });
+  // Apply Webflow's native focus classes based on input method
+  formElements.forEach((element) => {
+    element.addEventListener("focus", function () {
+      if (usingKeyboard) {
+        // Keyboard navigation - show focus ring
+        this.classList.add("w--focus-visible");
+        this.classList.remove("w--focus");
+      } else {
+        // Mouse interaction - show border only
+        this.classList.add("w--focus");
+        this.classList.remove("w--focus-visible");
       }
     });
-  }
 
-  // Focus states
-  function handleFocusStates() {
-    // Track mouse vs keyboard usage
-    document.body.addEventListener("mousedown", () => (usingMouse = true));
-    document.body.addEventListener("keydown", (e) => {
-      if (e.key === "Tab") usingMouse = false;
+    element.addEventListener("blur", function () {
+      this.classList.remove("w--focus", "w--focus-visible");
     });
-
-    inputs.forEach((input) => {
-      // Apply appropriate focus styles
-      input.addEventListener("focus", function () {
-        if (usingMouse) {
-          this.classList.remove("w--focus-visible");
-          this.classList.add("w--focus");
-        } else {
-          this.classList.add("w--focus-visible");
-        }
-      });
-
-      // Remove focus styles on blur
-      input.addEventListener("blur", function () {
-        this.classList.remove("w--focus", "w--focus-visible");
-      });
-    });
-
-    // Prevent default focus ring on mouse click, but allow textarea resizing
-    document.addEventListener("mousedown", function (e) {
-      if (
-        e.target instanceof HTMLElement &&
-        (e.target.tagName === "INPUT" || e.target.tagName === "SELECT")
-      ) {
-        e.preventDefault();
-        e.target.focus();
-      }
-    });
-  }
-
-  // Initialize all functionalities
-  handlePlaceholders();
-  handleFocusStates();
+  });
 });
